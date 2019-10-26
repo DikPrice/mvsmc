@@ -28,24 +28,26 @@ const SubmissionShowContainer = props => {
 
   return (
     <div className="submission-display">
-      <div className="rows columns small-12 title">
-        {submission.name}
-      </div>
-      <div className="rows columns small-12 details">
-        {submission.modeler_first_name} {submission.modeler_last_name}<br />
-        {submission.scale}<br />
-        {submission.source}
-      </div>
-      <div className="rows columns small-12 description">
-        {submission.description}
+      <div className="event-card">
+        <div className="rows columns small-12 title">
+          {submission.name}
+        </div>
+        <div className="rows columns small-12 details">
+          {submission.first_name} {submission.last_name}<br />
+          {submission.source}<br />
+          {submission.scale}    
+        </div>
+        <div className="rows columns small-12 description">
+          {submission.description}
+        </div>
       </div>
       <div className="rows columns small-12 meta">
           <hr />
           Length: {submission.length}",
           Width: {submission.width}",
           Height: {submission.height}"<br />
-          Phone: {submission.modeler_phone},
-          Email: {submission.modeler_email}
+          Phone: {submission.phone},
+          Email: {submission.email}
       </div>
     </div>
   )
