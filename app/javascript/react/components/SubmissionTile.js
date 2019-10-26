@@ -11,7 +11,8 @@ const SubmissionTile = props => {
             {props.name}
           </Link>
         </td>
-        <td>{props.scale}</td>      
+        <td>{props.scale}</td>
+        <td>{props.firstName} {props.lastName}</td>
       </tr>
     </>
   )

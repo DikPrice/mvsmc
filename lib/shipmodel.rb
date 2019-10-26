@@ -16,7 +16,7 @@ class ShipModel
       end
     end
     @name = entry["model_name"]
-    @scale = entry["model_scale"]
+    entry["model_scale"].nil? ? @scale= "N/A" : @scale = entry["model_scale"]
     @source = entry["model_source"]
     @description = description
     @length =  entry["model_length"]

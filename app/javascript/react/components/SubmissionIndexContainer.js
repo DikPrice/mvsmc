@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import SubmissionTile from './SubmissionTile'
 
 const SubmissionIndexContainer = props => {
@@ -31,6 +30,8 @@ const SubmissionIndexContainer = props => {
         id={submission.id}
         name={submission .name}
         scale={submission.scale}
+        firstName={submission.first_name}
+        lastName={submission.last_name}
       />
     )
   })
@@ -45,6 +46,7 @@ const SubmissionIndexContainer = props => {
             <tr>
               <th>Name</th>
               <th>Scale</th>
+              <th>Modeler</th>
             </tr>
           </thead>
           <tbody>

@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2019_10_24_123005) do
   enable_extension "plpgsql"
 
   create_table "submissions", force: :cascade do |t|
-    t.string "name"
-    t.string "modeler_first_name"
-    t.string "modeler_last_name"
-    t.string "modeler_email"
-    t.string "modeler_phone"
-    t.string "scale"
+    t.string "name", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email"
+    t.string "phone"
+    t.string "scale", null: false
     t.string "source"
     t.integer "length"
     t.integer "width"
