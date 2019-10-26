@@ -1,12 +1,12 @@
 class SubmissionsTable < ActiveRecord::Migration[5.2]
   def change
     create_table :submissions do |t|
-      t.string :name
-      t.string :modeler_first_name
-      t.string :modeler_last_name
-      t.string :modeler_email
-      t.string :modeler_phone
-      t.string :scale
+      t.string :name, null: false
+      t.string :first_name, null: false
+      t.string :last_name, null: false
+      t.string :email
+      t.string :phone
+      t.string :scale, null: false
       t.string :source
       t.integer :length
       t.integer :width

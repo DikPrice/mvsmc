@@ -1,2 +1,3 @@
 class Submission < ApplicationRecord
+
 end
