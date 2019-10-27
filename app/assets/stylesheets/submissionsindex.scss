@@ -1,4 +1,27 @@
 .submission-list {
   width: 90%;
   margin: auto;
+
+
+  .title {
+    text-align: left;
+    font-size: 1.25em;
+    font-weight: bold;
+
+
+    select {
+      width: 150px;
+      font-size: 1em;
+      height: 1.75em;
+      margin-top: 5px;
+    }
+
+    input {
+      font-size: 1em;
+      height: 1.25em;
+      margin-top: 5px;
+      padding: .12em;
+      border-radius: .25em;
+    }
+  }
 }

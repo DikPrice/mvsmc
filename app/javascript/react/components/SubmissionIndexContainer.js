@@ -3,25 +3,42 @@ import SubmissionTile from './SubmissionTile'
 
 const SubmissionIndexContainer = props => {
   const [submissions, setSubmissions] = useState([])
+  const [sort, setSort] = useState({sort: "none"})
 
-  useEffect(() => {fetch("/api/v1/submissions", {
-    credentials: 'same-origin',
+  const fetchModelList = (url) => {
+    fetch(url, {
+      credentials: 'same-origin',
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage)
+          throw(error)
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        setSubmissions(body)
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
+  useEffect(() => {
+    fetchModelList(`/api/v1/submissions?sort=${sort.sort.toLowerCase()}`)
+  }, [sort])
+
+  const handleInputChange = event => {
+    setSort({
+      ...sort,
+      [event.currentTarget.name]: event.currentTarget.value
     })
-    .then((response) => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage)
-        throw(error)
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      setSubmissions(body)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-  }, [])
+  }
+
+  const sortList = (event) => {
+    setSort(event.currentTarget.value)
+  }
 
   const submissionsTiles = submissions.map(submission  => {
     return(
@@ -37,10 +54,27 @@ const SubmissionIndexContainer = props => {
   })
 
   return (
-    <div className=" row submission-list">
-      <div className="columns small-12">
-        <p>Submissions</p>
+    <div className="submission-list">
+      <div className="title row">
+        <div className="columns small-5 large-2">
+          Submissions
+        </div>
+        <form>
+        <div className="columns small-5 large-2">
+          <label>
+            <select name="sort"
+              value={sort.sort}
+              onChange={handleInputChange}>
+              <option name="">Sort by</option>
+              <option name="models">Models</option>
+              <option name="modelers">Modelers</option>
+            </select>
+          </label>
+        </div>
+        </form>
         <hr />
+      </div>
+      <div className="row columns">
         <table>
           <thead>
             <tr>

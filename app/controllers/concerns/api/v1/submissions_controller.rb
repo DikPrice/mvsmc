@@ -2,7 +2,16 @@ class Api::V1::SubmissionsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    render json: Submission.all
+    unsorted_submissions = Submission.all
+    model_list = []
+    if (params["sort"] == "models")
+      model_list = unsorted_submissions.sort_by{ |value| value[:name] }
+    elsif (params["sort"] == "modelers")
+      model_list = unsorted_submissions.sort_by{ |value| value[:last_name] }
+    else
+      model_list =unsorted_submissions
+    end
+    render json: model_list
   end
 
   def show

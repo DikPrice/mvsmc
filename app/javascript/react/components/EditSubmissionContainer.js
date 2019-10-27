@@ -52,7 +52,7 @@ const EditSubmissionContainer = props => {
     .then(response => response.json())
     .then(body => {
       if (body.id) {
-        props.show()
+        props.showUpdates(body)
       } else {
         setErrors(body)
       }
