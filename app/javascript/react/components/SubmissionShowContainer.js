@@ -33,8 +33,9 @@ const SubmissionShowContainer = props => {
     setShowComponent("edit")
   }
 
-  let show_submission = (id) => {
+  let show_submission = (updatedSubmission) => {
     setShowComponent("show")
+    setSubmission(updatedSubmission)
   }
 
   let component = "show"
@@ -48,7 +49,7 @@ const SubmissionShowContainer = props => {
     component = <EditSubmissionContainer
       id={submission.id}
       submission={submission}
-      show={show_submission}/>
+      showUpdates={show_submission}/>
   }
 
   return (

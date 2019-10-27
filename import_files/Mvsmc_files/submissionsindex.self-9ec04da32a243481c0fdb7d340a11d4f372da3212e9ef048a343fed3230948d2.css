@@ -1,0 +1,26 @@
+/* line 1, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list {
+  width: 90%;
+  margin: auto;
+}
+/* line 6, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .title {
+  text-align: left;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+/* line 12, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .title select {
+  width: 150px;
+  font-size: 1em;
+  height: 1.75em;
+  margin-top: 5px;
+}
+/* line 19, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .title input {
+  font-size: 1em;
+  height: 1.25em;
+  margin-top: 5px;
+  padding: .12em;
+  border-radius: .25em;
+}
