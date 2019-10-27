@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react"
 
+import ShowSubmissionTile from "./ShowSubmissionTile"
+import EditSubmissionContainer from "./EditSubmissionContainer"
 
 const SubmissionShowContainer = props => {
 
   const [submission, setSubmission] = useState([])
+  const [showComponent, setShowComponent] = useState ("show")
 
   let submissionId = props.match.params.id
 
@@ -26,29 +29,31 @@ const SubmissionShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
+  let edit_submission = (event) => {
+    setShowComponent("edit")
+  }
+
+  let show_submission = (id) => {
+    setShowComponent("show")
+  }
+
+  let component = "show"
+  if (showComponent === "show") {
+    component = <ShowSubmissionTile
+      id={submission.id}
+      submission={submission}
+      edit={edit_submission}/>
+  }
+  else {
+    component = <EditSubmissionContainer
+      id={submission.id}
+      submission={submission}
+      show={show_submission}/>
+  }
+
   return (
-    <div className="submission-display">
-      <div className="event-card">
-        <div className="rows columns small-12 title">
-          {submission.name}
-        </div>
-        <div className="rows columns small-12 details">
-          {submission.first_name} {submission.last_name}<br />
-          {submission.source}<br />
-          {submission.scale}    
-        </div>
-        <div className="rows columns small-12 description">
-          {submission.description}
-        </div>
-      </div>
-      <div className="rows columns small-12 meta">
-          <hr />
-          Length: {submission.length}",
-          Width: {submission.width}",
-          Height: {submission.height}"<br />
-          Phone: {submission.phone},
-          Email: {submission.email}
-      </div>
+    <div>
+      {component}
     </div>
   )
 }
