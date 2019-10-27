@@ -35,6 +35,25 @@ class Api::V1::SubmissionsController < ApplicationController
     end
   end
 
+  def update
+    edit_submission = Submission.find_by(
+      name: params["name"],
+      scale: params["scale"],
+      first_name: params["firstname"],
+      last_name: params["lastname"]
+    )
+
+    if (edit_submission.update(submission_params) &&
+      edit_submission.update(
+        first_name: params["firstname"],
+        last_name: params["lastname"]
+      ))
+      render json: edit_submission
+    else
+      render json: edit_submisison.errors
+    end
+  end
+
   private
 
   def submission_params
