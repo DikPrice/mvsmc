@@ -13,8 +13,8 @@ const NewSubmissionContainer = props => {
     length: "",
     width: "",
     height: "",
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     phone: "",
     email: ""
   })
@@ -28,7 +28,7 @@ const NewSubmissionContainer = props => {
 
   const validForSubmission = () => {
     let submitErrors = {}
-    const requiredFields = ["name", "scale", "firstname", "lastname"]
+    const requiredFields = ["name", "scale", "first_name", "last_name"]
     requiredFields.forEach(field => {
       if (newSubmission[field].trim() === "") {
         submitErrors = {
@@ -43,6 +43,7 @@ const NewSubmissionContainer = props => {
   }
 
   const postNewSubmission = () => {
+    debugger
     event.preventDefault()
     if (validForSubmission()) {
       fetch("/api/v1/submissions", {
@@ -96,8 +97,8 @@ const NewSubmissionContainer = props => {
       length: "",
       width: "",
       height: "",
-      firstname: "",
-      lastname: "",
+      first_name: "",
+      last_name: "",
       phone: "",
       email: ""
     })
@@ -110,18 +111,25 @@ const NewSubmissionContainer = props => {
     )
   })
 
+  let duplicateError = ""
+  if (errors.result === "duplicate"){
+    duplicateError = " : Model already exists"
+  }
+
   return(
     <div className="submission-form">
       <form onSubmit={postNewSubmission}>
-        <div className="row columns form-title">
-          New Model Submission
-          {errors.result}
+        <div className="row columns">
+          <div className="form-title">
+            New Model Submission
+            <span id="duplicate">{duplicateError}</span>
+          </div>
         </div>
-
         <div className="row">
           <div className="columns small-12 large-8">
             <label>
-              Model Name: {errors.name}
+              Model Name:
+              {errors.name}
               <input
                 type="text"
                 name="name"
@@ -209,22 +217,22 @@ const NewSubmissionContainer = props => {
         <div className="row">
           <div className="columns small-6">
             <label className="">
-              First Name: {errors.firstname}
+              First Name: {errors.first_name}
               <input
                 type="text"
-                name="firstname"
-                value={newSubmission.firstname}
+                name="first_name"
+                value={newSubmission.first_name}
                 onChange={handleInputChange}
               />
             </label>
           </div>
           <div className="columns small-6">
             <label className="">
-              Last Name: {errors.lastname}
+              Last Name: {errors.last_name}
               <input
                 type="text"
-                name="lastname"
-                value={newSubmission.lastname}
+                name="last_name"
+                value={newSubmission.last_name}
                 onChange={handleInputChange}
               />
             </label>

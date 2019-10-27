@@ -19,20 +19,15 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def create
-
     model_exists = Submission.find_by(
       name: params["name"],
       scale: params["scale"],
-      first_name: params["firstname"],
-      last_name: params["lastname"]
+      first_name: params["first_name"],
+      last_name: params["last_name"]
     )
 
     if model_exists.nil?
       new_submission = Submission.new(submission_params)
-      new_submission.update(
-        first_name: params["firstname"],
-        last_name: params["lastname"]
-      )
 
       if new_submission.save
         render json: { result: new_submission, duplicate: 0}
@@ -45,13 +40,9 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def update
-    pry
+
     edit_submission = Submission.find(params["id"])
-    if (edit_submission.update(submission_params) &&
-      edit_submission.update(
-        first_name: params["firstname"],
-        last_name: params["lastname"]
-      ))
+    if edit_submission.update(submission_params)
       render json: edit_submission
     else
       render json: edit_submisison.errors
@@ -62,7 +53,6 @@ class Api::V1::SubmissionsController < ApplicationController
 
   def submission_params
     params.require(:submission).permit(
-      :id,
       :name,
       :scale,
       :source,
