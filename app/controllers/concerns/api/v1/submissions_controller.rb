@@ -45,13 +45,8 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def update
-    edit_submission = Submission.find_by(
-      name: params["name"],
-      scale: params["scale"],
-      first_name: params["firstname"],
-      last_name: params["lastname"]
-    )
-
+    pry
+    edit_submission = Submission.find(params["id"])
     if (edit_submission.update(submission_params) &&
       edit_submission.update(
         first_name: params["firstname"],
@@ -67,6 +62,7 @@ class Api::V1::SubmissionsController < ApplicationController
 
   def submission_params
     params.require(:submission).permit(
+      :id,
       :name,
       :scale,
       :source,
