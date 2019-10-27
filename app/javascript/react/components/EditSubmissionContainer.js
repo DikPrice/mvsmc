@@ -16,6 +16,7 @@ const EditSubmissionContainer = props => {
 
   const [errors, setErrors] = useState({})
   const [submission, setSubmission] = useState({
+    id: id,
     name: name,
     scale: scale,
     source: source,
