@@ -5,8 +5,9 @@ import EditSubmissionContainer from "./EditSubmissionContainer"
 
 const SubmissionShowContainer = props => {
 
-  const [submission, setSubmission] = useState([])
+  const [submission, setSubmission] = useState({})
   const [showComponent, setShowComponent] = useState ("show")
+  const [currentUser, setCurrentUser] = useState({})
 
   let submissionId = props.match.params.id
 
@@ -24,7 +25,8 @@ const SubmissionShowContainer = props => {
     })
     .then(response => response.json())
     .then(body => {
-      setSubmission(body)
+      setSubmission(body.model)
+      setCurrentUser(body.user)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
@@ -43,13 +45,16 @@ const SubmissionShowContainer = props => {
     component = <ShowSubmissionTile
       id={submission.id}
       submission={submission}
-      edit={edit_submission}/>
+      edit={edit_submission}
+      user={currentUser}
+    />
   }
   else {
     component = <EditSubmissionContainer
       id={submission.id}
       submission={submission}
-      showUpdates={show_submission}/>
+      showUpdates={show_submission}
+    />
   }
 
   return (

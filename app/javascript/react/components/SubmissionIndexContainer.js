@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from "react-router-dom"
 import SubmissionTile from './SubmissionTile'
 
 const SubmissionIndexContainer = props => {
   const [submissions, setSubmissions] = useState([])
   const [sort, setSort] = useState({sort: "none"})
+  const [currentUserId, setCurrentUserId] = useState(0)
+  const [show, setShow] = useState("list")
 
   const fetchModelList = (url) => {
     fetch(url, {
@@ -20,7 +23,8 @@ const SubmissionIndexContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        setSubmissions(body)
+        setSubmissions(body.models)
+        setCurrentUserId(body.user_id)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
@@ -41,6 +45,11 @@ const SubmissionIndexContainer = props => {
   }
 
   const submissionsTiles = submissions.map(submission  => {
+
+    let edit_submission = (event) => {
+      setShow("edit")
+    }
+
     return(
       <SubmissionTile
         key={submission.id}
@@ -49,47 +58,51 @@ const SubmissionIndexContainer = props => {
         scale={submission.scale}
         firstName={submission.first_name}
         lastName={submission.last_name}
+        userId={currentUserId}
+        edit={edit_submission}
       />
     )
   })
 
-  return (
-    <div className="submission-list">
-      <div className="title row">
-        <div className="columns small-5 large-2">
-          Submissions
+  if ( show === "list"){
+    return (
+      <div className="submission-list">
+        <div className="title row">
+          <div className="columns small-5 large-2">
+            Submissions
+          </div>
+          <form>
+          <div className="columns small-5 large-2">
+            <label>
+              <select name="sort"
+                value={sort.sort}
+                onChange={handleInputChange}>
+                <option name="">Sort by</option>
+                <option name="models">Models</option>
+                <option name="modelers">Modelers</option>
+              </select>
+            </label>
+          </div>
+          </form>
+          <hr />
         </div>
-        <form>
-        <div className="columns small-5 large-2">
-          <label>
-            <select name="sort"
-              value={sort.sort}
-              onChange={handleInputChange}>
-              <option name="">Sort by</option>
-              <option name="models">Models</option>
-              <option name="modelers">Modelers</option>
-            </select>
-          </label>
+        <div className="row columns">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Scale</th>
+                <th>Modeler</th>
+              </tr>
+            </thead>
+            <tbody>
+              {submissionsTiles}
+            </tbody>
+          </table>
         </div>
-        </form>
-        <hr />
       </div>
-      <div className="row columns">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Scale</th>
-              <th>Modeler</th>
-            </tr>
-          </thead>
-          <tbody>
-            {submissionsTiles}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default SubmissionIndexContainer
