@@ -16,7 +16,6 @@ const EditSubmissionContainer = props => {
 
   const [errors, setErrors] = useState({})
   const [submission, setSubmission] = useState({
-    id: id,
     name: name,
     scale: scale,
     source: source,
@@ -24,8 +23,8 @@ const EditSubmissionContainer = props => {
     length: length,
     width: width,
     height: height,
-    firstname: first_name,
-    lastname: last_name,
+    first_name: first_name,
+    last_name: last_name,
     phone: phone,
     email: email
   })
@@ -35,7 +34,10 @@ const EditSubmissionContainer = props => {
     fetch(`/api/v1/submissions/${id}`, {
       credentials: "same-origin",
       method: "PATCH",
-      body: JSON.stringify(submission),
+      body: JSON.stringify({
+        submission: submission,
+        id: id
+      }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -179,22 +181,22 @@ const EditSubmissionContainer = props => {
       <div className="row">
         <div className="columns small-6">
           <label className="">
-            First Name: {errors.firstname}
+            First Name: {errors.first_name}
             <input
               type="text"
-              name="firstname"
-              value={submission.firstname}
+              name="first_name"
+              value={submission.first_name}
               onChange={handleInputChange}
             />
           </label>
         </div>
         <div className="columns small-6">
           <label className="">
-            Last Name: {errors.lastname}
+            Last Name: {errors.last_name}
             <input
               type="text"
-              name="lastname"
-              value={submission.lastname}
+              name="last_name"
+              value={submission.last_name}
               onChange={handleInputChange}
             />
           </label>
