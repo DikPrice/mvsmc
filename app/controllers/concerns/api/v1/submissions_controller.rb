@@ -2,6 +2,9 @@ class Api::V1::SubmissionsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
+    if current_user
+      user_id = current_user.id
+    end
     unsorted_submissions = Submission.all
     model_list = []
     if (params["sort"] == "models")
@@ -11,26 +14,30 @@ class Api::V1::SubmissionsController < ApplicationController
     else
       model_list =unsorted_submissions
     end
-    render json: model_list
+    render json: { models: model_list, user_id: user_id }
   end
 
   def show
-    render json: Submission.find(params["id"])
+    if current_user
+      user_details = User.find(current_user.id)
+    end
+    model = Submission.find(params["id"])
+    render json: { model: model, user: user_details }
   end
 
   def create
     model_exists = Submission.find_by(
-      name: params["name"],
-      scale: params["scale"],
-      first_name: params["first_name"],
-      last_name: params["last_name"]
+      name: submission_params["name"],
+      scale: submission_params["scale"],
+      first_name: submission_params["first_name"],
+      last_name: submission_params["last_name"]
     )
 
     if model_exists.nil?
       new_submission = Submission.new(submission_params)
 
       if new_submission.save
-        render json: { result: new_submission, duplicate: 0}
+        render json: { result: new_submission, duplicate: 0, }
       else
         render json: { result: new_submission.errors, duplicate: 0 }
       end
@@ -40,7 +47,6 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def update
-
     edit_submission = Submission.find(params["id"])
     if edit_submission.update(submission_params)
       render json: edit_submission
