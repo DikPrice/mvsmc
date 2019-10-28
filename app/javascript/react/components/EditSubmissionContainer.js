@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from "react-router-dom"
+
 const EditSubmissionContainer = props => {
 
   for (var index in props.submission){
