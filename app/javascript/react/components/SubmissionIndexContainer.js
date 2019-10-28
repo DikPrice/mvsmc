@@ -58,6 +58,7 @@ const SubmissionIndexContainer = props => {
         scale={submission.scale}
         firstName={submission.first_name}
         lastName={submission.last_name}
+        review={submission.review}
         userId={currentUserId}
         edit={edit_submission}
       />

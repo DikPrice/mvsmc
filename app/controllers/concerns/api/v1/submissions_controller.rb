@@ -37,7 +37,7 @@ class Api::V1::SubmissionsController < ApplicationController
       new_submission = Submission.new(submission_params)
 
       if new_submission.save
-        render json: { result: new_submission, duplicate: 0, }
+        render json: { result: new_submission, duplicate: 0 }
       else
         render json: { result: new_submission.errors, duplicate: 0 }
       end
@@ -66,7 +66,8 @@ class Api::V1::SubmissionsController < ApplicationController
       :length, :width, :height,
       :first_name, :last_name,
       :phone,
-      :email
+      :email,
+      :review
     )
   end
 
