@@ -30,18 +30,20 @@ const SubmissionIndexContainer = props => {
   }
 
   useEffect(() => {
-    fetchModelList(`/api/v1/submissions?sort=${sort.sort.toLowerCase()}`)
+    fetchModelList(`/api/v1/submissions?sort=${sort.sort}`)
   }, [sort])
 
   const handleInputChange = event => {
+    let sortValue = event.currentTarget.value.toLowerCase().replace(' ', '')
     setSort({
       ...sort,
-      [event.currentTarget.name]: event.currentTarget.value
+      [event.currentTarget.name]: sortValue
     })
   }
 
-  const sortList = (event) => {
-    setSort(event.currentTarget.value)
+  let findMyModels  = ""
+  if (currentUserId){
+    findMyModels = <option name="mymodels">My Models</option>
   }
 
   const submissionsTiles = submissions.map(submission  => {
@@ -81,6 +83,7 @@ const SubmissionIndexContainer = props => {
                 <option name="">Sort by</option>
                 <option name="models">Models</option>
                 <option name="modelers">Modelers</option>
+                {findMyModels}
               </select>
             </label>
           </div>
