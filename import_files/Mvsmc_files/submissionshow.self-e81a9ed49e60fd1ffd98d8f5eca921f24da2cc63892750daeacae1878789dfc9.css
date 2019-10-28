@@ -1,0 +1,46 @@
+/* line 1, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+body {
+  font-family: 'Helvetica neue', Arial, 'sans serif';
+}
+
+/* line 5, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+.submission-display {
+  width: 75%;
+  margin: 10px auto;
+}
+/* line 9, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+.submission-display .event-card {
+  background-image: url("./../../card-backdrop.jpg");
+  background-size: cover;
+  width: 6.88in;
+  height: 5in;
+  margin: auto;
+  box-shadow: 10px 10px 5px grey;
+}
+/* line 17, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+.submission-display .event-card .title {
+  color: red;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px 20px 0px 0px;
+}
+/* line 24, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+.submission-display .event-card .details {
+  margin-left: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.25em;
+  padding: 5px 0;
+}
+/* line 32, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+.submission-display .event-card .description {
+  font-size: 14px;
+  text-align: justify;
+  margin-top: 0px;
+  padding: 15px 25px;
+}
+/* line 40, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionshow.scss */
+.submission-display .meta {
+  font-size: 0.8em;
+  margin-top: 10px;
+}

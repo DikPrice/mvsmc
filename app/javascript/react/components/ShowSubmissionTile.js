@@ -4,12 +4,19 @@ const ShowSubmissionTile = props => {
   const {
     name, source, scale, description,
     length, width, height,
-    first_name, last_name, phone, email
+    first_name, last_name, phone, email,
+    review
   } = props.submission
 
-  let edit
+  let edit, submitForReview
   if (first_name == props.user["first_name"] && last_name == props.user["last_name"]){
+    if (review === true){
+      edit = "Model under review"
+      submitForReview = ""
+    } else {
     edit= <button className="button" onClick={props.edit}>Edit</button>
+    submitForReview = <button className="button" onClick={props.forReview}>Submit</button>
+    }
   }
 
   return (
@@ -37,6 +44,7 @@ const ShowSubmissionTile = props => {
           Email: {email}
         </div>
         <div className="columns small-12 large-2">
+          {submitForReview}
           {edit}
         </div>
       </div>

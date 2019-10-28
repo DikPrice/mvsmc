@@ -5,15 +5,20 @@ class Api::V1::SubmissionsController < ApplicationController
     if current_user
       user_id = current_user.id
     end
-    unsorted_submissions = Submission.all
+    
     model_list = []
-    if (params["sort"] == "models")
+    unsorted_submissions = Submission.all
+
+    if (params["sort"] == "mymodels")
+      model_list = Submission.where(first_name: current_user[:first_name], last_name: current_user[:last_name])
+    elsif (params["sort"] == "models")
       model_list = unsorted_submissions.sort_by{ |value| value[:name] }
     elsif (params["sort"] == "modelers")
       model_list = unsorted_submissions.sort_by{ |value| value[:last_name] }
     else
       model_list =unsorted_submissions
     end
+
     render json: { models: model_list, user_id: user_id }
   end
 
@@ -37,7 +42,7 @@ class Api::V1::SubmissionsController < ApplicationController
       new_submission = Submission.new(submission_params)
 
       if new_submission.save
-        render json: { result: new_submission, duplicate: 0, }
+        render json: { result: new_submission, duplicate: 0 }
       else
         render json: { result: new_submission.errors, duplicate: 0 }
       end
@@ -66,7 +71,8 @@ class Api::V1::SubmissionsController < ApplicationController
       :length, :width, :height,
       :first_name, :last_name,
       :phone,
-      :email
+      :email,
+      :review
     )
   end
 
