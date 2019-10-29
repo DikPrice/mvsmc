@@ -13,6 +13,9 @@
       <h3><a href="/">MVSMC</a></h3>
       <%- if current_user -%>
         <%= current_user["first_name"] %> <%= current_user["last_name"] %>
+        <% if current_user["role"] == 2 %>
+          : Organiser
+        <% end %>
       <% end %>
     </div>
 

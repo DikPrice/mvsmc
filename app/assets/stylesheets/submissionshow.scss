@@ -40,5 +40,10 @@ body {
   .meta {
     font-size: 0.8em;
     margin-top: 10px;
+
+    .create-master {
+      background-color: red;
+      font-weight: bold;
+    }
   }
 }
