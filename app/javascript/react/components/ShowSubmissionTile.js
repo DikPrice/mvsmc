@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom"
 
 const ShowSubmissionTile = props => {
   const [redirect, setRedirect] = useState(false)
-  const [errors, serErrors] = useState([])
+  const [errors, setErrors] = useState([])
   const {
     id,
     name, source, scale, description,
@@ -14,21 +14,12 @@ const ShowSubmissionTile = props => {
   } = props.submission
 
   let uploadToMaster = () => {
+    debugger
     event.preventDefault()
     fetch("/api/v1/models", {
       credentials: 'same-origin',
       method: "POST",
-      body: JSON.stringify({
-        id: id,
-        name: name,
-        scale: scale,
-        source: source,
-        description: description,
-        length: length,
-        width: width,
-        height: height,
-        user_id: props.user["id"]
-      }),
+      body: JSON.stringify(props.submission),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -45,6 +36,7 @@ const ShowSubmissionTile = props => {
     })
     .then(response => response.json())
     .then(body => {
+      debugger
       if (body.result["id"]) {
         setRedirect(true)
       } else {

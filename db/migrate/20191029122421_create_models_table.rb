@@ -8,7 +8,7 @@ class CreateModelsTable < ActiveRecord::Migration[5.2]
       t.integer :length
       t.integer :width
       t.integer :height
-      t.belongs_to :user
+      t.belongs_to :modeler
 
       t.timestamps
     end

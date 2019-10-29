@@ -21,7 +21,8 @@
 
     <section class="top-bar-section">
       <ul class="menu align-right">
-        <li><%= link_to 'Models', "/" %></li>
+        <li><%= link_to 'Models', "/models" %></li>
+        <li><%= link_to 'Submissions', "/submissions" %></li>
         <%- if current_user -%>
           <li><%= link_to 'Add Model', "/submissions/new" %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
