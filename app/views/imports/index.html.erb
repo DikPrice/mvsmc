@@ -1,5 +1,9 @@
-<h2>Imported models</h2>
-
-  <% @completed_imports.each do |model| %>
-  <%= model.name %></br>
+<h2>Imported Data</h2>
+<h4>Models<h4>
+  <% @complete_model_imports.each do |model| %>
+    <%= model.name %></br>
+  <% end %>
+<h4>Users<h4>
+  <% @complete_model_imports.each do |user| %>
+    <%= user["first_name"]%><%= user["last_name"] %></br>
   <% end %>

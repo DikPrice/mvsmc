@@ -1,26 +1,61 @@
 class Api::V1::ModelsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
-  def create
-    model_exists = Model.find_by(
-      name: model_params["name"],
-      scale: model_params["scale"],
-      user_id: model_params["user_id"],
-    )
+  def index
+    if current_user
+      user = current_user
+    end
 
-    if model_exists.nil?
-      new_model = Model.new(model_params)
+    model_list = []
+    unsorted_model = Model.all
+    if (params["sort"] == "mymodels")
+      model_list = Submission.where(modeler_id: user[:id])
+    elsif (params["sort"] == "models")
+      model_list = unsorted_model.sort_by{ |value| value[:name] }
+    elsif (params["sort"] == "modelers")
+      model_list = unsorted_model.sort_by{ |value| value[:last_name] }
+    else
+      model_list =unsorted_model
+    end
+    render json: { models: model_list, user: user }
+  end
+
+  def create
+    modeler = Modeler.find_by(
+      first_name: params["first_name"],
+      last_name: params["last_name"]
+    )
+    if !modeler.nil?
+      model_exists = Model.find_by(
+        name: model_params["name"],
+        scale: model_params["scale"],
+        modeler_id: modeler["id"],
+      )
+      if model_exists.nil?
+        new_model = Model.create(
+              name: model_params["name"],
+              scale: model_params["scale"],
+              source: model_params["source"],
+              description: model_params["description"],
+              length: model_params["length"],
+              width: model_params["width"],
+              height: model_params["height"],
+              modeler_id: modeler[:id]
+            )
+      else
+        render json: { result: "duplicate", duplicate: model_exists }
+      end
       matching_submission = Submission.find(model_params[:id])
 
       if new_model.save
         matching_submission.delete
         render json: { result: new_model, duplicate: 0 }
-
       else
         render json: { result: new_model.errors, duplicate: 0 }
       end
     else
-      render json: { result: "duplicate", duplicate: model_exists }
+      binding.pry
+      render json: { result: "modeler doesn't exist", duplicate: 0}
     end
   end
 
@@ -35,8 +70,7 @@ class Api::V1::ModelsController < ApplicationController
       :description,
       :length,
       :width,
-      :height,
-      :user_id
+      :height
     )
   end
 end
