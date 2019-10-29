@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/submissions/:id', to: 'homes#index'
   get '/submissions/:id/update', to: 'homes#index'
 
+  get '/models', to: 'homes#index'
+  get '/models/:id', to: 'homes#index'
+
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :imports, only: [ :index, :create ]

@@ -5,7 +5,7 @@ import SubmissionTile from './SubmissionTile'
 const SubmissionIndexContainer = props => {
   const [submissions, setSubmissions] = useState([])
   const [sort, setSort] = useState({sort: "none"})
-  const [currentUserId, setCurrentUserId] = useState(0)
+  const [currentUser, setCurrentUser] = useState({})
   const [show, setShow] = useState("list")
 
   const fetchModelList = (url) => {
@@ -24,7 +24,7 @@ const SubmissionIndexContainer = props => {
       .then(response => response.json())
       .then(body => {
         setSubmissions(body.models)
-        setCurrentUserId(body.user_id)
+        setCurrentUser(body.user)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
@@ -41,9 +41,12 @@ const SubmissionIndexContainer = props => {
     })
   }
 
-  let findMyModels  = ""
-  if (currentUserId){
+  let findMyModels, showReadyForReview
+  if (currentUser){
     findMyModels = <option name="mymodels">My Models</option>
+    if (currentUser["role"] === 2){
+      showReadyForReview = <option name="forreview">Awaiting Review</option>
+    }
   }
 
   const submissionsTiles = submissions.map(submission  => {
@@ -61,7 +64,6 @@ const SubmissionIndexContainer = props => {
         firstName={submission.first_name}
         lastName={submission.last_name}
         review={submission.review}
-        userId={currentUserId}
         edit={edit_submission}
       />
     )
@@ -84,6 +86,7 @@ const SubmissionIndexContainer = props => {
                 <option name="models">Models</option>
                 <option name="modelers">Modelers</option>
                 {findMyModels}
+                {showReadyForReview}
               </select>
             </label>
           </div>

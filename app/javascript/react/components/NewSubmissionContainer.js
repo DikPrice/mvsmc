@@ -43,7 +43,6 @@ const NewSubmissionContainer = props => {
   }
 
   const postNewSubmission = () => {
-    debugger
     event.preventDefault()
     if (validForSubmission()) {
       fetch("/api/v1/submissions", {
@@ -268,7 +267,7 @@ const NewSubmissionContainer = props => {
           <input
             className="button"
             type="submit"
-            value="Add Model"
+            value="Save"
           />
           <button className="button" onClick={clearForm}>
             Clear
