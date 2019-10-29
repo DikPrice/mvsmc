@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :imports, only: [ :index, :create ]
   namespace :api do
     namespace :v1 do
+      resources :models, only: [ :index, :show, :create, :update ]
       resources :submissions, only: [ :index, :show, :create, :update ]
     end
   end
