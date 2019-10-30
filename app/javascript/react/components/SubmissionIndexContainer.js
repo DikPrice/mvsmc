@@ -73,11 +73,11 @@ const SubmissionIndexContainer = props => {
     return (
       <div className="submission-list">
         <div className="title row">
-          <div className="columns small-5 large-2">
+          <div className="columns small-6 large-3">
             Submissions
           </div>
           <form>
-          <div className="columns small-5 large-2">
+          <div className="columns small-6 large-9">
             <label>
               <select name="sort"
                 value={sort.sort}
@@ -93,19 +93,8 @@ const SubmissionIndexContainer = props => {
           </form>
           <hr />
         </div>
-        <div className="row columns">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Scale</th>
-                <th>Modeler</th>
-              </tr>
-            </thead>
-            <tbody>
-              {submissionsTiles}
-            </tbody>
-          </table>
+        <div className="row columns text_center submission-tiles">
+          {submissionsTiles}
         </div>
       </div>
     )
