@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::SubmissionsController, type: :controller do
+
   describe "GET#index" do
+    let!(:test_user) {FactoryBot.create(:user)}
     let!(:submission) { FactoryBot.create(:submission) }
 
     context "The user asks to see a list of models" do
@@ -39,7 +41,7 @@ RSpec.describe Api::V1::SubmissionsController, type: :controller do
 
         get :show, params: { id: submission.id }
         returned_json = JSON.parse(response.body)
-binding.pry
+        
         expect(response.status).to eq 200
         expect(response.content_type).to eq("application/json")
         expect(returned_json.length).to eq 2
@@ -191,7 +193,7 @@ binding.pry
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
-      expect(returned_json.length).to eq 14
+      expect(returned_json.length).to eq 15
       expect(returned_json).to be_kind_of(Hash)
 
       expect(returned_json["id"]).to eq edited_submission[:id]
