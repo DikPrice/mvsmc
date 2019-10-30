@@ -39,7 +39,7 @@ RSpec.describe Api::V1::SubmissionsController, type: :controller do
 
         get :show, params: { id: submission.id }
         returned_json = JSON.parse(response.body)
-binding.pry
+
         expect(response.status).to eq 200
         expect(response.content_type).to eq("application/json")
         expect(returned_json.length).to eq 2

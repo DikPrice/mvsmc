@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 
-const ModelShowContainer = props => {
-
+const ModelShowTile = props => {
   const [model , setModel] = useState({})
+  const [modeler , setModeler] = useState({})
   const [currentUser, setCurrentUser] = useState({})
 
   let modelId = props.match.params.id
@@ -21,17 +21,31 @@ const ModelShowContainer = props => {
     })
     .then(response => response.json())
     .then(body => {
-      setSubmission(body.model)
+      debugger
+      setModel(body.model)
+      setModeler(body.modeler)
       setCurrentUser(body.user)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
   return (
-    <>
-    Model
-    </>
+    <div className="submission-display">
+      <div className="event-card">
+        <div className="rows columns small-12 title">
+          {name}
+        </div>
+        <div className="rows columns small-12 details">
+          {modeler["first_name"]} {modeler["last_name"]}<br />
+          {model["source"]}<br />
+          {model["scale"]}
+        </div>
+        <div className="rows columns small-12 description">
+          {model["description"]}
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default ModelShowContainer
+export default ModelShowTile

@@ -20,8 +20,6 @@ class Api::V1::ModelersController < ApplicationController
         role: 1
       )
 
-      binding.pry
-
       if modeler.save
         render json: { result: modeler}
       else

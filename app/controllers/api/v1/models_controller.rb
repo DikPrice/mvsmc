@@ -20,12 +20,29 @@ class Api::V1::ModelsController < ApplicationController
     render json: { models: model_list, user: user }
   end
 
+  def show
+    if current_user
+      user = current_user
+    end
+
+    model = Model.find(params["id"])
+    modeler = model.modeler
+    render json: { model: model, modeler: modeler , user: user}
+  end
+
   def create
     modeler = Modeler.find_by(
       first_name: params["first_name"],
       last_name: params["last_name"]
     )
-    if !modeler.nil?
+    if modeler.nil?
+      modeler = Modeler.create(
+        first_name: params["first_name"],
+        last_name: params["last_name"],
+        email: params["email"],
+        phone: params["phone"],
+        role: 1
+      )
       model_exists = Model.find_by(
         name: model_params["name"],
         scale: model_params["scale"],
@@ -54,7 +71,6 @@ class Api::V1::ModelsController < ApplicationController
         render json: { result: new_model.errors, duplicate: 0 }
       end
     else
-      binding.pry
       render json: { result: "modeler doesn't exist", duplicate: 0}
     end
   end

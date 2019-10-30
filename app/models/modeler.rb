@@ -3,4 +3,6 @@ class Modeler < ApplicationRecord
   validates :last_name, presence: true
 
   has_many :models
+
+  belongs_to :user, optional: true
 end
