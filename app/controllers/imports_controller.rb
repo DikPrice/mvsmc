@@ -50,5 +50,8 @@ class ImportsController < ApplicationController
       end
     end
 
+    import_models()
+    import_modellers()
+
   end
 end
