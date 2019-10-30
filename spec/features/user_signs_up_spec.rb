@@ -28,6 +28,7 @@ feature 'user registers', %Q{
     visit new_user_registration_path
 
     click_button 'Sign up'
-    expect(page).to_not have_content('Sign Out')
+    expect(page).to have_content('Email can\'t be blank')
+    expect(page).to have_content('Password can\'t be blank')
   end
 end
