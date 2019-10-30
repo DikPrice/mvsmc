@@ -32,21 +32,23 @@ class ImportsController < ApplicationController
     def import_modelers
       imported_modeler_data = Import.read_file('user_data.csv')
       imported_modeler_data.each do |modeler|
-      if modeler_email["email"].nil?
-        modeler["email"] = "n/a"
+        if modeler_email["email"].nil?
+          modeler["email"] = "n/a"
+        end
+        if modler["phone"].nil?
+          modeler["phone"] = "n/a"
+        end
+        new_user = Modeler.new(
+          first_name: modeler["first_name"],
+          last_name: modeler["last_name"],
+          email: modeler["email"],
+          phone: modeler["phone"],
+          role: 1,
+        )
+        new_modeler.save
+        @complete_modeler_imports << user
       end
-      if modler["phone"].nil?
-        modeler["phone"] = "n/a"
-      end
-      new_user = Modeler.new(
-        first_name: modeler["first_name"],
-        last_name: modeler["last_name"],
-        email: modeler["email"],
-        phone: modeler["phone"],
-        role: 1,
-      )
-      new_modeler.save
-      @complete_modeler_imports << user
     end
+
   end
 end
