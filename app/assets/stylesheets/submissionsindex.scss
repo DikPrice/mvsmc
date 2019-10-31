@@ -1,11 +1,18 @@
 .submission-list {
-  width: 90%;
-  margin: auto;
+  max-width: 700px;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: 3px solid #0071BD;
 
   .title {
     text-align: left;
     font-size: 1.25em;
     font-weight: bold;
+
+    hr {
+      padding: 0px;
+      margin: 0px;
+    }
 
     select {
       width: 150px;
@@ -27,5 +34,17 @@
      a {
        color: red;
      }
+  }
+
+  .submission-tiles {
+    height: 75vh;
+    overflow-y: scroll;
+    margin: 0px auto;
+    padding: 0px;
+
+    hr {
+      padding: 0px;
+      margin: 0px;
+    }
   }
 }

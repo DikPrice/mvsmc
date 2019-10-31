@@ -4,6 +4,7 @@ import ModelTile from './ModelTile'
 
 const ModelIndexContainer = props => {
   const [models, setModels] = useState([])
+  const [modelers, setModelers] = useState([])
   const [sort, setSort] = useState({sort: "none"})
   const [currentUser, setCurrentUser] = useState({})
 
