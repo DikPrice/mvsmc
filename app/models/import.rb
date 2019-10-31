@@ -1,11 +1,7 @@
 require 'csv'
-require 'pry'
-require_relative "../../lib/shipmodel"
-require_relative "../../lib/modeler"
 
-class Import < ApplicationRecord
-
-  IMPORT_PATHNAME = "/Users/richardprice/challenges/BreakableToy/mvsmc/import_files/"
+class Import
+  IMPORT_PATHNAME = Rails.root.to_s + ("/import_files/")
 
   def self.read_file(file_name)
     file_name = IMPORT_PATHNAME + file_name
@@ -16,22 +12,52 @@ class Import < ApplicationRecord
     data
   end
 
-  def self.find_models(data, type)
-    ships = []
-    data.each do |entry|
-      ship = ShipModel.new(entry, type)
-      ships << ship
+  def self.import_models
+    complete_model_imports = []
+    imported_model_data = read_file('model_data.csv')
+    imported_model_data.each do |data|
+      description = ShipModel.merge_paragraphs(data)
+      scale = ShipModel.add_scale_if_missing(data["model_scale"])
+      new_model = Submission.new(
+        name: data["model_name"],
+        scale: scale,
+        source: data["model_source"],
+        description: description,
+        length: data["model_length"],
+        width: data["model_width"],
+        height: data["model_height"],
+        first_name: data["modeler_first_name"],
+        last_name: data["modeler_last_name"],
+        phone: data["modeler_phone"],
+        email: data["modeler_email"]
+      )
+      new_model.save
+      complete_model_imports << new_model
     end
-    ships
+    complete_model_imports
   end
 
-  def self.find_modelers(data)
-    modelers = []
-    data.each do |entry|
-      modeler = Modeler.new(entry)
-      modelers << modeler
+  def self.import_modelers
+    complete_modeler_imports = []
+    imported_modeler_data = read_file('user_data.csv')
+    imported_modeler_data.each do |modeler|
+      if modeler["email"].nil?
+        modeler["email"] = "n/a"
+      end
+      if modeler["phone"].nil?
+        modeler["phone"] = "n/a"
+      end
+      new_modeler = Modeler.new(
+        first_name: modeler["first_name"],
+        last_name: modeler["last_name"],
+        email: modeler["email"],
+        phone: modeler["phone"],
+        role: 1
+      )
+      new_modeler.save
+      complete_modeler_imports << new_modeler
     end
-    modelers
+    complete_modeler_imports
   end
 
 end

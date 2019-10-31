@@ -74,15 +74,15 @@ const ShowSubmissionTile = props => {
   return (
     <div className="submission-display">
       <div className="event-card">
-        <div className="rows columns small-12 title">
+        <div className="rows columns title">
           {name}
         </div>
-        <div className="rows columns small-12 details">
+        <div className="rows columns details">
           {first_name} {last_name}<br />
           {source}<br />
           {scale}
         </div>
-        <div className="rows columns small-12 description">
+        <div className="rows columns description">
           {description}
         </div>
       </div>

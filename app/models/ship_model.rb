@@ -2,8 +2,8 @@ class ShipModel
 
   attr_reader :name, :scale, :source, :description, :length, :width, :height
 
-  def initialize(entry, source)
-    if source != "import" || entry["model_description_2"].nil?
+  def self.merge_paragraphs(entry)
+    if entry["model_description_2"].nil?
       description = entry["model_description_1"]
     else
       para1 = entry["model_description_1"]
@@ -15,13 +15,13 @@ class ShipModel
         description = "#{para1}\n#{para2}\n#{para3}"
       end
     end
-    @name = entry["model_name"]
-    entry["model_scale"].nil? ? @scale= "N/A" : @scale = entry["model_scale"]
-    @source = entry["model_source"]
-    @description = description
-    @length =  entry["model_length"]
-    @width =  entry["model_width"]
-    @height =  entry["model_height"]
+  end
+
+  def self.add_scale_if_missing(scale)
+    if scale.nil?
+      scale = "Not to scale"
+    end
+    scale
   end
 
 end

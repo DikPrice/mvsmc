@@ -4,7 +4,7 @@ import SubmissionIndexContainer from './SubmissionIndexContainer'
 import SubmissionShowContainer from './SubmissionShowContainer'
 import NewSubmissionContainer from './NewSubmissionContainer'
 import ModelIndexContainer from './ModelIndexContainer'
-import ModelShowContainer from './ModelShowContainer'
+import ModelShowTile from './ModelShowTile'
 
 export const App = (props) => {
   return (
@@ -16,7 +16,7 @@ export const App = (props) => {
         <Route exact path="/submissions/new" component={NewSubmissionContainer} />
         <Route exact path="/submissions/:id" component={SubmissionShowContainer} />
         <Route exact path="/models" component={ModelIndexContainer} />
-        <Route exact path="/models/:id" component={ModelShowContainer} />
+        <Route exact path="/models/:id" component={ModelShowTile} />
       </Switch>
     </BrowserRouter>
   )

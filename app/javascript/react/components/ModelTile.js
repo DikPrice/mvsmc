@@ -4,7 +4,9 @@ import { Link } from "react-router-dom"
 const ModelTile = props => {
 
   const [modeler, setModeler] = useState({})
-  useEffect(() => {fetch(`/api/v1/modelers/${props.model["modeler_id"]}`, {
+debugger
+  let modelerId = props.model["modeler_id"]
+  useEffect(() => {fetch(`/api/v1/modelers/${modelerId}`, {
     credentials: 'same-origin',
     })
     .then((response) => {
@@ -27,7 +29,7 @@ const ModelTile = props => {
     <>
       <tr>
         <td>
-          <Link to={`/models/${props.id}`}>
+          <Link to={`/models/${props.model["id"]}`}>
               {props.model["name"]}
           </Link>
         </td>
