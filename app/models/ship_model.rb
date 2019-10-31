@@ -17,4 +17,11 @@ class ShipModel
     end
   end
 
+  def self.add_scale_if_missing(scale)
+    if scale.nil?
+      scale = "Not to scale"
+    end
+    scale
+  end
+
 end

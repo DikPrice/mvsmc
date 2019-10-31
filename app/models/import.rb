@@ -17,9 +17,10 @@ class Import
     imported_model_data = read_file('model_data.csv')
     imported_model_data.each do |data|
       description = ShipModel.merge_paragraphs(data)
+      scale = ShipModel.add_scale_if_missing(data["model_scale"])
       new_model = Submission.new(
         name: data["model_name"],
-        scale: data["model_scale"],
+        scale: scale,
         source: data["model_source"],
         description: description,
         length: data["model_length"],
@@ -30,7 +31,6 @@ class Import
         phone: data["modeler_phone"],
         email: data["modeler_email"]
       )
-      binding.pry
       new_model.save
       complete_model_imports << new_model
     end

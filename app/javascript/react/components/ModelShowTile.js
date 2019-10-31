@@ -21,7 +21,6 @@ const ModelShowTile = props => {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
       setModel(body.model)
       setModeler(body.modeler)
       setCurrentUser(body.user)
@@ -32,16 +31,27 @@ const ModelShowTile = props => {
   return (
     <div className="submission-display">
       <div className="event-card">
-        <div className="rows columns small-12 title">
-          {name}
+      <div className="row columns model-adjust">
+      </div>
+        <div className="row columns title">
+          {model["name"]}
         </div>
-        <div className="rows columns small-12 details">
+        <div className="row columns details">
           {modeler["first_name"]} {modeler["last_name"]}<br />
           {model["source"]}<br />
           {model["scale"]}
         </div>
-        <div className="rows columns small-12 description">
+        <div className="row columns description">
           {model["description"]}
+        </div>
+        <hr />
+        <div className="rows meta">
+          <div className="columns small-12 large-4">
+          </div>
+          <div className="columns small-12 large-4">
+          </div>
+          <div className="columns small-12 large-4">
+          </div>
         </div>
       </div>
     </div>

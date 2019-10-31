@@ -43,35 +43,33 @@ class Api::V1::ModelsController < ApplicationController
         phone: params["phone"],
         role: 1
       )
-      model_exists = Model.find_by(
-        name: model_params["name"],
-        scale: model_params["scale"],
-        modeler_id: modeler["id"],
-      )
-      if model_exists.nil?
-        new_model = Model.create(
-              name: model_params["name"],
-              scale: model_params["scale"],
-              source: model_params["source"],
-              description: model_params["description"],
-              length: model_params["length"],
-              width: model_params["width"],
-              height: model_params["height"],
-              modeler_id: modeler[:id]
-            )
-      else
-        render json: { result: "duplicate", duplicate: model_exists }
-      end
-      matching_submission = Submission.find(model_params[:id])
-
-      if new_model.save
-        matching_submission.delete
-        render json: { result: new_model, duplicate: 0 }
-      else
-        render json: { result: new_model.errors, duplicate: 0 }
-      end
+    end
+    model_exists = Model.find_by(
+      name: model_params["name"],
+      scale: model_params["scale"],
+      modeler_id: modeler["id"],
+    )
+    if model_exists.nil?
+      new_model = Model.create(
+            name: model_params["name"],
+            scale: model_params["scale"],
+            source: model_params["source"],
+            description: model_params["description"],
+            length: model_params["length"],
+            width: model_params["width"],
+            height: model_params["height"],
+            modeler_id: modeler[:id]
+          )
     else
-      render json: { result: "modeler doesn't exist", duplicate: 0}
+        render json: { result: "duplicate", duplicate: model_exists }
+    end
+    matching_submission = Submission.find(model_params[:id])
+
+    if new_model.save
+      matching_submission.delete
+      render json: { result: new_model, duplicate: 0 }
+    else
+      render json: { result: new_model.errors, duplicate: 0 }
     end
   end
 
