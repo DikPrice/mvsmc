@@ -1,0 +1,63 @@
+/* line 1, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display {
+  width: 90%;
+  margin: 10px auto;
+}
+/* line 5, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box,
+.event-display .selected-box,
+.event-display .event-box {
+  border: 1px solid #0071BD;
+  border-radius: 10px;
+  height: 75vh;
+  overflow-y: scroll;
+  margin: 0px;
+}
+/* line 14, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box hr,
+.event-display .selected-box hr,
+.event-display .event-box hr {
+  margin: 0px;
+  padding: 0px;
+}
+/* line 19, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box .event-title,
+.event-display .selected-box .event-title,
+.event-display .event-box .event-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #0071BD;
+  text-align: center;
+}
+/* line 26, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box .event-desc,
+.event-display .select-box .dates,
+.event-display .select-box .venue,
+.event-display .selected-box .event-desc,
+.event-display .selected-box .dates,
+.event-display .selected-box .venue,
+.event-display .event-box .event-desc,
+.event-display .event-box .dates,
+.event-display .event-box .venue {
+  font-size: 0.85em;
+  padding: 1em;
+}
+/* line 33, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box .event-desc,
+.event-display .selected-box .event-desc,
+.event-display .event-box .event-desc {
+  text-align: justify;
+}
+/* line 37, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box .dates,
+.event-display .selected-box .dates,
+.event-display .event-box .dates {
+  text-align: right;
+}
+/* line 41, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/eventshow.scss */
+.event-display .select-box .select-box,
+.event-display .selected-box .select-box,
+.event-display .event-box .select-box {
+  margin: 0px;
+  padding: 0px;
+}
