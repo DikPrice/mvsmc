@@ -12,7 +12,6 @@ class Api::V1::EventRegistrationsController < ApplicationController
         event_id: registration_params[:event_id],
         model_id: registration_params[:model_id]
       )
-binding.pry
       if registration.save
         render json: { result: registration}
       else
