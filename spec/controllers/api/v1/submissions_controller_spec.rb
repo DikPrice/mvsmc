@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::SubmissionsController, type: :controller do
+
   describe "GET#index" do
+    let!(:test_user) {FactoryBot.create(:user)}
     let!(:submission) { FactoryBot.create(:submission) }
 
     context "The user asks to see a list of models" do
