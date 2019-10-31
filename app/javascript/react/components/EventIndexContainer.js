@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from "react-router-dom"
-import EventTile from './ModelTile'
+import { Link } from "react-router-dom"
+import EventTile from './EventTile'
 
 const EventIndexContainer = props => {
   const [events, setEvents] = useState([])
@@ -33,11 +33,7 @@ const EventIndexContainer = props => {
 
   let addEvent
   if (currentUser["role"] === 2){
-    addEvent = <button className="button" onClick={loadEventForm}>Edit</button>
-  }
-
-  const loadEventForm = (event) => {
-    // redirect to neweventform
+    addEvent = <Link to='/events/new'>Add Event</Link>
   }
 
   const eventTiles = events.map(event  => {
@@ -62,7 +58,8 @@ const EventIndexContainer = props => {
             {eventTiles}
           </tbody>
         </table>
-        <div className="columns small-12 large-4">
+        <div className="columns small-12">
+        <hr />
           {addEvent}
         </div>
       </div>
