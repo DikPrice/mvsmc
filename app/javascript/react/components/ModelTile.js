@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const ModelTile = props => {
 
   const [modeler, setModeler] = useState({})
-debugger
+  
   let modelerId = props.model["modeler_id"]
   useEffect(() => {fetch(`/api/v1/modelers/${modelerId}`, {
     credentials: 'same-origin',
