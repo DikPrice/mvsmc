@@ -1,0 +1,39 @@
+/* line 1, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list {
+  width: 90%;
+  margin: auto;
+}
+/* line 5, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .scroll-body {
+  height: 75vh;
+  overflow-y: scroll;
+}
+/* line 10, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .title {
+  text-align: left;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+/* line 15, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .title select {
+  width: 150px;
+  font-size: 1em;
+  height: 1.75em;
+  margin-top: 5px;
+}
+/* line 22, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .title input {
+  font-size: 1em;
+  height: 1.25em;
+  margin-top: 5px;
+  padding: .12em;
+  border-radius: .25em;
+}
+/* line 30, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .under-review {
+  color: red;
+}
+/* line 32, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/submissionsindex.scss */
+.submission-list .under-review a {
+  color: red;
+}

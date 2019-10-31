@@ -9,7 +9,7 @@ class Api::V1::SubmissionsController < ApplicationController
     model_list = []
     unsorted_submissions = Submission.all
     if (params["sort"] == "mymodels")
-      model_list = Submission.where(first_name: current_user[:first_name], last_name: current_user[:last_name])
+      model_list = Submission.where(first_name: user[:first_name], last_name: user[:last_name])
     elsif (params["sort"] == "awaitingreview")
       model_list = Submission.where(review: true)
     elsif (params["sort"] == "models")

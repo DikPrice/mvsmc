@@ -1,0 +1,47 @@
+.event-display {
+  width: 90%;
+  margin: 10px auto;
+
+  .select-box,
+  .selected-box,
+  .event-box {
+    border: 1px solid #0071BD;
+    border-radius: 10px;
+    height: 75vh;
+    overflow-y: scroll;
+    margin: 0px;
+
+    hr {
+      margin: 0px;
+      padding: 0px,
+    }
+
+    .event-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #0071BD;
+      text-align: center;
+    }
+
+    .event-desc,
+    .dates,
+    .venue {
+      font-size: 0.85em;
+      padding: 1em;
+    }
+
+    .event-desc {
+      text-align: justify;
+    }
+
+    .dates {
+      text-align: right;
+    }
+
+    .select-box {
+      margin: 0px;
+      padding: 0px;
+
+    }
+  }
+}
