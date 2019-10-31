@@ -33,8 +33,10 @@ const EventIndexContainer = props => {
   }, [])
 
   let addEvent
-  if (currentUser["role"] === 2){
-    addEvent = <Link to='/events/new'>Add Event</Link>
+  if (currentUser){
+    if (currentUser["role"] === 2){
+      addEvent = <Link to='/events/new'>Add Event</Link>
+    }
   }
 
   const eventTiles = events.map(event  => {
