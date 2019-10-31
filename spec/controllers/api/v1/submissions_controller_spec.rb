@@ -191,7 +191,7 @@ RSpec.describe Api::V1::SubmissionsController, type: :controller do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
-      expect(returned_json.length).to eq 14
+      expect(returned_json.length).to eq 15
       expect(returned_json).to be_kind_of(Hash)
 
       expect(returned_json["id"]).to eq edited_submission[:id]
