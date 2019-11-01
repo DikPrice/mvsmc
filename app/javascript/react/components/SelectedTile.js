@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom"
 
-const SelectTile = props => {
+const SelectedTile = props => {
   const [modeler, setModeler] = useState({})
-  const [registration, setRegistration] = useState({})
+
   let modelerId = props.model["modeler_id"]
 
   useEffect(() => {fetch(`/api/v1/modelers/${modelerId}`, {
@@ -25,43 +24,11 @@ const SelectTile = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
-  const registerModel = (event) => {
-    event.preventDefault()
-    fetch("/api/v1/event_registrations", {
-      credentials: 'same-origin',
-      method: "POST",
-      body: JSON.stringify({
-        event_id: props.eventId,
-        model_id: props.model["id"]
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      setRegistration(body.registration)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-    
-    props.selectModel()
-  }
-
   return (
     <>
       <div className="row">
         <div className="columns small-8">
-          <div onClick={registerModel}>
+          <div>
             {props.model["name"]}
           </div>
         </div>
@@ -77,4 +44,4 @@ const SelectTile = props => {
   )
 }
 
-export default SelectTile
+export default SelectedTile
