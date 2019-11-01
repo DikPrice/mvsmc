@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import ManageEventContainer from './ManageEventContainer'
-import EventEditContainer from './EventEditContainer'
+import EditEventContainer from './EditEventContainer'
 
 const EventShowContainer = props => {
 
   const [ eventInfo, setEventInfo ] = useState({})
+  const [showComponent, setShowComponent] = useState ("manage")
   const [currentUser, setCurrentUser] = useState({})
 
   let eventId = props.match.params.id
@@ -30,14 +31,27 @@ const EventShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
-  let selectComponent = <ShowEventContainer id={eventId} eventId={eventId} />
-  let selectComponent = <EditEventContainer id={eventId} eventId={eventId} />
+
+  let component = "manage"
+  if (showComponent === "manage"){
+    component = <ManageEventContainer id={eventId} eventId={eventId} />
+  }
+  if (showComponent === "edit"){
+    component = <EditEventContainer id={eventId} event={eventInfo} goBack={showEventManager}/>
+  }
 
   let editEvent
   if (currentUser){
     if (currentUser["role"] === 2){
       editEvent = <Link to='/events/new'>Edit this Event</Link>
     }
+  }
+
+  const showEventManager = () => {
+    setShowComponent("manage")
+  }
+  const showEventEdit = () => {
+    setShowComponent("edit")
   }
 
   return (
@@ -61,14 +75,14 @@ const EventShowContainer = props => {
           <div className="dates">
             <hr />
             {eventInfo["start_date"]} : {eventInfo["end_date"]}
-          </div>
-          <div className="row">
             <hr />
-            {editEvent}
           </div>
+          <button className="button" onClick={showEventEdit}>
+            Edit this Event
+          </button>
         </div>
         <div className="select-box columns small-12 medium-8">
-          {selectComponent}
+          {component}
         </div>
       </div>
     </div>

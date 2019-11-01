@@ -5,14 +5,16 @@ import { isEmpty } from 'lodash'
 const EditEventContainer = props => {
 
   const {
+    id,
     name, venue, description,
-    addess, city, state, zip,
+    address, city, state, zip,
     start_date, end_date
   } = props.event
 
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
   const [editEvent, setEditEvent] = useState({
+    id: id,
     name: name,
     venue: venue,
     description: description,
@@ -28,7 +30,7 @@ const EditEventContainer = props => {
     let submitErrors = {}
     const requiredFields = ["name", "venue", "city", "start_date"]
     requiredFields.forEach(field => {
-      if (newEvent[field].trim() === "") {
+      if (editEvent[field].trim() === "") {
         submitErrors = {
           ...submitErrors,
           [field]: "can't be blank"
@@ -40,14 +42,13 @@ const EditEventContainer = props => {
     return isEmpty(submitErrors)
   }
 
-  const postNewEvent = () => {
-    debugger
+  const updateEvent = () => {
     event.preventDefault()
     if (validForSubmission()) {
-      fetch("/api/v1/events", {
+      fetch(`/api/v1/events/${editEvent.id}`, {
         credentials: 'same-origin',
         method: "PATCH",
-        body: JSON.stringify(newEvent),
+        body: JSON.stringify(editEvent),
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
@@ -64,7 +65,8 @@ const EditEventContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        if (body.result["id"]) {
+        debugger
+        if (body["id"]) {
           setRedirect(true)
         } else {
           setErrors(body)
@@ -79,34 +81,18 @@ const EditEventContainer = props => {
   }
 
   const handleInputChange = event => {
-    setNewEvent({
-      ...newEvent,
+    setEditEvent({
+      ...editEvent,
       [event.currentTarget.name]: event.currentTarget.value
     })
   }
 
-  const clearForm = event => {
-    event.preventDefault()
-    setNewEvent({
-      name: "",
-      venue: "",
-      description: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      start_date: "",
-      end_date: ""
-    })
-    setErrors({})
-  }
-
   return(
     <div className="submission-form">
-      <form onSubmit={postNewEvent}>
+      <form onSubmit={updateEvent}>
         <div className="row columns">
           <div className="form-title">
-            Create a new event
+            Edit "{editEvent.name}"
           </div>
         </div>
         <div className="row">
@@ -117,7 +103,7 @@ const EditEventContainer = props => {
               <input
                 type="text"
                 name="name"
-                value={newEvent.name}
+                value={editEvent.name}
                 onChange={handleInputChange}
               />
             </label>
@@ -128,7 +114,7 @@ const EditEventContainer = props => {
               <input
                 type="text"
                 name="venue"
-                value={newEvent.venue}
+                value={editEvent.venue}
                 onChange={handleInputChange}
               />
             </label>
@@ -141,7 +127,7 @@ const EditEventContainer = props => {
             <input
               type="text"
               name="description"
-              value={newEvent.description}
+              value={editEvent.description}
               onChange={handleInputChange}
             />
           </label>
@@ -154,7 +140,7 @@ const EditEventContainer = props => {
               <input
                 type="text"
                 name="address"
-                value={newEvent.address}
+                value={editEvent.address}
                 onChange={handleInputChange}
               />
             </label>
@@ -165,7 +151,7 @@ const EditEventContainer = props => {
               <input
                 type="text"
                 name="city"
-                value={newEvent.city}
+                value={editEvent.city}
                 onChange={handleInputChange}
               />
             </label>
@@ -176,7 +162,7 @@ const EditEventContainer = props => {
               <input
                 type="text"
                 name="state"
-                value={newEvent.state}
+                value={editEvent.state}
                 onChange={handleInputChange}
               />
             </label>
@@ -187,7 +173,7 @@ const EditEventContainer = props => {
               <input
                 type="text"
                 name="zip"
-                value={newEvent.zip}
+                value={editEvent.zip}
                 onChange={handleInputChange}
               />
             </label>
@@ -201,7 +187,7 @@ const EditEventContainer = props => {
               <input
                 type="date"
                 name="start_date"
-                value={newEvent.start_date}
+                value={editEvent.start_date}
                 onChange={handleInputChange}
               />
             </label>
@@ -212,7 +198,7 @@ const EditEventContainer = props => {
               <input
                 type="date"
                 name="end_date"
-                value={newEvent.end_date}
+                value={editEvent.end_date}
                 onChange={handleInputChange}
               />
             </label>
@@ -225,8 +211,8 @@ const EditEventContainer = props => {
             type="submit"
             value="Submit"
           />
-          <button className="button" onClick={clearForm}>
-            Clear
+          <button className="button" onClick={props.goBack}>
+            Cancel
           </button>
         </div>
       </form>
