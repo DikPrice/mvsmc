@@ -12,7 +12,6 @@ const ManageEventContainer = props => {
     fetchModelList(`/api/v1/events/${props.eventId}/models`)
   }, [])
 
-
   const fetchModelList = (url) => {
     fetch(url, {
       credentials: 'same-origin',
