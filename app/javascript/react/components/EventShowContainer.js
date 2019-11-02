@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import SelectListContainer from './SelectListContainer'
+import { Link } from 'react-router-dom'
+import ManageEventContainer from './ManageEventContainer'
+import EventEditContainer from './EventEditContainer'
 
 const EventShowContainer = props => {
 
@@ -28,7 +30,15 @@ const EventShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
-  let selectComponent = <SelectListContainer id={eventId} eventId={eventId} />
+  let selectComponent = <ShowEventContainer id={eventId} eventId={eventId} />
+  let selectComponent = <EditEventContainer id={eventId} eventId={eventId} />
+
+  let editEvent
+  if (currentUser){
+    if (currentUser["role"] === 2){
+      editEvent = <Link to='/events/new'>Edit this Event</Link>
+    }
+  }
 
   return (
     <div className="event-display">
@@ -52,12 +62,13 @@ const EventShowContainer = props => {
             <hr />
             {eventInfo["start_date"]} : {eventInfo["end_date"]}
           </div>
+          <div className="row">
+            <hr />
+            {editEvent}
+          </div>
         </div>
-        <div className="select-box columns small-12 medium-4">
+        <div className="select-box columns small-12 medium-8">
           {selectComponent}
-        </div>
-        <div className="selected-box columns small-12 medium-4">
-          <h5>Selected List</h5>
         </div>
       </div>
     </div>

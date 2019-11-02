@@ -7,16 +7,27 @@ class Api::V1::ModelsController < ApplicationController
     end
 
     model_list = []
-    unsorted_model = Model.all
-    if (params["sort"] == "mymodels")
-      model_list = Submission.where(modeler_id: user[:id])
-    elsif (params["sort"] == "models")
-      model_list = unsorted_model.sort_by{ |value| value[:name] }
-    elsif (params["sort"] == "modelers")
-      model_list = unsorted_model.sort_by{ |value| value[:last_name] }
+
+    if (params["event_id"])
+      unsorted_models = Event.find(params["event_id"]).models
+    elsif (params["sort"] == "mymodels")
+      unsorted_models = Model.where(modeler_id: user[:id])
     else
-      model_list =unsorted_model
+      unsorted_models = Model.all
     end
+
+    if (params["sort"] == "models")
+      model_list = unsorted_models.sort_by{ |value| value[:name] }
+    elsif (params["sort"] == "modelers")
+      model_list = unsorted_models.sort_by{ |value| value[:last_name] }
+    else
+      model_list =unsorted_models
+    end
+
+    if model_list.empty?
+      model_list << {name: "No models found"}
+    end
+
     render json: { models: model_list, user: user }
   end
 
