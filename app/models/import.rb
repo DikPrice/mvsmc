@@ -40,24 +40,54 @@ class Import
   def self.import_modelers
     complete_modeler_imports = []
     imported_modeler_data = read_file('user_data.csv')
-    imported_modeler_data.each do |modeler|
-      if modeler["email"].nil?
-        modeler["email"] = "n/a"
-      end
-      if modeler["phone"].nil?
-        modeler["phone"] = "n/a"
-      end
-      new_modeler = Modeler.new(
-        first_name: modeler["first_name"],
-        last_name: modeler["last_name"],
-        email: modeler["email"],
-        phone: modeler["phone"],
-        role: 1
-      )
+    users = create_user_set(imported_modeler_data)
+
+    users.each do |user|
+      new_modeler = Modeler.new(user)
       new_modeler.save
       complete_modeler_imports << new_modeler
     end
     complete_modeler_imports
+    write_user_to_file(complete_modeler_imports)
+  end
+
+  def self.create_user_set(imported_data)
+    user_set = []
+    imported_data.each do |user|
+      if user["email"].nil?
+        user["email"] = "n/a"
+      end
+      if user["phone"].nil?
+        user["phone"] = "n/a"
+      end
+
+      user_details = {
+        first_name: user["first_name"],
+        last_name: user["last_name"],
+        email: user["email"],
+        phone: user["phone"],
+      }
+      user_set << user_details
+    end
+    user_set
+  end
+
+  def self.write_user_to_file(users)
+    CSV.open("#{IMPORT_PATHNAME}/user_seed_file.csv", "wb") do |entry|
+      users.each do |user|
+        if (user.email != "n/a")
+          entry << ['User.create(']
+          entry << ["  email: \"#{user.email}\","]
+          entry << ["  username: \"\","]
+          entry << ["  first_name: \"#{user.first_name}\","]
+          entry << ["  last_name: \"#{user.last_name}\","]
+          entry << ['  password: "password",']
+          entry << ['  password_confirmation: "password",']
+          entry << ['  role: 2,']
+          entry << [')']
+        end
+      end
+    end
   end
 
 end

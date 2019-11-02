@@ -9,8 +9,7 @@ const ManageEventContainer = props => {
 
 
   useEffect(() => {
-    fetchModelList(`/api/v1/models`)
-    fetchAssignedModelList(`/api/v1/events/${props.eventId}/models`)
+    fetchModelList(`/api/v1/events/${props.eventId}/models`)
   }, [])
 
 
@@ -30,32 +29,14 @@ const ManageEventContainer = props => {
       .then(response => response.json())
       .then(body => {
         setModels(body.models)
+        setEventModels(body.event_models)
         setCurrentUser(body.user)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
-  const fetchAssignedModelList = (url) => {
-    fetch(url, {
-      credentials: 'same-origin',
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage)
-          throw(error)
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        setEventModels(body.models)
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
-  }
-
-  const selectModelForEvent = () => {
+  const upDateLists = () => {
+    fetchModelList(`/api/v1/events/${props.eventId}/models`)
   }
 
   const selectTiles = models.map(model  => {
@@ -64,7 +45,7 @@ const ManageEventContainer = props => {
         key={model.id}
         model={model}
         eventId={props.eventId}
-        selectModel={selectModelForEvent}
+        updateLists={upDateLists}
       />
     )
   })
@@ -74,6 +55,7 @@ const ManageEventContainer = props => {
         key={model.id}
         model={model}
         eventId={props.eventId}
+        updateLists={upDateLists}
       />
     )
   })

@@ -44,7 +44,7 @@ const SubmissionIndexContainer = props => {
   let findMyModels, showReadyForReview
   if (currentUser){
     findMyModels = <option name="mymodels">My Models</option>
-    if (currentUser["role"] === 2){
+    if (currentUser["role"] >= 2){
       showReadyForReview = <option name="forreview">Awaiting Review</option>
     }
   }

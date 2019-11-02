@@ -3,7 +3,7 @@ import ModelTile from './ModelTile'
 
 const ModelIndexContainer = props => {
   const [models, setModels] = useState([])
-  const [sort, setSort] = useState({sort: "none"})
+  const [sort, setSort] = useState("models?sort=modelers")
   const [currentUser, setCurrentUser] = useState({})
 
   const fetchModelList = (url) => {
@@ -28,15 +28,19 @@ const ModelIndexContainer = props => {
   }
 
   useEffect(() => {
-    fetchModelList(`/api/v1/models?sort=${sort.sort}`)
+    fetchModelList(`/api/v1/${sort}`)
   }, [sort])
 
-  const handleInputChange = event => {
+  const sortOptions = [
+    {sortBy: "modelers", url: "models?sort=modelers"},
+    {sortBy: "models", url: "models?sort=models"},
+    {sortBy: "mymodels", url: `modelers/${currentUser['id']}/models`}
+  ]
+
+  const passSortType = event => {
     let sortValue = event.currentTarget.value.toLowerCase().replace(' ', '')
-    setSort({
-      ...sort,
-      [event.currentTarget.name]: sortValue
-    })
+    let fetchFrom = sortOptions.find(option => {return option.sortBy === sortValue})
+    setSort(fetchFrom.url)
   }
 
   let findMyModels
@@ -64,10 +68,10 @@ const ModelIndexContainer = props => {
           <label>
             <select name="sort"
               value={sort.sort}
-              onChange={handleInputChange}>
+              onChange={passSortType}>
               <option name="">Sort by</option>
-              <option name="models">Models</option>
-              <option name="modelers">Modelers</option>
+              <option name="models?sort=models">Models</option>
+              <option name="models?sort=modelers">Modelers</option>
               {findMyModels}
             </select>
           </label>

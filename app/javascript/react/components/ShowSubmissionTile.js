@@ -53,9 +53,9 @@ const ShowSubmissionTile = props => {
 
   let edit, submitForReview, showContacts, showTimestamps, transferToMaster
   if (props.user){
-    if ((first_name == props.user["first_name"] && last_name == props.user["last_name"]) || (props.user["role"] === 2)){
+    if ((first_name == props.user["first_name"] && last_name == props.user["last_name"]) || (props.user["role"] >= 2)){
       if (review === true){
-        if (props.user["role"] === 2){
+        if (props.user["role"] >= 2){
           edit= <button className="button" onClick={props.edit}>Edit</button>
           transferToMaster= <button className="button create-master" onClick={uploadToMaster}>Create Master</button>
         } else {

@@ -5,30 +5,29 @@ class Api::V1::ModelsController < ApplicationController
     if current_user
       user = current_user
     end
-
+    selected_models = []
     model_list = []
 
-    if (params["event_id"])
-      unsorted_models = Event.find(params["event_id"]).models
-    elsif (params["sort"] == "mymodels")
-      unsorted_models = Model.where(modeler_id: user[:id])
+    if (params["modeler_id"])
+      model_list = Model.find_by(modeler_id: params["modeler_id"])
+    elsif (params["event_id"])
+      selected_models = Event.find(params["event_id"]).models
+      model_list = get_unselected_models(selected_models)
     else
-      unsorted_models = Model.all
+      model_list = Model.all
     end
 
     if (params["sort"] == "models")
-      model_list = unsorted_models.sort_by{ |value| value[:name] }
+      model_list = model_list.sort_by{ |value| value[:name] }
     elsif (params["sort"] == "modelers")
-      model_list = unsorted_models.sort_by{ |value| value[:last_name] }
-    else
-      model_list =unsorted_models
+      model_list = model_list.sort_by{ |value| value[:last_name] }
     end
 
     if model_list.empty?
-      model_list << {name: "No models found"}
+      model_list << {id: 1, name: "No models found"}
     end
 
-    render json: { models: model_list, user: user }
+    render json: { models: model_list, event_models: selected_models, user: user }
   end
 
   def show
@@ -85,6 +84,16 @@ class Api::V1::ModelsController < ApplicationController
   end
 
   private
+
+  def get_unselected_models(selected_models)
+    all_models = Model.all
+    unselected_models = all_models.filter do |model|
+      if (!selected_models.include?(model))
+        model
+      end
+    end
+    return unselected_models
+  end
 
   def model_params
     params.require(:model).permit(

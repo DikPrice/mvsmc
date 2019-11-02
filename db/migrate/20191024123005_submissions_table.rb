@@ -12,6 +12,7 @@ class SubmissionsTable < ActiveRecord::Migration[5.2]
       t.integer :width
       t.integer :height
       t.text :description
+      t.boolean :review, default: false
 
       t.timestamps
     end

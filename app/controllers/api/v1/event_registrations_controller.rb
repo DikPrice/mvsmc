@@ -22,6 +22,11 @@ class Api::V1::EventRegistrationsController < ApplicationController
     end
   end
 
+  def destroy
+    registration_to_remove = EventRegistration.find_by(registration_params)
+    registration_to_remove.delete
+  end
+
   private
 
   def registration_params

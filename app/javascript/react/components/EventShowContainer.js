@@ -39,19 +39,19 @@ const EventShowContainer = props => {
   if (showComponent === "edit"){
     component = <EditEventContainer id={eventId} event={eventInfo} goBack={showEventManager}/>
   }
-
-  let editEvent
-  if (currentUser){
-    if (currentUser["role"] === 2){
-      editEvent = <Link to='/events/new'>Edit this Event</Link>
-    }
-  }
-
+  
   const showEventManager = () => {
     setShowComponent("manage")
   }
   const showEventEdit = () => {
     setShowComponent("edit")
+  }
+
+  let showEditButton
+  if (currentUser.role >= 2){
+    showEditButton = <button className="button" onClick={showEventEdit}>Edit this Event</button>
+  } else {
+    showEditButton = ""
   }
 
   return (
@@ -77,9 +77,7 @@ const EventShowContainer = props => {
             {eventInfo["start_date"]} : {eventInfo["end_date"]}
             <hr />
           </div>
-          <button className="button" onClick={showEventEdit}>
-            Edit this Event
-          </button>
+           {showEditButton}
         </div>
         <div className="select-box columns small-12 medium-8">
           {component}

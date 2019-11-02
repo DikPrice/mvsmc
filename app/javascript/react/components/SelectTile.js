@@ -53,8 +53,8 @@ const SelectTile = props => {
       setRegistration(body.registration)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
-    
-    props.selectModel()
+
+    props.updateLists()
   }
 
   return (
