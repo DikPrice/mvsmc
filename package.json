@@ -15,9 +15,12 @@
     "@rails/webpacker": "^4.0.7",
     "babel-loader": "^8.0.6",
     "balanced-match": "^1.0.0",
+    "google-map-react": "^1.1.5",
+    "google-maps-react": "^2.0.2",
     "prop-types": "~15.6.0",
     "react": "~16.8.0",
     "react-dom": "~16.8.0",
+    "react-google-maps-loader": "^4.2.6",
     "react-router-dom": "5.0.0",
     "redbox-react": "1.6.0"
   },

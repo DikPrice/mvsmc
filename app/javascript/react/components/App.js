@@ -1,14 +1,16 @@
 import React from 'react'
 import { Route, Switch, BrowserRouter } from "react-router-dom"
 import SplashTile from './SplashTile'
-import SubmissionIndexContainer from './SubmissionIndexContainer'
-import SubmissionShowContainer from './SubmissionShowContainer'
-import NewSubmissionContainer from './NewSubmissionContainer'
+import SubmissionIndexContainer from './submissions/SubmissionIndexContainer'
+import SubmissionShowContainer from './submissions/SubmissionShowContainer'
+import NewSubmissionContainer from './submissions/NewSubmissionContainer'
 import ModelIndexContainer from './ModelIndexContainer'
 import ModelShowTile from './ModelShowTile'
-import EventIndexContainer from './EventIndexContainer'
-import NewEventContainer from './NewEventContainer'
-import EventShowContainer from './EventShowContainer'
+import EventIndexContainer from './events/EventIndexContainer'
+import NewEventContainer from './events/NewEventContainer'
+import EventShowContainer from './events/EventShowContainer'
+
+import GoogleMapsContainer from './googlemaps/GoogleMapsContainer'
 
 export const App = (props) => {
   return (

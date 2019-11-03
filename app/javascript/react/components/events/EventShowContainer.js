@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import ManageEventContainer from './ManageEventContainer'
 import EditEventContainer from './EditEventContainer'
+import GoogleMapsContainer from '../googlemaps/GoogleMapsContainer'
 
 const EventShowContainer = props => {
 
@@ -31,27 +32,40 @@ const EventShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
-
   let component = "manage"
   if (showComponent === "manage"){
     component = <ManageEventContainer id={eventId} eventId={eventId} />
   }
   if (showComponent === "edit"){
-    component = <EditEventContainer id={eventId} event={eventInfo} goBack={showEventManager}/>
+    component = <EditEventContainer id={eventId} event={eventInfo} goBack={showManager}/>
   }
-  
-  const showEventManager = () => {
-    setShowComponent("manage")
-  }
-  const showEventEdit = () => {
-    setShowComponent("edit")
+  if (showComponent === "map"){
+    component = <GoogleMapsContainer
+      google={{apiKey: "AIzaSyDO3llKxY58ckwDleWJZLGnEU0fbJ4xmGs"}}
+      center={{
+          lat: 42.8111371,
+          lng: -70.875609}}
+      zoom={8}
+    />
   }
 
-  let showEditButton
+  const allowManager = () => {
+    setShowComponent("manage")
+  }
+  const allowEdit = () => {
+    setShowComponent("edit")
+  }
+  const showMap = () => {
+    setShowComponent("map")
+  }
+
+  let showEdit, showManager
   if (currentUser.role >= 2){
-    showEditButton = <button className="button" onClick={showEventEdit}>Edit this Event</button>
+    showEdit = <button className="button" onClick={allowEdit}>Edit this Event</button>
+    showManager= <button className="button" onClick={allowManager}>Allocat Models</button>
   } else {
-    showEditButton = ""
+    showEdit = ""
+    showManager = ""
   }
 
   return (
@@ -77,7 +91,11 @@ const EventShowContainer = props => {
             {eventInfo["start_date"]} : {eventInfo["end_date"]}
             <hr />
           </div>
-           {showEditButton}
+            <button className="button" onClick={showMap}>
+              Show Map
+            </button>
+           {showEdit}
+           {showManager}
         </div>
         <div className="select-box columns small-12 medium-8">
           {component}
