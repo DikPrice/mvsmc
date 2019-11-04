@@ -76,7 +76,7 @@ const EventShowContainer = props => {
   }
 
   return (
-    <div className="event-display">
+    <div>
       <div className="row">
         <div className="event-box columns small-12 medium-4">
          <div className="row event-title">
@@ -104,7 +104,7 @@ const EventShowContainer = props => {
            {showEdit}
            {showManager}
         </div>
-        <div className="select-box columns small-12 medium-8">
+        <div className="columns small-12 medium-8">
           {component}
         </div>
       </div>

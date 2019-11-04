@@ -2,6 +2,11 @@
   width: 75%;
   margin: 10px auto;
 
+  .button {
+    margin: 3px;
+    border-radius: 3px;
+  }
+
   .event-card{
     background-image: url("./../../card-backdrop.jpg");
     background-size: cover;

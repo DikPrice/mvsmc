@@ -33,7 +33,7 @@ const SubmissionIndexContainer = props => {
     fetchModelList(`/api/v1/submissions?sort=${sort.sort}`)
   }, [sort])
 
-  const handleInputChange = event => {
+  const passSortType = event => {
     let sortValue = event.currentTarget.value.toLowerCase().replace(' ', '')
     setSort({
       ...sort,
@@ -71,41 +71,43 @@ const SubmissionIndexContainer = props => {
 
   if ( show === "list"){
     return (
-      <div className="submission-list">
+      <div className="index-list submission">
         <div className="title row">
-          <div className="columns small-5 medium-4 large-3">
+          <div className="columns small-8 medium-8">
             Submissions
           </div>
           <form>
-          <div className="columns small-5 medium-2 large-2">
-            <label>
-              <select name="sort"
-                value={sort.sort}
-                onChange={handleInputChange}>
-                <option name="">Sort by</option>
-                <option name="models">Models</option>
-                <option name="modelers">Modelers</option>
-                {findMyModels}
-                {showReadyForReview}
-              </select>
-            </label>
-          </div>
+            <div className="columns small-4 medium-2">
+              <label>
+                <select name="sort"
+                  value={sort.sort}
+                  onChange={passSortType}>
+                  <option name="">Sort by</option>
+                  <option name="models">Models</option>
+                  <option name="modelers">Modelers</option>
+                  {findMyModels}
+                  {showReadyForReview}
+                </select>
+              </label>
+            </div>
           </form>
-          <hr />
         </div>
-        <div className="scroll-body row columns">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Scale</th>
-                <th>Modeler</th>
-              </tr>
-            </thead>
-            <tbody>
-              {submissionsTiles}
-            </tbody>
-          </table>
+        <div className="row columns">
+          <div className="rows table-header">
+            <div className="columns small-6 large-6">
+              Model
+            </div>
+            <div className="columns small-2 large-2">
+              Scale
+            </div>
+            <div className="columns small-12 large-4">
+              Modeler
+            </div>
+          <hr />
+          </div>
+          <div className="scroll-body row columns">
+            {submissionsTiles}
+          </div>
         </div>
       </div>
     )

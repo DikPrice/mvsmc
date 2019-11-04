@@ -10,8 +10,8 @@ const SubmissionTile = props => {
   }
 
   return (
-    <div className="tiles">
-      <div className="rows tile">
+    <div>
+      <div className="row tile">
         <div className="columns small-6 large-6 name">
           <Link to={`/submissions/${props.id}`}>
             <span className={status}>

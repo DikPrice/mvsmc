@@ -62,40 +62,42 @@ const ModelIndexContainer = props => {
   })
 
   return (
-    <div className="submission-list">
+    <div className="index-list model">
       <div className="title row">
-        <div className="columns small-5 large-2">
+        <div className="columns small-8 large-8">
           Model Registry
         </div>
         <form>
-        <div className="columns small-5 large-2">
-          <label>
-            <select name="sort"
-              value={sort.sort}
-              onChange={passSortType}>
-              <option name="">Sort by</option>
-              <option name="models?sort=models">Models</option>
-              <option name="models?sort=modelers">Modelers</option>
-              {findMyModels}
-            </select>
-          </label>
-        </div>
+          <div className="columns small-4 large-4">
+            <label>
+              <select name="sort"
+                value={sort.sort}
+                onChange={passSortType}>
+                <option name="">Sort by</option>
+                <option name="models?sort=models">Models</option>
+                <option name="models?sort=modelers">Modelers</option>
+                {findMyModels}
+              </select>
+            </label>
+          </div>
         </form>
-        <hr />
       </div>
       <div className="row columns">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Scale</th>
-              <th>Modeler</th>
-            </tr>
-          </thead>
-          <tbody>
-            {modelTiles}
-          </tbody>
-        </table>
+        <div className="rows table-header">
+          <div className="columns small-6 large-6">
+            Model
+          </div>
+          <div className="columns small-2 large-2">
+            Scale
+          </div>
+          <div className="columns small-12 large-4">
+            Modeler
+          </div>
+        <hr />
+        </div>
+        <div className="scroll-body row columns">
+          {modelTiles}
+        </div>
       </div>
     </div>
   )
