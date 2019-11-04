@@ -15,16 +15,20 @@ Rails.application.routes.draw do
   get '/models/:id', to: 'homes#index'
 
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users, only: [ :index, :show, :create ]
+
   resources :imports, only: [ :index, :create ]
   namespace :api do
     namespace :v1 do
       resources :models, only: [ :index, :show, :create, :update ]
-      resources :modelers, only: [ :show, :create, :update ]
+      resources :modelers, only: [ :show, :create, :update ] do
+        resources :models, only: :index
+      end
       resources :submissions, only: [ :index, :show, :create, :update ]
       resources :events, only: [ :index, :show, :create, :update ] do
         resources :models, only: [ :index ]
       end
+      resources :event_registrations, only: [ :create, :destroy ]
     end
   end
 end

@@ -16,6 +16,9 @@
         <% if current_user["role"] == 2 %>
           : Organiser
         <% end %>
+        <% if current_user["role"] == 3 %>
+          : Admin
+        <% end %>
       <% end %>
     </div>
 

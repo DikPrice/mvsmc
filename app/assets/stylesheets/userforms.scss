@@ -1,4 +1,25 @@
 .user-forms {
-  width: 80%;
-  margin: auto;
+  background-image: url("./../../sussex.jpg");
+  background-size: cover;
+  height: 100vh;
+  opacity: 75%;
+
+  .new_user {
+    float: left;
+    width: 500px;
+    margin-left: 100px;
+    margin-top: 50px;
+    opacity: 100%;
+    border-radius: 10px;
+    background-color: white;
+    padding:10px;
+    box-shadow: 10px 10px 5px #444444;
+
+    p {
+      color: #0071BD;
+      font-size: 2em;
+      font-weight: bold;
+      margin: 0 auto 5px;
+    }
+  }
 }

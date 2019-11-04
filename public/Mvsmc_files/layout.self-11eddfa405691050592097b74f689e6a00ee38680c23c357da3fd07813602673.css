@@ -1,0 +1,19 @@
+/* line 1, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/layout.scss */
+body {
+  font-family: 'Helvetica neue', Arial, 'sans serif';
+}
+
+/* line 5, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/layout.scss */
+.top-bar {
+  background-color: #0071BD;
+  color: white;
+}
+/* line 9, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/layout.scss */
+.top-bar h3 {
+  margin: 0;
+}
+/* line 13, /Users/richardprice/challenges/BreakableToy/mvsmc/app/assets/stylesheets/layout.scss */
+.top-bar a {
+  background-color: #0071BD;
+  color: white;
+}

@@ -16,6 +16,11 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def show
+    if current_user
+      user = current_user
+    end
+    event = Event.find(params["id"])
+    render json: { event: event, user: user }
   end
 
   def create
@@ -33,6 +38,15 @@ class Api::V1::EventsController < ApplicationController
       end
     else
       render json: { result: "duplicate", duplicate: event_exists }
+    end
+  end
+
+  def update
+    event_update = Event.find(params["id"])
+    if event_update.update(event_params)
+      render json: event_update
+    else
+      render json: event_update.errors
     end
   end
 

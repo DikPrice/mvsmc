@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 
-const ModelTile = props => {
+const SelectTile = props => {
 
   const [modeler, setModeler] = useState({})
-  
+
   let modelerId = props.model["modeler_id"]
   useEffect(() => {fetch(`/api/v1/modelers/${modelerId}`, {
     credentials: 'same-origin',
@@ -40,4 +40,4 @@ const ModelTile = props => {
   )
 }
 
-export default ModelTile
+export default SelectTile

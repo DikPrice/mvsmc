@@ -5,7 +5,7 @@ class CreateModelers < ActiveRecord::Migration[5.2]
       t.string :last_name, null: false
       t.string :phone
       t.string :email
-      t.integer :role, default: 1      
+      t.belongs_to :user
     end
   end
 end
