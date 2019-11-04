@@ -94,42 +94,40 @@ const EditEventContainer = props => {
             Edit "{editEvent.name}"
           </div>
         </div>
-        <div className="row">
-          <div className="columns small-12 large-8">
-            <label>
-              Event name:
-              {errors.name}
-              <input
-                type="text"
-                name="name"
-                value={editEvent.name}
-                onChange={handleInputChange}
-              />
-            </label>
-          </div>
-          <div className="columns small-6 large-4">
-            <label>
-              Venue: {errors.venue}
-              <input
-                type="text"
-                name="venue"
-                value={editEvent.venue}
-                onChange={handleInputChange}
-              />
-            </label>
-          </div>
-        </div>
-
-        <div  className="row columns">
+        <div className="row columns">
           <label>
-            Description: {errors.description}
+            Event name:
+            {errors.name}
             <input
               type="text"
-              name="description"
-              value={editEvent.description}
+              name="name"
+              value={editEvent.name}
               onChange={handleInputChange}
             />
           </label>
+        </div>
+        <div className="row columns">
+          <label>
+            Venue: {errors.venue}
+            <input
+              type="text"
+              name="venue"
+              value={editEvent.venue}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+
+        <div  className="row columns">
+          Description: {errors.description}
+          <textarea
+            type="text"
+            name="description"
+            rows="5"
+            columns="50"
+            value={editEvent.description}
+            onChange={handleInputChange}
+          ></textarea>
         </div>
 
         <div className="row">

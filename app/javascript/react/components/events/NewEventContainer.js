@@ -103,7 +103,7 @@ const NewEventContainer = props => {
           </div>
         </div>
         <div className="row">
-          <div className="columns small-12 large-8">
+          <div className="columns small-12 large-6">
             <label>
               Event name:
               {errors.name}
@@ -115,7 +115,7 @@ const NewEventContainer = props => {
               />
             </label>
           </div>
-          <div className="columns small-6 large-4">
+          <div className="columns small-12 large-6">
             <label>
               Venue: {errors.venue}
               <input
@@ -129,15 +129,15 @@ const NewEventContainer = props => {
         </div>
 
         <div  className="row columns">
-          <label>
-            Description: {errors.description}
-            <input
-              type="text"
-              name="description"
-              value={newEvent.description}
-              onChange={handleInputChange}
-            />
-          </label>
+          Description: {errors.description}
+          <textarea
+            type="text"
+            name="description"
+            rows="5"
+            columns="50"
+            value={newEvent.description}
+            onChange={handleInputChange}
+          ></textarea>
         </div>
 
         <div className="row">
