@@ -31,10 +31,14 @@ const ModelIndexContainer = props => {
     fetchModelList(`/api/v1/${sort}`)
   }, [sort])
 
+  let modelsByModeller = "models?sort=modelers"
+  if (currentUser){
+    modelsByModeller = `modelers/${currentUser['id']}/models`
+  }
   const sortOptions = [
     {sortBy: "modelers", url: "models?sort=modelers"},
     {sortBy: "models", url: "models?sort=models"},
-    {sortBy: "mymodels", url: `modelers/${currentUser['id']}/models`}
+    {sortBy: "mymodels", url: modelsByModeller}
   ]
 
   const passSortType = event => {

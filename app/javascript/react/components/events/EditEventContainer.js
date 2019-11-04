@@ -65,7 +65,6 @@ const EditEventContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        debugger
         if (body["id"]) {
           setRedirect(true)
         } else {

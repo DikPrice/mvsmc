@@ -3,12 +3,12 @@
   margin: 10px auto;
 
   .select-box,
-  .selected-box,
   .event-box {
     border: 1px solid #0071BD;
     border-radius: 10px;
     height: 75vh;
     overflow-y: scroll;
+    overflow: hidden;
     margin: 0px;
 
     hr {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-
+import { Redirect } from 'react-router-dom'
 import ShowSubmissionTile from "./ShowSubmissionTile"
 import EditSubmissionContainer from "./EditSubmissionContainer"
 
@@ -8,6 +8,7 @@ const SubmissionShowContainer = props => {
   const [submission, setSubmission] = useState({})
   const [showComponent, setShowComponent] = useState ("show")
   const [currentUser, setCurrentUser] = useState({})
+  const [redirect, setRedirect] = useState(false)
 
   let submissionId = props.match.params.id
 
@@ -32,8 +33,8 @@ const SubmissionShowContainer = props => {
   },[])
 
   const markForReview = () => {
+    event.preventDefault()
     submission["review"] = true
-    debugger
     event.preventDefault()
     fetch(`/api/v1/submissions/${submissionId}`, {
       credentials: "same-origin",
@@ -60,6 +61,7 @@ const SubmissionShowContainer = props => {
     .then(body => {
       if (body.id) {
         showSubmission(body)
+        setRedirect(true)
       } else {
         setErrors(body)
       }
@@ -67,7 +69,12 @@ const SubmissionShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
+  if (redirect === true){
+    return <Redirect to='/submissions' />
+  }
+
   let edit_submission = (event) => {
+    event.preventDefault()
     setShowComponent("edit")
   }
 

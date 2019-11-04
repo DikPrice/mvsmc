@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import ManageEventContainer from './ManageEventContainer'
 import EditEventContainer from './EditEventContainer'
+import RegistrationIndexContainer from './RegistrationIndexContainer'
 import GoogleMapsContainer from '../googlemaps/GoogleMapsContainer'
 
 const EventShowContainer = props => {
 
   const [ eventInfo, setEventInfo ] = useState({})
-  const [showComponent, setShowComponent] = useState ("manage")
+  const [showComponent, setShowComponent] = useState ("public")
   const [currentUser, setCurrentUser] = useState({})
 
   let eventId = props.match.params.id
@@ -48,6 +49,9 @@ const EventShowContainer = props => {
       zoom={8}
     />
   }
+  if (showComponent === "public"){
+    component = <RegistrationIndexContainer id={eventId} eventId={eventId} goBack={seeRegistrations}/>
+  }
 
   const allowManager = () => {
     setShowComponent("manage")
@@ -58,14 +62,17 @@ const EventShowContainer = props => {
   const showMap = () => {
     setShowComponent("map")
   }
+  const seeRegistrations = () => {
+    setShowComponent("public")
+  }
 
-  let showEdit, showManager
-  if (currentUser.role >= 2){
-    showEdit = <button className="button" onClick={allowEdit}>Edit this Event</button>
-    showManager= <button className="button" onClick={allowManager}>Allocat Models</button>
-  } else {
-    showEdit = ""
-    showManager = ""
+  let showEdit = ""
+  let showManager = <button className="button" onClick={seeRegistrations}>Registered Models</button>
+  if(currentUser){
+    if (currentUser.role >= 2){
+      showEdit = <button className="button" onClick={allowEdit}>Edit this Event</button>
+      showManager = <button className="button" onClick={allowManager}>Allocate Models</button>
+    }
   }
 
   return (

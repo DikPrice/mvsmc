@@ -60,18 +60,17 @@ const SelectTile = props => {
   return (
     <div className="model-select" onClick={registerModel}>
       <div className="row">
-        <div className="columns small-10">
+        <div className="columns small-8">
           <div>
-            {props.model["name"]}
+            <strong>{props.model["name"]}</strong>
           </div>
         </div>
-        <div className="columns small-2">
+        <div className="columns small-4">
           {props.model["scale"]}
         </div>
       </div>
       <div className="row columns">
         {modeler["first_name"]} {modeler["last_name"]}
-        <hr />
       </div>
     </div>
   )

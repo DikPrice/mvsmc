@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import SelectTile from './SelectTile'
-import SelectedTile from './SelectedTile'
+import RegisteredTile from './RegisteredTile'
 
-const ManageEventContainer = props => {
-  const [models, setModels] = useState([])
+const RegistrationIndexContainer= props => {
   const [eventModels, setEventModels] = useState([])
   const [currentUser, setCurrentUser] = useState({})
 
@@ -27,7 +25,6 @@ const ManageEventContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        setModels(body.models)
         setEventModels(body.event_models)
         setCurrentUser(body.user)
       })
@@ -38,45 +35,24 @@ const ManageEventContainer = props => {
     fetchModelList(`/api/v1/events/${props.eventId}/models`)
   }
 
-  const selectTiles = models.map(model  => {
+  const registeredTiles = eventModels.map(model  => {
     return(
-      <SelectTile
+      <RegisteredTile
         key={model.id}
         model={model}
-        eventId={props.eventId}
-        updateLists={upDateLists}
-      />
-    )
-  })
-  const selectedTiles = eventModels.map(model  => {
-    return(
-      <SelectedTile
-        key={model.id}
-        model={model}
-        eventId={props.eventId}
-        updateLists={upDateLists}
       />
     )
   })
 
   return (
     <div className="row">
-      <div className="columns small-6">
-        <strong>Available Models</strong>
-        <hr />
-        <div id="select-list">
-          {selectTiles}
-        </div>
-      </div>
-      <div className="columns small-6">
+      <div className="columns small-12">
         <strong>Registered Models</strong>
         <hr />
-        <div id="selected-list">
-          {selectedTiles}
-        </div>
+        {registeredTiles}
       </div>
     </div>
   )
 }
 
-export default ManageEventContainer
+export default RegistrationIndexContainer

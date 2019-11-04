@@ -6,7 +6,6 @@
 
   .splash-text-box {
     float: left;
-    height: 300px;
     width: 500px;
     margin-left: 100px;
     margin-top: 50px;
@@ -23,8 +22,14 @@
     }
 
     .welcome-options {
+      margin-left: 20px;
       padding: 20px;
       font-size: 1.5em;
+    }
+
+    .about-the-site {
+      text-align: justify;
+      font-size: 1em;
     }
   }
   .model-info-box {

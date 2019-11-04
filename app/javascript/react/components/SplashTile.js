@@ -19,6 +19,10 @@ const SplashTile = props => {
           <Link to="/events">
             Events
           </Link><br />
+          <a href="http://www.mvsmc.org">MVSMC Website</a>
+        </div>
+        <div className="about-the-site">
+        The Merrimack Valley Ship Modellers Club (MVSMC) regular stages public displays of it's members models. This site has been ceated to assist in submitting details of their models (and other items) for those events.
         </div>
       </div>
       <div className="model-info-box">

@@ -14,7 +14,6 @@ const ShowSubmissionTile = props => {
   } = props.submission
 
   let uploadToMaster = () => {
-    debugger
     event.preventDefault()
     fetch("/api/v1/models", {
       credentials: 'same-origin',
@@ -47,8 +46,12 @@ const ShowSubmissionTile = props => {
   }
 
   if (redirect){
-    debugger
     return < Redirect to='/submissions' />
+  }
+
+  let goBack = (event) => {
+    event.preventDefault()
+    setRedirect(true)
   }
 
   let edit, submitForReview, showContacts, showTimestamps, transferToMaster
@@ -98,6 +101,7 @@ const ShowSubmissionTile = props => {
           {showTimestamps}
         </div>
         <div className="columns small-12 large-4">
+          <button className="button" onClick={goBack}>Go Back</button>
           {submitForReview}
           {edit}
           {transferToMaster}
