@@ -34,7 +34,7 @@ const EventIndexContainer = props => {
 
   let addEvent
   if (currentUser){
-    if (currentUser["role"] === 2){
+    if (currentUser["role"] >= 2){
       addEvent = <Link to='/events/new'>Add Event</Link>
     }
   }
@@ -49,20 +49,32 @@ const EventIndexContainer = props => {
   })
 
   return (
-    <div className="submission-list">
-      <div className="row columns">
-        <table>
-          <thead>
-            <tr>
-              <th>Events</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventTiles}
-          </tbody>
-        </table>
+    <div className=" event-list">
+      <div className="title row">
         <div className="columns small-12">
-        <hr />
+          Events
+        </div>
+      </div>
+      <div className="row columns">
+        <div className="rows table-header">
+          <div className="columns small-6 large-3">
+            Event
+          </div>
+          <div className="columns small-2 large-4">
+            Venue
+          </div>
+          <div className="columns small-12 large-3">
+            Location
+          </div>
+          <div className="columns small-12 large-2">
+            When
+          </div>
+          <hr />
+        </div>
+        <div className="scroll-body row columns">
+          {eventTiles}
+        </div>
+        <div className="text-center columns small-12">
           {addEvent}
         </div>
       </div>

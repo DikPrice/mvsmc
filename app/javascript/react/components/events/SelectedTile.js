@@ -57,23 +57,23 @@ const SelectedTile = props => {
   }
 
   return (
-    <>
-    <div className="model-select" onClick={deregisterModel}>
-      <div className="row">
-        <div className="columns small-8">
-          <div>
-            <strong>{props.model["name"]}</strong>
+    <div>
+      <div className="model-select" onClick={deregisterModel}>
+        <div className="row tile">
+          <div className="columns small-8">
+            <div>
+              <strong>{props.model["name"]}</strong>
+            </div>
+          </div>
+          <div className="columns small-4">
+            {props.model["scale"]}<br />
           </div>
         </div>
-        <div className="columns small-4">
-          {props.model["scale"]}
+        <div className="row columns">
+          {modeler["first_name"]} {modeler["last_name"]}
         </div>
       </div>
-      <div className="row columns">
-        {modeler["first_name"]} {modeler["last_name"]}
-      </div>
     </div>
-    </>
   )
 }
 

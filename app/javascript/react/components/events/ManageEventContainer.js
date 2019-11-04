@@ -61,18 +61,24 @@ const ManageEventContainer = props => {
 
   return (
     <div className="row">
-      <div className="columns small-6">
-        <strong>Available Models</strong>
-        <hr />
-        <div id="select-list">
-          {selectTiles}
+      <div className="select columns small-12 medium-6">
+        <div className="index-list select">
+          <div className="title row columns">
+            Available Models
+          </div>
+          <div className="scroll-body select-list">
+            {selectTiles}
+          </div>
         </div>
       </div>
-      <div className="columns small-6">
-        <strong>Registered Models</strong>
-        <hr />
-        <div id="selected-list">
-          {selectedTiles}
+      <div className="select columns small-12 medium-6">
+        <div className="index-list select">
+          <div className="title row columns">
+            Registered Models
+          </div>
+          <div className="scroll-body selected-list">
+            {selectedTiles}
+          </div>
         </div>
       </div>
     </div>
