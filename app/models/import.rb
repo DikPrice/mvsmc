@@ -48,7 +48,8 @@ class Import
       complete_modeler_imports << new_modeler
     end
     complete_modeler_imports
-    write_user_to_file(complete_modeler_imports)
+    # Only include in development
+    # write_user_to_file(complete_modeler_imports)
   end
 
   def self.create_user_set(imported_data)

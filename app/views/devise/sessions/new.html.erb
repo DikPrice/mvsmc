@@ -1,7 +1,16 @@
 
 <div class="user-forms">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<<<<<<< HEAD
     <p>Sign In</p>
+=======
+
+    <% flash.each do |key, value| %>
+        <%= key %>">
+        <%= value %>
+    <% end %>
+
+>>>>>>> master
     <div class="field">
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

@@ -3,7 +3,12 @@ import ModelTile from './ModelTile'
 
 const ModelIndexContainer = props => {
   const [models, setModels] = useState([])
+<<<<<<< HEAD
   const [sort, setSort] = useState("models?sort=modelers")
+=======
+  const [modelers, setModelers] = useState([])
+  const [sort, setSort] = useState({sort: "none"})
+>>>>>>> master
   const [currentUser, setCurrentUser] = useState({})
 
   const fetchModelList = (url) => {

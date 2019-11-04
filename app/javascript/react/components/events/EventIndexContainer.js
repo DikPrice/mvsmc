@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import EventTile from './EventTile'
 
+
 const EventIndexContainer = props => {
   const [events, setEvents] = useState([])
   const [currentUser, setCurrentUser] = useState({})
