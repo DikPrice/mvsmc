@@ -1,10 +1,9 @@
-.event-list {
+.event-index-list {
   margin: 10px auto;
   border-radius: 5px;
-  border: 1px solid #0071BD;
-  max-width: 75%;
-  height: 65vh;
-
+  border: 3px solid #0071BD;
+  height: 62vh;
+  overflow-y: hidden;
 
   hr {
     padding: 0px;
@@ -20,12 +19,18 @@
     }
   }
 
+  .scroll-body {
+    height: 58vh;
+    overflow-y: scroll;
+  }
+
   .title {
     text-align: left;
     font-size: 1.25em;
     font-weight: bold;
     color: white;
     background-color: #0071BD;
+    padding-left: 10px;
 
     .tile {
 
@@ -37,6 +42,17 @@
       .name, .scale, .modeler {
         padding: 3px 20px 3px 0px;
       }
+    }
+  }
+  .under-review {
+    color: red;
+     a {
+       color: red;
+     }
+
+    hr {
+      padding: 0px;
+      margin: 0px;
     }
   }
 }

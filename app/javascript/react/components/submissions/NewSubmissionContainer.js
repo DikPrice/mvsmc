@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash'
 
 const NewSubmissionContainer = props => {
   const [errors, setErrors] = useState({})
-  const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [redirect, setRedirect] = useState("")
   const [newSubmission, setNewSubmission] = useState({
     name: "",
     scale: "",
@@ -66,7 +66,7 @@ const NewSubmissionContainer = props => {
       .then(response => response.json())
       .then(body => {
         if (body.result["id"]) {
-          setShouldRedirect(true)
+          setShouldRedirect("submissions")
         } else {
           setErrors(body)
         }
@@ -75,8 +75,16 @@ const NewSubmissionContainer = props => {
     }
   }
 
-  if (shouldRedirect) {
-    return <Redirect to='/submissions' />
+  if (redirect === "submissions") {
+    return <Redirect to="/submissions" />
+  }
+  if (redirect === "/") {
+    return <Redirect to='/' />
+  }
+
+  const loadMainPage = (event) => {
+    event.preventDefault()
+    setRedirect("/")
   }
 
   const handleInputChange = event => {
@@ -260,6 +268,9 @@ const NewSubmissionContainer = props => {
                   />
                   <button className="button" onClick={clearForm}>
                     Clear
+                  </button>
+                  <button className="button" onClick={loadMainPage}>
+                    Go Back
                   </button>
                 </div>
               </div>

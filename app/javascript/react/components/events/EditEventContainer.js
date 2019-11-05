@@ -87,7 +87,7 @@ const EditEventContainer = props => {
   }
 
   return(
-    <div className="submission-form">
+    <div className="event-submission-form">
       <form onSubmit={updateEvent}>
         <div className="row columns">
           <div className="form-title">
@@ -123,7 +123,7 @@ const EditEventContainer = props => {
           <textarea
             type="text"
             name="description"
-            rows="5"
+            rows="4"
             columns="50"
             value={editEvent.description}
             onChange={handleInputChange}

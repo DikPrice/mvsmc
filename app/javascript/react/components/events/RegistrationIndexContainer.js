@@ -45,9 +45,9 @@ const RegistrationIndexContainer= props => {
   })
 
   return (
-    <div className="index-list registrations">
+    <div className="event-index-list registrations">
       <div className="title row columns">
-          Registered Models
+          Event Manifest
       </div>
       <div className="row columns">
         <div className="rows table-header">

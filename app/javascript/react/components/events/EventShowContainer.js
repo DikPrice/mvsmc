@@ -50,30 +50,34 @@ const EventShowContainer = props => {
     />
   }
   if (showComponent === "public"){
-    component = <RegistrationIndexContainer id={eventId} eventId={eventId} goBack={seeRegistrations}/>
+    component = <RegistrationIndexContainer id={eventId} eventId={eventId} />
   }
 
   const allowManager = () => {
+    event.preventDefault()
     setShowComponent("manage")
   }
   const allowEdit = () => {
+    event.preventDefault()
     setShowComponent("edit")
   }
   const showMap = () => {
+    event.preventDefault()
     setShowComponent("map")
   }
-  const seeRegistrations = () => {
+  const showManifest = () => {
+    event.preventDefault()
     setShowComponent("public")
   }
 
-  let showEdit = ""
-  let showManager = <button className="button" onClick={seeRegistrations}>Registered Models</button>
+  let showEdit = "", showManager = ""
   if(currentUser){
     if (currentUser.role >= 2){
       showEdit = <button className="button" onClick={allowEdit}>Edit this Event</button>
       showManager = <button className="button" onClick={allowManager}>Allocate Models</button>
     }
   }
+  const registrations = <button className="button" onClick={showManifest}>Registered Models</button>
 
   return (
     <div>
@@ -103,8 +107,9 @@ const EventShowContainer = props => {
             </button>
            {showEdit}
            {showManager}
+           {registrations}
         </div>
-        <div className="columns small-12 medium-8">
+        <div className="event-list columns small-12 medium-8">
           {component}
         </div>
       </div>

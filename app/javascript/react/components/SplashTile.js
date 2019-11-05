@@ -1,7 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const SplashTile = props => {
+  const [submissions, setSubmissions] = useState([])
+  const [currentUser, setCurrentUser] = useState({})
+
+  useEffect(() => {fetch(`/api/v1/submissions?sort=mymodels`, {
+      credentials: 'same-origin',
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage)
+          throw(error)
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        setSubmissions(body.models)
+        setCurrentUser(body.user)
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }, [])
+
+  let currentSubmissions = 0
+  let seeSubmissions
+  if (currentUser) {
+    if (submissions){
+      currentSubmissions = submissions.length
+    }
+    seeSubmissions =
+      <>
+        <Link to="/submissions/new">Submit a new Model</Link><br />
+        <li><span className="stats">
+          (you have {currentSubmissions} submissions in progress)
+        </span></li>
+      </>
+  }
 
   return (
     <div className="splash-tile">
@@ -10,9 +47,7 @@ const SplashTile = props => {
           Welcome
         </div>
         <div className="welcome-options">
-          <Link to="/submissions">
-            Submissions
-          </Link><br />
+          {seeSubmissions}
           <Link to="/models">
             Registered Models
           </Link><br />

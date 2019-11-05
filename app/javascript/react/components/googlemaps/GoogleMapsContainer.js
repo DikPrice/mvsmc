@@ -5,7 +5,7 @@ const GoogleMapsContainer = props => {
 
   const style = {
     width: '750px',
-    height: '550px',
+    height: '60vh',
     margin: '10px',
   }
 

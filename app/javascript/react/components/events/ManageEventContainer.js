@@ -62,7 +62,7 @@ const ManageEventContainer = props => {
   return (
     <div className="row">
       <div className="select columns small-12 medium-6">
-        <div className="index-list select">
+        <div className="event-index-list select">
           <div className="title row columns">
             Available Models
           </div>
@@ -72,7 +72,7 @@ const ManageEventContainer = props => {
         </div>
       </div>
       <div className="select columns small-12 medium-6">
-        <div className="index-list select">
+        <div className="event-index-list select">
           <div className="title row columns">
             Registered Models
           </div>

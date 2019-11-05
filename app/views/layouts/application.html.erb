@@ -10,14 +10,14 @@
 
   <nav class="top-bar">
     <div>
-      <h3><a href="/">MVSMC</a></h3>
+      <h3><a href="/">MVSMC Digital Curator</a></h3>
       <%- if current_user -%>
-        <%= current_user["first_name"] %> <%= current_user["last_name"] %>
+        Logged in as: <em><%= current_user["first_name"] %> <%= current_user["last_name"] %></em>
         <% if current_user["role"] == 2 %>
-          : Organiser
+          (Organiser)
         <% end %>
         <% if current_user["role"] == 3 %>
-          : Admin
+          (Admin)
         <% end %>
       <% end %>
     </div>

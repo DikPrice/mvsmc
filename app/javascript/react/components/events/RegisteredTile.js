@@ -25,22 +25,22 @@ const RegisteredTile = props => {
   },[])
 
   return (
-    <>
-      <div className="row">
-        <div className="columns small-5">
-          {props.model["name"]}
+    <div>
+      <div className="row tile">
+        <div className="columns small-6 large-6 name">
+          {props.model.name}
         </div>
-        <div className="columns small-3">
-          {props.model["scale"]}
+        <div className="columns small-2 large-2 scale">
+          {props.model.scale}
         </div>
-        <div className="columns small-4">
+        <div className="columns small-12 large-4 modeler">
           {modeler["first_name"]} {modeler["last_name"]}
         </div>
+        <div>
+          <hr />
+        </div>
       </div>
-      <div className="row">
-        <hr />
-      </div>
-    </>
+    </div>
   )
 }
 
