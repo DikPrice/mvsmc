@@ -44,7 +44,7 @@ RSpec.describe Api::V1::SubmissionsController, type: :controller do
 
         expect(response.status).to eq 200
         expect(response.content_type).to eq("application/json")
-        expect(returned_json.length).to eq 2
+        expect(returned_json.length).to eq 3
         expect(returned_json).to be_kind_of(Hash)
 
         expect(returned_json["model"]["id"]).to eq submission.id

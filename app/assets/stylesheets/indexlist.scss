@@ -1,12 +1,12 @@
 .model,
 .submission {
-  max-width: 50%;
+  max-width: 55%;
 }
 
 .index-list {
   margin: 10px auto;
-  border-radius: 5px;
-  border: 3px solid #0071BD;
+  border-radius: 10px;
+  border: 2px solid #0071BD;
 
   hr {
     padding: 0px;
@@ -25,6 +25,19 @@
   .scroll-body {
     height: 65vh;
     overflow-y: scroll;
+
+    .tile {
+      margin: 5px;
+      padding: 5px 0;
+
+      .divide {
+        margin-top: 3px;
+        hr {
+          padding: 0px;
+          margin: 0px;
+        }
+      }
+    }
   }
 
   .title {
@@ -49,19 +62,8 @@
       margin-top: 5px;
       border-radius: .25em;
     }
-
-    .tile {
-
-      hr {
-        padding: 0px;
-        margin: 0px;
-      }
-
-      .name, .scale, .modeler {
-        padding: 3px 20px 3px 0px;
-      }
-    }
   }
+
   .under-review {
     color: red;
      a {

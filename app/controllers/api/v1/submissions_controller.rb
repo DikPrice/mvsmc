@@ -8,10 +8,12 @@ class Api::V1::SubmissionsController < ApplicationController
     if (params["sort"])
       model_list = Submission.get_model_list(params["sort"], user)
       render json: { models: model_list, user: user }
-    end
-    if (params["count"])
+    elsif (params["count"])
       model_count = Submission.get_model_count(params["statusCount"], user)
       render json: { models: model_count, user: user }
+    else
+      model_list = Submission.all
+      render json: { models: model_list, user: user }
     end
   end
 

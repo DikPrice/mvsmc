@@ -66,7 +66,7 @@ const NewSubmissionContainer = props => {
       .then(response => response.json())
       .then(body => {
         if (body.result["id"]) {
-          setShouldRedirect("submissions")
+          setRedirect("submissions")
         } else {
           setErrors(body)
         }

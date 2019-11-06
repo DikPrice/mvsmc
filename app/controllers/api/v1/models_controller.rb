@@ -52,7 +52,6 @@ class Api::V1::ModelsController < ApplicationController
         last_name: params["last_name"],
         email: params["email"],
         phone: params["phone"],
-        role: 1
       )
     end
     model_exists = Model.find_by(

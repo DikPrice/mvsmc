@@ -30,22 +30,21 @@ const SplashTile = props => {
       .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
-  let seeSubmissions, awaitingReview
-  if (currentUser) {
+  let seeSubmissions, submissionStats, awaitingReview
+  if (currentUser.role >= 1) {
+    seeSubmissions = <><Link to="/submissions/new">Submit a new Model</Link><br /></>
     if (statusCount.submissioncount > 0){
-      seeSubmissions =
-      <>
-        <Link to="/submissions/new">Submit a new Model</Link><br />
+      submissionStats =
+        <>
           <li className="stats">In progress: {statusCount.submissioncount}</li>
           <li className="stats">Being reviewed: {statusCount.myreviews}</li>
-      </>
-      if (currentUser.role >= 2) {
-        awaitingReview =
-        <li className="stats review">Awaiting review: {statusCount.allreviewcount}</li>
-      }
+        </>
+    }
+    if (currentUser.role >= 2) {
+      awaitingReview =
+      <li className="stats review">Awaiting review: {statusCount.allreviewcount}</li>
     }
   }
-
 
   return (
     <div className="splash-tile">
@@ -55,6 +54,7 @@ const SplashTile = props => {
         </div>
         <div className="welcome-options">
           {seeSubmissions}
+          {submissionStats}
           {awaitingReview}
           <Link to="/models">
             Registered Models

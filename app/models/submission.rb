@@ -17,6 +17,9 @@ class Submission < ApplicationRecord
       model_list = unsorted_submissions.sort_by{ |value| value[:name] }
     elsif (look_for == "modelers")
       model_list = unsorted_submissions.sort_by{ |value| value[:last_name] }
+    elsif (look_for == "newestupdate")
+      model_list = unsorted_submissions.sort_by{ |value| value[:updated_at] }
+      model_list = model_list.reverse
     else
       model_list =unsorted_submissions
     end

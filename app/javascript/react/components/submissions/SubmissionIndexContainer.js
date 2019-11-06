@@ -85,6 +85,7 @@ const SubmissionIndexContainer = props => {
                   <option name="">Sort by</option>
                   <option name="models">Models</option>
                   <option name="modelers">Modelers</option>
+                  <option name="newestupdate">Newest Update</option>
                   {findMyModels}
                   {showReadyForReview}
                 </select>
@@ -105,8 +106,10 @@ const SubmissionIndexContainer = props => {
             </div>
           <hr />
           </div>
-          <div className="scroll-body row columns">
-            {submissionsTiles}
+          <div className="row columns">
+            <div className="scroll-body">
+              {submissionsTiles}
+            </div>
           </div>
         </div>
       </div>

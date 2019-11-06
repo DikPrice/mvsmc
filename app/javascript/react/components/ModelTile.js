@@ -30,7 +30,7 @@ const SelectTile = props => {
       <div className="row tile">
         <div className="columns small-6 large-6 name">
           <Link to={`/models/${props.model["id"]}`}>
-            {props.model.name}
+            <strong>{props.model.name}</strong>
           </Link>
         </div>
         <div className="columns small-2 large-2 scale">
