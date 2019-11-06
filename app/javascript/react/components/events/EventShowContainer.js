@@ -4,6 +4,7 @@ import ManageEventContainer from './ManageEventContainer'
 import EditEventContainer from './EditEventContainer'
 import RegistrationIndexContainer from './RegistrationIndexContainer'
 import GoogleMapsContainer from '../googlemaps/GoogleMapsContainer'
+import EventPrintTile from './EventPrintTile'
 
 const EventShowContainer = props => {
 
@@ -44,9 +45,10 @@ const EventShowContainer = props => {
     component = <GoogleMapsContainer
       google={{apiKey: "AIzaSyDO3llKxY58ckwDleWJZLGnEU0fbJ4xmGs"}}
       center={{
-          lat: 42.8111371,
-          lng: -70.875609}}
-      zoom={8}
+        lat: 42.81083333,
+        lng: -70.87166667
+      }}
+      zoom={1}
     />
   }
   if (showComponent === "public"){
@@ -102,12 +104,14 @@ const EventShowContainer = props => {
             {eventInfo["start_date"]} : {eventInfo["end_date"]}
             <hr />
           </div>
+          <div className="text-center">
             <button className="button" onClick={showMap}>
               Show Map
             </button>
-           {showEdit}
-           {showManager}
-           {registrations}
+            {showEdit}<br />
+            {showManager}
+            {registrations}
+          </div>
         </div>
         <div className="event-list columns small-12 medium-8">
           {component}

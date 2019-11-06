@@ -69,7 +69,10 @@ const ShowSubmissionTile = props => {
         edit= <button className="button" onClick={props.edit}>Edit</button>
         submitForReview = <button className="button" onClick={props.forReview}>Submit</button>
         showContacts = `Phone: ${phone}, Email: ${email}`
-        showTimestamps = <>Created: {created_at},<br />Updated: {updated_at}</>
+        showTimestamps =
+        <>
+          Created: {props.timestamps.created},<br />Updated: {props.timestamps.updated}
+        </>
       }
     }
   }

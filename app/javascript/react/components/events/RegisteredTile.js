@@ -27,8 +27,10 @@ const RegisteredTile = props => {
   return (
     <div>
       <div className="row tile">
-        <div className="columns small-6 large-6 name">
-          {props.model.name}
+        <div className="columns small-6 large-6">
+          <span className="name">
+            {props.model.name}
+          </span>
         </div>
         <div className="columns small-2 large-2 scale">
           {props.model.scale}

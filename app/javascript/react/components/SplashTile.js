@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const SplashTile = props => {
-  const [submissions, setSubmissions] = useState([])
+  const [statusCount, setStatusCount] = useState({})
   const [currentUser, setCurrentUser] = useState({})
 
-  useEffect(() => {fetch(`/api/v1/submissions?sort=mymodels`, {
+  useEffect(() => {
+    getData(`/api/v1/submissions?count=statuscount`)
+  }, [])
+
+  const getData = (url) =>{
+    fetch(url, {
       credentials: 'same-origin',
       })
       .then((response) => {
@@ -19,26 +24,28 @@ const SplashTile = props => {
       })
       .then(response => response.json())
       .then(body => {
-        setSubmissions(body.models)
+        setStatusCount(body.models)
         setCurrentUser(body.user)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
-  }, [])
+  }
 
-  let currentSubmissions = 0
-  let seeSubmissions
+  let seeSubmissions, awaitingReview
   if (currentUser) {
-    if (submissions){
-      currentSubmissions = submissions.length
-    }
-    seeSubmissions =
+    if (statusCount.submissioncount > 0){
+      seeSubmissions =
       <>
         <Link to="/submissions/new">Submit a new Model</Link><br />
-        <li><span className="stats">
-          (you have {currentSubmissions} submissions in progress)
-        </span></li>
+          <li className="stats">In progress: {statusCount.submissioncount}</li>
+          <li className="stats">Being reviewed: {statusCount.myreviews}</li>
       </>
+      if (currentUser.role >= 2) {
+        awaitingReview =
+        <li className="stats review">Awaiting review: {statusCount.allreviewcount}</li>
+      }
+    }
   }
+
 
   return (
     <div className="splash-tile">
@@ -48,6 +55,7 @@ const SplashTile = props => {
         </div>
         <div className="welcome-options">
           {seeSubmissions}
+          {awaitingReview}
           <Link to="/models">
             Registered Models
           </Link><br />
@@ -57,7 +65,6 @@ const SplashTile = props => {
           <a href="http://www.mvsmc.org">MVSMC Website</a>
         </div>
         <div className="about-the-site">
-        The Merrimack Valley Ship Modellers Club (MVSMC) regular stages public displays of it's members models. This site has been ceated to assist in submitting details of their models (and other items) for those events.
         </div>
       </div>
       <div className="model-info-box">

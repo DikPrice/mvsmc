@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 
 const ModelShowTile = props => {
   const [model , setModel] = useState({})
-  const [modeler , setModeler] = useState({})
+  const [modeler, setModeler] = useState({})
   const [currentUser, setCurrentUser] = useState({})
 
   let modelId = props.match.params.id
@@ -34,15 +34,15 @@ const ModelShowTile = props => {
       <div className="row columns model-adjust">
       </div>
         <div className="row columns title">
-          {model["name"]}
+          {model.name}
         </div>
         <div className="row columns details">
-          {modeler["first_name"]} {modeler["last_name"]}<br />
-          {model["source"]}<br />
-          {model["scale"]}
+          {modeler.first_name} {modeler.last_name}<br />
+          {model.source}<br />
+          {model.scale}
         </div>
         <div className="row columns description">
-          {model["description"]}
+          {model.description}
         </div>
         <hr />
         <div className="rows meta">

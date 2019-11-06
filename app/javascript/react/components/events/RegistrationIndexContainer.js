@@ -62,7 +62,7 @@ const RegistrationIndexContainer= props => {
           </div>
         <hr />
         </div>
-        <div className="scroll-body row columns">
+        <div className="event-scroll-body row columns">
           {registeredTiles}
         </div>
       </div>

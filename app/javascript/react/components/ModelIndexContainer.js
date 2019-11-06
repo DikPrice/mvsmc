@@ -57,6 +57,7 @@ const ModelIndexContainer = props => {
       <ModelTile
         key={model["id"]}
         model={model}
+        modeler={currentUser}
       />
     )
   })

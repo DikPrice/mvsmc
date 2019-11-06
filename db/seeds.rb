@@ -1,38 +1,11 @@
 User.create(
-  email: "Admin@admin.com",
-  username: "admin",
-  first_name: "Richard",
-  last_name: "Price",
-  password: "password",
-  password_confirmation: "password",
-  role: 3
-)
-User.create(
-  email: "organiser@organiser.com",
-  username: "ShipBottler",
-  first_name: "Alex",
-  last_name: "Bellinger",
-  password: "password",
-  password_confirmation: "password",
-  role: 2
-)
-User.create(
-  email: "member@member.com",
-  username: "AwesomeTinkerer",
-  first_name: "Robin",
-  last_name: "Neil",
-  password: "password",
-  password_confirmation: "password",
-  role: 1
-)
-User.create(
   email: "michael.m.andrade@gmail.com",
   username: "",
   first_name: "Michael",
   last_name: "Andrade",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "shipinbottler@gmail.net",
@@ -50,7 +23,7 @@ email: "bali002@hotmail.com",
   last_name: "Berry",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "snodok@comcast.net",
@@ -59,7 +32,7 @@ User.create(
   last_name: "Bodner",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "mdbouch@hotmail.com",
@@ -68,7 +41,7 @@ User.create(
   last_name: "Boucher",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "rlucienb@juno.com",
@@ -77,7 +50,7 @@ User.create(
   last_name: "Boucher",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "spchannin@yahoo.com",
@@ -95,7 +68,7 @@ User.create(
   last_name: "Cooper",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "roycrane@verizon.net",
@@ -104,7 +77,7 @@ User.create(
   last_name: "Crane",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "rjccjr@excite.com",
@@ -113,7 +86,7 @@ User.create(
   last_name: "Crean",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "dvds@comcast.net",
@@ -122,7 +95,7 @@ User.create(
   last_name: "DeInnocentis",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "mmarshanne@comcast.net",
@@ -140,7 +113,7 @@ email: "catboat59@comcast.net",
   last_name: "Hering",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
 email: "rhunter_47@msn.com",
@@ -149,7 +122,7 @@ email: "rhunter_47@msn.com",
   last_name: "Hunter",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
 email: "enter489@comcast.net",
@@ -158,7 +131,7 @@ email: "enter489@comcast.net",
   last_name: "Kelley",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "tmallia@ix.netcom.com",
@@ -167,7 +140,7 @@ User.create(
   last_name: "Malia",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "walt.meibaum@alumni.tufts.edu",
@@ -176,7 +149,7 @@ User.create(
   last_name: "Meibaum",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "njmulqueen@msn.com",
@@ -185,7 +158,7 @@ User.create(
   last_name: "Mulqueen",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "rdbrmurray@gmail.com",
@@ -194,7 +167,7 @@ User.create(
   last_name: "Murray",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
 email: "boatmanrob14@gmail.com",
@@ -203,7 +176,7 @@ email: "boatmanrob14@gmail.com",
   last_name: "Napier",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "rjneill@comcast.net",
@@ -212,7 +185,7 @@ User.create(
   last_name: "Neil",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
 email: "jnorton1946@gmail.com",
@@ -221,7 +194,7 @@ email: "jnorton1946@gmail.com",
   last_name: "Norton",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "pielcraftsmen@verizon.net",
@@ -230,7 +203,7 @@ User.create(
   last_name: "Partridge",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "rosiep@clara.net",
@@ -239,7 +212,7 @@ User.create(
   last_name: "Price",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 3,
 )
 User.create(
 email: "charles0100@comcast.net",
@@ -248,7 +221,7 @@ email: "charles0100@comcast.net",
   last_name: "Purinton",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "johnruggerio@myfairpoint.net",
@@ -257,7 +230,7 @@ User.create(
   last_name: "Ruggerio",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
   email: "wmsceery@comcast.net",
@@ -266,7 +239,7 @@ User.create(
   last_name: "Sceery",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 3,
 )
 User.create(
   email: "martinonisland@gmail.com",
@@ -275,7 +248,7 @@ User.create(
   last_name: "Seim",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 User.create(
 email: "mike.swanson1@comcast.net",
@@ -284,7 +257,7 @@ email: "mike.swanson1@comcast.net",
   last_name: "Swanson",
   password: "password",
   password_confirmation: "password",
-role: 2,
+role: 1,
 )
 Event.create(
   name: "Yankee Homecoming",

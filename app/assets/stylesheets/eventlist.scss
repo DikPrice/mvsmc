@@ -5,19 +5,13 @@
   max-width: 75%;
   height: 65vh;
 
-
   hr {
     padding: 0px;
     margin: 0px;
   }
 
-  .table-header {
-    font-size: 1em;
+  .table-header{
     font-weight: bold;
-
-    hr {
-      border: 1px solid #0071BD
-    }
   }
 
   .title {
@@ -26,17 +20,16 @@
     font-weight: bold;
     color: white;
     background-color: #0071BD;
+    }
 
-    .tile {
+  .event-scroll-body {
+    height: 65vh;
+    overflow-y: scroll;
 
-      hr {
-        padding: 0px;
-        margin: 0px;
-      }
-
-      .name, .scale, .modeler {
-        padding: 3px 20px 3px 0px;
-      }
+    .name,
+    .modeler {
+      padding-left: 10px;
     }
   }
+
 }

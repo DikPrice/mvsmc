@@ -30,14 +30,14 @@ const SelectTile = props => {
       <div className="row tile">
         <div className="columns small-6 large-6 name">
           <Link to={`/models/${props.model["id"]}`}>
-            {props.model["name"]}
+            {props.model.name}
           </Link>
         </div>
         <div className="columns small-2 large-2 scale">
-          {props.model["scale"]}
+          {props.model.scale}
         </div>
         <div className="columns small-12 large-4 modeler">
-          {modeler["first_name"]} {modeler["last_name"]}
+          {modeler.first_name} {modeler.last_name}
         </div>
         <div>
           <hr />

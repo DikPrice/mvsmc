@@ -66,7 +66,7 @@ const ManageEventContainer = props => {
           <div className="title row columns">
             Available Models
           </div>
-          <div className="scroll-body select-list">
+          <div className="event-scroll-body select-list">
             {selectTiles}
           </div>
         </div>
@@ -76,7 +76,7 @@ const ManageEventContainer = props => {
           <div className="title row columns">
             Registered Models
           </div>
-          <div className="scroll-body selected-list">
+          <div className="event-scroll-body selected-list">
             {selectedTiles}
           </div>
         </div>
