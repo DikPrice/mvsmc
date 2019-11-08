@@ -95,16 +95,18 @@ const SubmissionIndexContainer = props => {
         </div>
         <div className="row columns">
           <div className="rows table-header">
-            <div className="columns small-6 large-6">
-              Model
+            <div className="table-header">
+              <div className="columns small-6 large-6">
+                Model
+              </div>
+              <div className="columns small-2 large-2">
+                Scale
+              </div>
+              <div className="columns small-12 large-4">
+                Modeler
+              </div>
+            <hr />
             </div>
-            <div className="columns small-2 large-2">
-              Scale
-            </div>
-            <div className="columns small-12 large-4">
-              Modeler
-            </div>
-          <hr />
           </div>
           <div className="row columns">
             <div className="scroll-body">

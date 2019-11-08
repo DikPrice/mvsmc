@@ -90,11 +90,6 @@ const EditEventContainer = props => {
     <div className="event-submission-form">
       <form onSubmit={updateEvent}>
         <div className="row columns">
-          <div className="form-title">
-            Edit "{editEvent.name}"
-          </div>
-        </div>
-        <div className="row columns">
           <label>
             Event name:
             {errors.name}

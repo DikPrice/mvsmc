@@ -4,12 +4,12 @@ import ManageEventContainer from './ManageEventContainer'
 import EditEventContainer from './EditEventContainer'
 import RegistrationIndexContainer from './RegistrationIndexContainer'
 import GoogleMapsContainer from '../googlemaps/GoogleMapsContainer'
-import EventPrintTile from './EventPrintTile'
 
 const EventShowContainer = props => {
 
   const [ eventInfo, setEventInfo ] = useState({})
   const [showComponent, setShowComponent] = useState ("public")
+  const [dates, setDates] = useState({})
   const [currentUser, setCurrentUser] = useState({})
 
   let eventId = props.match.params.id
@@ -29,6 +29,7 @@ const EventShowContainer = props => {
     .then(response => response.json())
     .then(body => {
       setEventInfo(body.event)
+      setDates(body.dates)
       setCurrentUser(body.user)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -81,9 +82,17 @@ const EventShowContainer = props => {
   }
   const registrations = <button className="button" onClick={showManifest}>Registered Models</button>
 
+  let showEventDates
+  if (dates.start_date === dates.end_date){
+    showEventDates = <>Takes place:{dates.start_date}</>
+  } else {
+    showEventDates = <>Start date: {dates.start_date}<br />
+    End date: {dates.end_date}</>
+  }
+
   return (
     <div>
-      <div className="row">
+      <div className="show-events">
         <div className="event-box columns small-12 medium-4">
          <div className="row event-title">
             {eventInfo["name"]}
@@ -101,7 +110,7 @@ const EventShowContainer = props => {
           </div>
           <div className="dates">
             <hr />
-            {eventInfo["start_date"]} : {eventInfo["end_date"]}
+              {showEventDates}
             <hr />
           </div>
           <div className="text-center">
@@ -113,8 +122,10 @@ const EventShowContainer = props => {
             {registrations}
           </div>
         </div>
-        <div className="event-list columns small-12 medium-8">
-          {component}
+        <div className="columns small-12 medium-8">
+          <div className="event-display">
+            {component}
+          </div>
         </div>
       </div>
     </div>

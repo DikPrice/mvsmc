@@ -1,0 +1,39 @@
+.manifest-index-list {
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid #E9EDF0;
+  overflow: hidden;
+  max-width: 100;
+  height: 95%;
+
+  hr {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .table-header{
+    font-weight: bold;
+  }
+
+  .title {
+    text-align: left;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #265479;
+    background-color: #E9EDF0;
+    padding-left: 10px;
+    }
+
+  .event-scroll-body {
+    height: 80vh;
+    overflow-y: scroll;
+
+    .tile {
+      padding-top: 5px;
+
+      .name {
+        padding-left: 10px;
+      }
+    }
+  }
+}

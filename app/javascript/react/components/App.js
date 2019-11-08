@@ -9,7 +9,6 @@ import ModelShowTile from './ModelShowTile'
 import EventIndexContainer from './events/EventIndexContainer'
 import NewEventContainer from './events/NewEventContainer'
 import EventShowContainer from './events/EventShowContainer'
-import EventPrintTile from './events/EventPrintTile'
 
 import GoogleMapsContainer from './googlemaps/GoogleMapsContainer'
 
@@ -25,7 +24,6 @@ export const App = (props) => {
         <Route exact path="/models/:id" component={ModelShowTile} />
         <Route exact path="/events" component={EventIndexContainer} />
         <Route exact path="/events/new" component={NewEventContainer} />
-        <Route exact path="/events/print" component={EventPrintTile} />
         <Route exact path="/events/:id" component={EventShowContainer} />
       </Switch>
     </BrowserRouter>

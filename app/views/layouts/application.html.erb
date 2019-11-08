@@ -12,15 +12,9 @@
   <nav class="top-bar">
     <div>
       <h3><a href="/">MVSMC Digital Curator</a></h3>
-      <%- if current_user -%>
-        Logged in as: <em><%= current_user["first_name"] %> <%= current_user["last_name"] %></em>
-        <% if current_user["role"] == 2 %>
-          (Organiser)
-        <% end %>
-        <% if current_user["role"] == 3 %>
-          (Admin)
-        <% end %>
-      <% end %>
+      <span>
+        <strong>M</strong>errimack <strong>V</strong>alley <strong>S</strong>hip <strong>M</strong>odelers <strong>C</strong>lub
+      </span>
     </div>
 
     <section class="top-bar-section">
@@ -36,6 +30,17 @@
           <li><%= link_to 'Sign In', new_user_session_path %></li>
         <%- end -%>
       </ul>
+      <div class="login-detail">
+      <%- if current_user -%>
+        Logged in as: <em><%= current_user["first_name"] %> <%= current_user["last_name"] %></em>
+        <% if current_user["role"] == 2 %>
+          (Organiser)
+        <% end %>
+        <% if current_user["role"] == 3 %>
+          (Admin)
+        <% end %>
+      <% end %>
+      </div>
     </section>
   </nav>
 

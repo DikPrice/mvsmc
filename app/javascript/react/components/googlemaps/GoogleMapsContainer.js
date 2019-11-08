@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 const GoogleMapsContainer = props => {

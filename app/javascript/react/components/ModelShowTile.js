@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
+import { Redirect } from "react-router-dom"
 
 const ModelShowTile = props => {
   const [model , setModel] = useState({})
   const [modeler, setModeler] = useState({})
   const [currentUser, setCurrentUser] = useState({})
+  const [redirect, setRedirect] = useState(false)
 
   let modelId = props.match.params.id
 
@@ -28,29 +30,48 @@ const ModelShowTile = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
+  if (redirect){
+    return < Redirect to='/models' />
+  }
+
+  let goBack = (event) => {
+    event.preventDefault()
+    setRedirect(true)
+  }
+
   return (
-    <div className="submission-display">
-      <div className="event-card">
-      <div className="row columns model-adjust">
-      </div>
-        <div className="row columns title">
-          {model.name}
-        </div>
-        <div className="row columns details">
-          {modeler.first_name} {modeler.last_name}<br />
-          {model.source}<br />
-          {model.scale}
-        </div>
-        <div className="row columns description">
-          {model.description}
-        </div>
-        <hr />
-        <div className="rows meta">
-          <div className="columns small-12 large-4">
+    <div className="submission-panel">
+      <div className="submission-display">
+        <div className="row">
+          <div className="event-card">
+            <div className="rows columns title">
+              {model.name}
+            </div>
+            <div className="rows columns details">
+              {modeler.first_name} {modeler.last_name}<br />
+              {model.source}<br />
+              {model.scale}
+            </div>
+            <div className="rows columns description">
+              {model.description}
+            </div>
           </div>
-          <div className="columns small-12 large-4">
-          </div>
-          <div className="columns small-12 large-4">
+        </div>
+        <div className="row">
+          <div className="meta-panel">
+            <div className="columns small-12 medium-4">
+              <div className="meta">
+              </div>
+            </div>
+            <div className="columns small-12 medium-4">
+              <div className="meta">
+              </div>
+            </div>
+            <div className="columns small-12 medium-4">
+              <div className="meta">
+                <button className="button" onClick={goBack}>Go Back</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

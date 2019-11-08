@@ -105,7 +105,7 @@ const SubmissionShowContainer = props => {
   }
 
   return (
-    <div>
+    <div className="submission-panel">
       {component}
     </div>
   )
