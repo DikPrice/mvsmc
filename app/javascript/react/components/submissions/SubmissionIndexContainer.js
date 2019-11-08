@@ -1,44 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from "react-router-dom"
 import SubmissionTile from './SubmissionTile'
+import { fetchData } from './fetchData'
 
 const SubmissionIndexContainer = props => {
   const [submissions, setSubmissions] = useState([])
-  const [sort, setSort] = useState({sort: "none"})
+  const [sort, setSort] = useState("none")
   const [currentUser, setCurrentUser] = useState({})
   const [show, setShow] = useState("list")
 
-  const fetchModelList = (url) => {
-    fetch(url, {
-      credentials: 'same-origin',
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage)
-          throw(error)
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        setSubmissions(body.models)
-        setCurrentUser(body.user)
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  const storeData = (body) =>{
+    setSubmissions(body.models)
+    setCurrentUser(body.user)
   }
-
   useEffect(() => {
-    fetchModelList(`/api/v1/submissions?sort=${sort.sort}`)
+    fetchData(`/api/v1/submissions?sort=${sort}`, storeData)
   }, [sort])
 
   const passSortType = event => {
     let sortValue = event.currentTarget.value.toLowerCase().replace(' ', '')
-    setSort({
-      ...sort,
-      [event.currentTarget.name]: sortValue
-    })
+    setSort(sortValue)
   }
 
   let findMyModels, showReadyForReview
@@ -52,18 +32,14 @@ const SubmissionIndexContainer = props => {
   const submissionsTiles = submissions.map(submission  => {
 
     let edit_submission = (event) => {
+      event.preventDefault()
       setShow("edit")
     }
 
     return(
       <SubmissionTile
         key={submission.id}
-        id={submission.id}
-        name={submission .name}
-        scale={submission.scale}
-        firstName={submission.first_name}
-        lastName={submission.last_name}
-        review={submission.review}
+        submission={submission}
         edit={edit_submission}
       />
     )

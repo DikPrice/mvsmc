@@ -134,7 +134,6 @@ const NewSubmissionContainer = props => {
       <form onSubmit={postNewSubmission}>
         <div className="row">
           <div className="columns small-12 large-6">
-
             <div className="row columns">
               <label>
                 Model Name:
@@ -147,7 +146,6 @@ const NewSubmissionContainer = props => {
                 />
               </label>
             </div>
-
             <div className="row">
               <div className="columns small-6">
                 <label>
@@ -172,7 +170,6 @@ const NewSubmissionContainer = props => {
                 </label>
               </div>
               </div>
-
               <div className="row">
                 <div className="columns small-6">
                   <label className="">
@@ -197,7 +194,6 @@ const NewSubmissionContainer = props => {
                   </label>
                 </div>
               </div>
-
               <div className="row">
                 <div className="columns small-6">
                   <label className="">
@@ -222,7 +218,6 @@ const NewSubmissionContainer = props => {
                   </label>
                 </div>
               </div>
-
               <div className="row">
                 <div className="columns small-4">
                   <label>
@@ -258,7 +253,6 @@ const NewSubmissionContainer = props => {
                   </label>
                 </div>
               </div>
-
               <div className="row">
                 <div className="text-center form-footer">
                   <input
@@ -275,7 +269,6 @@ const NewSubmissionContainer = props => {
                 </div>
               </div>
           </div>
-
           <div className="columns small-12 large-6">
             Description: {errors.description} <br/>
             <textarea
