@@ -9,8 +9,8 @@ class Api::V1::ModelsController < ApplicationController
     model_list = []
 
     if (params["modeler_id"])
-      model_list = Model.where(modeler_id: params["modeler_id"])
-      binding.pry
+      modeler = Modeler.find_by(email: user.email)
+      model_list=Model.where(modeler_id: modeler)
     elsif (params["event_id"])
       selected_models = Event.find(params["event_id"]).models
       model_list = get_unselected_models(selected_models)
@@ -52,7 +52,6 @@ class Api::V1::ModelsController < ApplicationController
         last_name: params["last_name"],
         email: params["email"],
         phone: params["phone"],
-        role: 1
       )
     end
     model_exists = Model.find_by(

@@ -5,22 +5,16 @@ class Api::V1::SubmissionsController < ApplicationController
     if current_user
       user = current_user
     end
-
-    model_list = []
-    unsorted_submissions = Submission.all
-    if (params["sort"] == "mymodels")
-      model_list = Submission.where(first_name: user[:first_name], last_name: user[:last_name])
-    elsif (params["sort"] == "awaitingreview")
-      model_list = Submission.where(review: true)
-    elsif (params["sort"] == "models")
-      model_list = unsorted_submissions.sort_by{ |value| value[:name] }
-    elsif (params["sort"] == "modelers")
-      model_list = unsorted_submissions.sort_by{ |value| value[:last_name] }
+    if (params["sort"])
+      model_list = Submission.get_model_list(params["sort"], user)
+      render json: { models: model_list, user: user }
+    elsif (params["count"])
+      model_count = Submission.get_model_count(params["statusCount"], user)
+      render json: { models: model_count, user: user }
     else
-      model_list =unsorted_submissions
+      model_list = Submission.all
+      render json: { models: model_list, user: user }
     end
-
-    render json: { models: model_list, user: user }
   end
 
   def show
@@ -28,7 +22,16 @@ class Api::V1::SubmissionsController < ApplicationController
       user_details = User.find(current_user.id)
     end
     model = Submission.find(params["id"])
-    render json: { model: model, user: user_details }
+    created_est = model.created_at - (5*3600)
+    updated_est = model.updated_at - (5*3600)
+    created = created_est.strftime("%A, %d %b %Y %l:%M %p")
+    updated = updated_est.strftime("%A, %d %b %Y %l:%M %p")
+
+    render json: {
+      model: model,
+      timestamps: {created: created, updated: updated},
+      user: user_details
+    }
   end
 
   def create

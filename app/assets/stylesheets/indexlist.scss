@@ -1,33 +1,21 @@
-.event-list {
+.model,
+.submission {
+  max-width: 60%;
+}
+.index-list {
   margin: 10px auto;
-  border-radius: 5px;
-  border: 3px solid #0071BD;
-  max-width: 75%;
-
-  hr {
-    padding: 0px;
-    margin: 0px;
-  }
-
-  .table-header {
-    font-size: 1em;
-    font-weight: bold;
-
-    hr {
-      border: 1px solid #0071BD
-    }
-  }
-
-  .scroll-body {
-    overflow-y: scroll;
-  }
+  border-radius: 10px;
+  border: 1px solid #E9EDF0;
+  background-color: white;
+  overflow: hidden;
 
   .title {
     text-align: left;
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: bold;
-    color: white;
-    background-color: #0071BD;
+    color: #265479;
+    background-color: #E9EDF0;
+    padding-left: 10px;
 
     select {
       width: 150px;
@@ -41,10 +29,43 @@
       font-size: 1em;
       height: 1.25em;
       margin-top: 5px;
-      padding: .12em;
       border-radius: .25em;
     }
+
+    .table-header {
+      font-size: 1em;
+      font-weight: bold;
+    }
   }
+
+  hr {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .scroll-body {
+    height: 65vh;
+    overflow-y: scroll;
+
+    .tile {
+      margin: 5px;
+      padding: 5px 0;
+      font-size: 1em;
+
+      a{
+        color: #265479;
+      }
+
+      .divide {
+        margin-top: 3px;
+        hr {
+          padding: 0px;
+          margin: 0px;
+        }
+      }
+    }
+  }
+
   .under-review {
     color: red;
      a {

@@ -9,9 +9,10 @@ const EditSubmissionContainer = props => {
   }
 
   const {
-    id, name, source, scale, description,
+    id,
+    name, source, scale, description,
     length, width, height,
-    first_name, last_name, phone, email
+    first_name, last_name, phone, email,
   } = props.submission
 
   const [errors, setErrors] = useState({})

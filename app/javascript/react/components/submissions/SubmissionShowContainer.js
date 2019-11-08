@@ -8,6 +8,7 @@ const SubmissionShowContainer = props => {
   const [submission, setSubmission] = useState({})
   const [showComponent, setShowComponent] = useState ("show")
   const [currentUser, setCurrentUser] = useState({})
+  const [timestamps, setTimestamps] = useState({})
   const [redirect, setRedirect] = useState(false)
 
   let submissionId = props.match.params.id
@@ -27,6 +28,7 @@ const SubmissionShowContainer = props => {
     .then(response => response.json())
     .then(body => {
       setSubmission(body.model)
+      setTimestamps(body.timestamps)
       setCurrentUser(body.user)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -91,6 +93,7 @@ const SubmissionShowContainer = props => {
       edit={edit_submission}
       user={currentUser}
       forReview={markForReview}
+      timestamps={timestamps}
     />
   }
   else {
@@ -102,7 +105,7 @@ const SubmissionShowContainer = props => {
   }
 
   return (
-    <div>
+    <div className="submission-panel">
       {component}
     </div>
   )

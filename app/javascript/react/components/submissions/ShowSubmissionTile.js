@@ -57,6 +57,10 @@ const ShowSubmissionTile = props => {
   let edit, submitForReview, showContacts, showTimestamps, transferToMaster
   if (props.user){
     if ((first_name == props.user["first_name"] && last_name == props.user["last_name"]) || (props.user["role"] >= 2)){
+      showTimestamps =
+      <>
+        Created: {props.timestamps.created},<br />Updated: {props.timestamps.updated}
+      </>
       if (review === true){
         if (props.user["role"] >= 2){
           edit= <button className="button" onClick={props.edit}>Edit</button>
@@ -68,43 +72,51 @@ const ShowSubmissionTile = props => {
       } else {
         edit= <button className="button" onClick={props.edit}>Edit</button>
         submitForReview = <button className="button" onClick={props.forReview}>Submit</button>
-        showContacts = `Phone: ${phone}, Email: ${email}`
-        showTimestamps = <>Created: {created_at},<br />Updated: {updated_at}</>
+        showContacts = <>Phone: {phone} <br /> Email: {email}</>
       }
     }
   }
 
   return (
     <div className="submission-display">
-      <div className="event-card">
-        <div className="rows columns title">
-          {name}
-        </div>
-        <div className="rows columns details">
-          {first_name} {last_name}<br />
-          {source}<br />
-          {scale}
-        </div>
-        <div className="rows columns description">
-          {description}
+      <div className="row">
+        <div className="event-card">
+          <div className="rows columns title">
+            {name}
+          </div>
+          <div className="rows columns details">
+            {first_name} {last_name}<br />
+            {source}<br />
+            {scale}
+          </div>
+          <div className="rows columns description">
+            {description}
+          </div>
         </div>
       </div>
-      <hr />
-      <div className="rows meta">
-        <div className="columns small-12 large-4">
-          Length: {length}",
-          Width: {width}",
-          Height: {height}"<br />
-          {showContacts}
-        </div>
-        <div className="columns small-12 large-4">
-          {showTimestamps}
-        </div>
-        <div className="columns small-12 large-4">
-          <button className="button" onClick={goBack}>Go Back</button>
-          {submitForReview}
-          {edit}
-          {transferToMaster}
+      <div className="row">
+        <div className="meta-panel">
+          <div className="columns small-12 medium-4">
+            <div className="meta">
+              Length: {length}",
+              Width: {width}",
+              Height: {height}"<br />
+              {showContacts}
+            </div>
+          </div>
+          <div className="columns small-12 medium-4">
+            <div className="meta">
+              {showTimestamps}
+            </div>
+          </div>
+          <div className="columns small-12 medium-4">
+            <div className="meta">
+              <button className="button" onClick={goBack}>Go Back</button>
+              {submitForReview}
+              {edit}
+              {transferToMaster}
+            </div>
+          </div>
         </div>
       </div>
     </div>

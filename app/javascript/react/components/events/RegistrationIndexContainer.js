@@ -45,9 +45,11 @@ const RegistrationIndexContainer= props => {
   })
 
   return (
-    <div className="index-list registrations">
+    <div className="manifest-index-list registrations">
       <div className="title row columns">
-          Registered Models
+        <div className="title">
+          Models to be Displayed
+        </div>
       </div>
       <div className="row columns">
         <div className="rows table-header">
@@ -62,7 +64,7 @@ const RegistrationIndexContainer= props => {
           </div>
         <hr />
         </div>
-        <div className="scroll-body row columns">
+        <div className="event-scroll-body row columns">
           {registeredTiles}
         </div>
       </div>

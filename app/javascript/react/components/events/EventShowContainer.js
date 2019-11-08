@@ -9,6 +9,7 @@ const EventShowContainer = props => {
 
   const [ eventInfo, setEventInfo ] = useState({})
   const [showComponent, setShowComponent] = useState ("public")
+  const [dates, setDates] = useState({})
   const [currentUser, setCurrentUser] = useState({})
 
   let eventId = props.match.params.id
@@ -28,6 +29,7 @@ const EventShowContainer = props => {
     .then(response => response.json())
     .then(body => {
       setEventInfo(body.event)
+      setDates(body.dates)
       setCurrentUser(body.user)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -44,40 +46,53 @@ const EventShowContainer = props => {
     component = <GoogleMapsContainer
       google={{apiKey: "AIzaSyDO3llKxY58ckwDleWJZLGnEU0fbJ4xmGs"}}
       center={{
-          lat: 42.8111371,
-          lng: -70.875609}}
-      zoom={8}
+        lat: 42.81083333,
+        lng: -70.87166667
+      }}
+      zoom={1}
     />
   }
   if (showComponent === "public"){
-    component = <RegistrationIndexContainer id={eventId} eventId={eventId} goBack={seeRegistrations}/>
+    component = <RegistrationIndexContainer id={eventId} eventId={eventId} />
   }
 
   const allowManager = () => {
+    event.preventDefault()
     setShowComponent("manage")
   }
   const allowEdit = () => {
+    event.preventDefault()
     setShowComponent("edit")
   }
   const showMap = () => {
+    event.preventDefault()
     setShowComponent("map")
   }
-  const seeRegistrations = () => {
+  const showManifest = () => {
+    event.preventDefault()
     setShowComponent("public")
   }
 
-  let showEdit = ""
-  let showManager = <button className="button" onClick={seeRegistrations}>Registered Models</button>
+  let showEdit = "", showManager = ""
   if(currentUser){
     if (currentUser.role >= 2){
       showEdit = <button className="button" onClick={allowEdit}>Edit this Event</button>
       showManager = <button className="button" onClick={allowManager}>Allocate Models</button>
     }
   }
+  const registrations = <button className="button" onClick={showManifest}>Registered Models</button>
+
+  let showEventDates
+  if (dates.start_date === dates.end_date){
+    showEventDates = <>Takes place:{dates.start_date}</>
+  } else {
+    showEventDates = <>Start date: {dates.start_date}<br />
+    End date: {dates.end_date}</>
+  }
 
   return (
     <div>
-      <div className="row">
+      <div className="show-events">
         <div className="event-box columns small-12 medium-4">
          <div className="row event-title">
             {eventInfo["name"]}
@@ -95,17 +110,22 @@ const EventShowContainer = props => {
           </div>
           <div className="dates">
             <hr />
-            {eventInfo["start_date"]} : {eventInfo["end_date"]}
+              {showEventDates}
             <hr />
           </div>
+          <div className="text-center">
             <button className="button" onClick={showMap}>
               Show Map
             </button>
-           {showEdit}
-           {showManager}
+            {showEdit}<br />
+            {showManager}
+            {registrations}
+          </div>
         </div>
         <div className="columns small-12 medium-8">
-          {component}
+          <div className="event-display">
+            {component}
+          </div>
         </div>
       </div>
     </div>

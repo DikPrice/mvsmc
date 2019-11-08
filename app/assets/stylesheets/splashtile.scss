@@ -3,6 +3,7 @@
   background-size: cover;
   height: 100vh;
   opacity: 75%;
+  font-family: 'Open Sans', sans-serif;
 
   .splash-text-box {
     float: left;
@@ -14,6 +15,14 @@
     background-color: white;
     padding:10px;
     box-shadow: 10px 10px 5px #444444;
+
+    .stats {
+      font-size: 0.65em;
+    }
+
+    .review {
+      color: red;
+    }
 
     .welcome {
       text-align: center;
