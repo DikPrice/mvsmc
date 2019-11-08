@@ -27,7 +27,7 @@ const EventIndexContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  let addNewEvent = <Link to='/events/new'>Add Event</Link>
+  let addNewEvent
   if (currentUser){
     if (currentUser.role >= 2){
       addNewEvent = <Link to='/events/new'>Add Event</Link>
@@ -71,7 +71,7 @@ const EventIndexContainer = props => {
         {eventTiles}
       </div>
       <div className="text-center">
-
+        {addNewEvent}
       </div>
     </div>
   )
