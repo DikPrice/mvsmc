@@ -17,5 +17,3 @@ export const fetchData = (url, setStateValue) => {
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
 }
-
-// Note body can hav varibale content depending on component
