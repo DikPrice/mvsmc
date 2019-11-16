@@ -102,7 +102,7 @@ class Api::V1::SubmissionsController < ApplicationController
 
   def removeNull (submission)
     submission.source.nil? ? "" : submission.source
-    submission.description.ni? ? "" : submission.description
+    submission.description.nil? ? "" : submission.description
     submission.length.nil? ? 0 : submission.length
     submission.width.nil? ? 0 : submission.width
     submission.height.nil? ? 0 : submission.height
