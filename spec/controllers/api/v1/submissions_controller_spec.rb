@@ -193,21 +193,21 @@ RSpec.describe Api::V1::SubmissionsController, type: :controller do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
-      expect(returned_json.length).to eq 15
+      expect(returned_json.length).to eq 1
       expect(returned_json).to be_kind_of(Hash)
 
-      expect(returned_json["id"]).to eq edited_submission[:id]
-      expect(returned_json["name"]).to eq edited_submission[:name]
-      expect(returned_json["scale"]).to eq edited_submission[:scale]
-      expect(returned_json["source"]).to eq edited_submission[:source]
-      expect(returned_json["description"]).to eq edited_submission[:description]
-      expect(returned_json["length"]).to eq edited_submission[:length]
-      expect(returned_json["width"]).to eq edited_submission[:width]
-      expect(returned_json["height"]).to eq edited_submission[:height]
-      expect(returned_json["first_name"]).to eq edited_submission[:first_name]
-      expect(returned_json["last_name"]).to eq edited_submission[:last_name]
-      expect(returned_json["phone"]).to eq edited_submission[:phone]
-      expect(returned_json["email"]).to eq edited_submission[:email]
+      expect(returned_json["result"]["id"]).to eq edited_submission[:id]
+      expect(returned_json["result"]["name"]).to eq edited_submission[:name]
+      expect(returned_json["result"]["scale"]).to eq edited_submission[:scale]
+      expect(returned_json["result"]["source"]).to eq edited_submission[:source]
+      expect(returned_json["result"]["description"]).to eq edited_submission[:description]
+      expect(returned_json["result"]["length"]).to eq edited_submission[:length]
+      expect(returned_json["result"]["width"]).to eq edited_submission[:width]
+      expect(returned_json["result"]["height"]).to eq edited_submission[:height]
+      expect(returned_json["result"]["first_name"]).to eq edited_submission[:first_name]
+      expect(returned_json["result"]["last_name"]).to eq edited_submission[:last_name]
+      expect(returned_json["result"]["phone"]).to eq edited_submission[:phone]
+      expect(returned_json["result"]["email"]).to eq edited_submission[:email]
     end
   end
 end
