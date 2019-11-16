@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
+import { fetchData } from './../../modules/fetchData'
 
 const SelectTile = props => {
 
   const [modeler, setModeler] = useState({})
-
   let modelerId = props.model["modeler_id"]
-  useEffect(() => {fetch(`/api/v1/modelers/${modelerId}`, {
-    credentials: 'same-origin',
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage)
-        throw(error)
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      setModeler(body.modeler)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-  },[])
+
+  const storeData = (body) =>{
+    setModeler(body.modeler)
+  }
+  useEffect(() => {
+    fetchData(`/api/v1/modelers/${modelerId}`, storeData)
+  }, [])
 
   return (
     <div>

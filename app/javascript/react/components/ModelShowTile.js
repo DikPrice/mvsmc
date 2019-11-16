@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
+import { fetchData } from './../../modules/fetchData'
 
 const ModelShowTile = props => {
   const [model , setModel] = useState({})
@@ -9,26 +10,14 @@ const ModelShowTile = props => {
 
   let modelId = props.match.params.id
 
-  useEffect(() => {fetch(`/api/v1/models/${modelId}`, {
-    credentials: 'same-origin',
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage)
-        throw(error)
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      setModel(body.model)
-      setModeler(body.modeler)
-      setCurrentUser(body.user)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-  },[])
+  const storeData = (body) =>{
+    setModel(body.model)
+    setModeler(body.modeler)
+    setCurrentUser(body.user)
+  }
+  useEffect(() => {
+    fetchData(`/api/v1/models/${modelId}`, storeData)
+  }, [])
 
   if (redirect){
     return < Redirect to='/models' />

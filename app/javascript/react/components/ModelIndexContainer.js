@@ -1,34 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import ModelTile from './ModelTile'
+import { fetchData } from './../../modules/fetchData'
 
 const ModelIndexContainer = props => {
   const [models, setModels] = useState([])
   const [sort, setSort] = useState("models?sort=modelers")
   const [currentUser, setCurrentUser] = useState({})
 
-  const fetchModelList = (url) => {
-    fetch(url, {
-      credentials: 'same-origin',
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage)
-          throw(error)
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        setModels(body.models)
-        setCurrentUser(body.user)
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  const storeData = (body) =>{
+    setModels(body.models)
+    setCurrentUser(body.user)
   }
-
   useEffect(() => {
-    fetchModelList(`/api/v1/${sort}`)
+    fetchData(`/api/v1/${sort}`, storeData)
   }, [sort])
 
   let modelsByModeller = "models?sort=modelers"

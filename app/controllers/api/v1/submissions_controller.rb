@@ -58,9 +58,9 @@ class Api::V1::SubmissionsController < ApplicationController
   def update
     edit_submission = Submission.find(params["id"])
     if edit_submission.update(submission_params)
-      render json: edit_submission
+      render json: { result: edit_submission }
     else
-      render json: edit_submisison.errors
+      render json: { result: edit_submisison.errors }
     end
   end
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import SubmissionTile from './SubmissionTile'
-import { fetchData } from './fetchData'
+import { fetchData } from './../../../modules/fetchData'
 
 const SubmissionIndexContainer = props => {
   const [submissions, setSubmissions] = useState([])

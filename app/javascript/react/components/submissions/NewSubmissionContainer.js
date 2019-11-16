@@ -1,22 +1,15 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { isEmpty } from 'lodash'
+import { sendData } from './../../../modules/sendData'
 
 const NewSubmissionContainer = props => {
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState("")
   const [newSubmission, setNewSubmission] = useState({
-    name: "",
-    scale: "",
-    source: "",
-    description: "",
-    length: "",
-    width: "",
-    height: "",
-    first_name: "",
-    last_name: "",
-    phone: "",
-    email: ""
+    name: "", scale: "", source: "", description: "",
+    length: "", width: "", height: "",
+    first_name: "",last_name: "", phone: "", email: ""
   })
 
   const sourceArray = [
@@ -42,38 +35,19 @@ const NewSubmissionContainer = props => {
     return isEmpty(submitErrors)
   }
 
+  const setSuccessState = (body) =>{
+    setRedirect("submissions")
+  }
+  const setErrorState = (body) =>{
+    setErrors(body)
+  }
   const postNewSubmission = () => {
     event.preventDefault()
     if (validForSubmission()) {
-      fetch("/api/v1/submissions", {
-        credentials: 'same-origin',
-        method: "POST",
-        body: JSON.stringify(newSubmission),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          return response
-        } else {
-          const errorMessage = `${response.status} (${response.statusText})`
-          const error = new Error(errorMessage)
-          throw error
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        if (body.result["id"]) {
-          setRedirect("submissions")
-        } else {
-          setErrors(body)
-        }
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+      sendData("/api/v1/submissions", "POST", newSubmission, setSuccessState, setErrorState)
     }
   }
+
 
   if (redirect === "submissions") {
     return <Redirect to="/submissions" />

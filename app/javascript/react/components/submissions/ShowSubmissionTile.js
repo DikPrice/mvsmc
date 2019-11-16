@@ -1,5 +1,6 @@
-import React, {useState } from "react"
+import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
+import { sendData } from './../../../modules/sendData'
 
 const ShowSubmissionTile = props => {
   const [redirect, setRedirect] = useState(false)
@@ -13,36 +14,15 @@ const ShowSubmissionTile = props => {
     review
   } = props.submission
 
-  let uploadToMaster = () => {
+  const setSuccessState = (body) =>{
+    setRedirect(true)
+  }
+  const setErrorState = (body) =>{
+    setErrors(body)
+  }
+  const postToMaster = (event) =>{
     event.preventDefault()
-    fetch("/api/v1/models", {
-      credentials: 'same-origin',
-      method: "POST",
-      body: JSON.stringify(props.submission),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      debugger
-      if (body.result["id"]) {
-        setRedirect(true)
-      } else {
-        setErrors(body)
-      }
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
+    sendData("/api/v1/models", "POST", props.submission, setSuccessState, setErrorState)
   }
 
   if (redirect){
@@ -64,7 +44,8 @@ const ShowSubmissionTile = props => {
       if (review === true){
         if (props.user["role"] >= 2){
           edit= <button className="button" onClick={props.edit}>Edit</button>
-          transferToMaster= <button className="button create-master" onClick={uploadToMaster}>Create Master</button>
+          transferToMaster= <button className="button create-master" onClick={postToMaster}>
+          Create Master</button>
         } else {
           edit = "Model under review"
           submitForReview = ""

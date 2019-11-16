@@ -1,34 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchData } from './../../modules/fetchData'
 
 const SplashTile = props => {
   const [statusCount, setStatusCount] = useState({})
   const [currentUser, setCurrentUser] = useState({})
 
-  useEffect(() => {
-    getData(`/api/v1/submissions?count=statuscount`)
-  }, [])
-
-  const getData = (url) =>{
-    fetch(url, {
-      credentials: 'same-origin',
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage)
-          throw(error)
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        setStatusCount(body.models)
-        setCurrentUser(body.user)
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  const storeData = (body) =>{
+    setStatusCount(body.models)
+    setCurrentUser(body.user)
   }
+  useEffect(() => {
+    fetchData(`/api/v1/submissions?count=statuscount`, storeData)
+  }, [])
 
   let seeSubmissions, submissionStats, awaitingReview
   if (currentUser.role >= 1) {
