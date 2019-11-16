@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<div class="user-table">
+  <table >
+    <thead>
+      <th>First Name</th>
+      <th>Last name</th>
+      <th>Role</th>
+      <th>Email</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.role %></td>
+          <td><%= user.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

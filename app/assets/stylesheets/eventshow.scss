@@ -1,47 +1,51 @@
-.event-display {
-  width: 90%;
-  margin: 10px auto;
 
-  .select-box,
-  .event-box {
-    border: 1px solid #0071BD;
-    border-radius: 10px;
-    height: 75vh;
-    overflow-y: scroll;
-    overflow: hidden;
-    margin: 0px;
+.show-events{
+  width: 95vw;
+  margin: auto;
+}
 
-    hr {
-      margin: 0px;
-      padding: 0px,
-    }
+.event-box {
+  border: 1px solid #E9EDF0;
+  border-radius: 10px;
+  height: 80vh;
+  margin-top: 10px;
+  background-color: white;
 
-    .event-title {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #0071BD;
-      text-align: center;
-    }
-
-    .event-desc,
-    .dates,
-    .venue {
-      font-size: 0.85em;
-      padding: 1em;
-    }
-
-    .event-desc {
-      text-align: justify;
-    }
-
-    .dates {
-      text-align: right;
-    }
-
-    .select-box {
-      margin: 0px;
-      padding: 0px;
-
-    }
+  .button {
+    margin: 3px;
+    border-radius: 3px;
+    padding: 5px 3px;
+    width: 150px;
+    background-color: #265479;
   }
+
+  hr {
+    margin: 0px;
+    padding: 0px,
+  }
+  .event-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #265479;
+    text-align: center;
+  }
+  .event-desc,
+  .dates,
+  .venue {
+    font-size: 1em;
+    padding: 1em;
+  }
+  .event-desc {
+    text-align: justify;
+  }
+  .dates {
+    text-align: center;
+  }
+}
+.event-display {
+  border: 1px solid #E9EDF0;
+  border-radius: 10px;
+  height: 80vh;
+  margin-top: 10px;
+  background-color: white;
 }

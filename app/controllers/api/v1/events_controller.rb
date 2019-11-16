@@ -20,7 +20,14 @@ class Api::V1::EventsController < ApplicationController
       user = current_user
     end
     event = Event.find(params["id"])
-    render json: { event: event, user: user }
+    start_date = event.start_date.strftime("%A, %d %b")
+    end_date = event.end_date.strftime("%A, %d %b")
+
+    render json: {
+      event: event,
+      dates: {start_date: start_date, end_date: end_date},
+      user: user
+     }
   end
 
   def create

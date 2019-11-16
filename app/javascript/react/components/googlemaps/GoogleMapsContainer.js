@@ -1,11 +1,11 @@
-import React from 'react'
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React, { useState } from 'react'
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 const GoogleMapsContainer = props => {
 
   const style = {
     width: '750px',
-    height: '550px',
+    height: '60vh',
     margin: '10px',
   }
 
@@ -15,8 +15,16 @@ const GoogleMapsContainer = props => {
         google={props.google}
         initialCenter={props.center}
         defaultZoom={props.zoom}
-        style={style}
-      />
+        style={style}>
+
+        <Marker
+          name={'MVSMC'}
+          position={{
+            lat: 42.81083333,
+            lng: -70.87166667
+          }}
+        />
+      </Map>
     </div>
   )
 }

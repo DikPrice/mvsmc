@@ -5,36 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <nav class="top-bar">
     <div>
-      <h3><a href="/">MVSMC</a></h3>
-      <%- if current_user -%>
-        <%= current_user["first_name"] %> <%= current_user["last_name"] %>
-        <% if current_user["role"] == 2 %>
-          : Organiser
-        <% end %>
-        <% if current_user["role"] == 3 %>
-          : Admin
-        <% end %>
-      <% end %>
+      <h3><a href="/">MVSMC Digital Curator</a></h3>
+      <span>
+        <strong>M</strong>errimack <strong>V</strong>alley <strong>S</strong>hip <strong>M</strong>odelers <strong>C</strong>lub
+      </span>
     </div>
 
     <section class="top-bar-section">
       <ul class="menu align-right">
         <li><%= link_to 'Models', "/models" %></li>
-        <li><%= link_to 'Submissions', "/submissions" %></li>
         <li><%= link_to 'Events', "/events" %></li>
         <%- if current_user -%>
-          <li><%= link_to 'Add Model', "/submissions/new" %></li>
+          <li><%= link_to 'Submit Model', "/submissions/new" %></li>
+          <li><%= link_to 'Submissions', "/submissions" %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <%- else -%>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <li><%= link_to 'Sign In', new_user_session_path %></li>
         <%- end -%>
       </ul>
+      <div class="login-detail">
+      <%- if current_user -%>
+        Logged in as: <em><%= current_user["first_name"] %> <%= current_user["last_name"] %></em>
+        <% if current_user["role"] == 2 %>
+          (Organiser)
+        <% end %>
+        <% if current_user["role"] == 3 %>
+          (Admin)
+        <% end %>
+      <% end %>
+      </div>
     </section>
   </nav>
 

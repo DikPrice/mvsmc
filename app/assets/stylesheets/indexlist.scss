@@ -1,0 +1,80 @@
+.model,
+.submission {
+  max-width: 60%;
+}
+.index-list {
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 1px solid #E9EDF0;
+  background-color: white;
+  overflow: hidden;
+
+  .title {
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #265479;
+    background-color: #E9EDF0;
+    padding-left: 10px;
+
+    select {
+      width: 150px;
+      font-size: 1em;
+      height: 1.75em;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    input {
+      font-size: 1em;
+      height: 1.25em;
+      margin-top: 5px;
+      border-radius: .25em;
+    }
+
+    .table-header {
+      font-size: 1em;
+      font-weight: bold;
+    }
+  }
+
+  hr {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .scroll-body {
+    height: 65vh;
+    overflow-y: scroll;
+
+    .tile {
+      margin: 5px;
+      padding: 5px 0;
+      font-size: 1em;
+
+      a{
+        color: #265479;
+      }
+
+      .divide {
+        margin-top: 3px;
+        hr {
+          padding: 0px;
+          margin: 0px;
+        }
+      }
+    }
+  }
+
+  .under-review {
+    color: red;
+     a {
+       color: red;
+     }
+
+    hr {
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+}

@@ -45,11 +45,28 @@ const RegistrationIndexContainer= props => {
   })
 
   return (
-    <div className="row">
-      <div className="columns small-12">
-        <strong>Registered Models</strong>
+    <div className="manifest-index-list registrations">
+      <div className="title row columns">
+        <div className="title">
+          Models to be Displayed
+        </div>
+      </div>
+      <div className="row columns">
+        <div className="rows table-header">
+          <div className="columns small-6 large-6">
+            Model
+          </div>
+          <div className="columns small-2 large-2">
+            Scale
+          </div>
+          <div className="columns small-12 large-4">
+            Modeler
+          </div>
         <hr />
-        {registeredTiles}
+        </div>
+        <div className="event-scroll-body row columns">
+          {registeredTiles}
+        </div>
       </div>
     </div>
   )

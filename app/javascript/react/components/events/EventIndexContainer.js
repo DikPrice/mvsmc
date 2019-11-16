@@ -7,64 +7,71 @@ const EventIndexContainer = props => {
   const [events, setEvents] = useState([])
   const [currentUser, setCurrentUser] = useState({})
 
-  const fetchEventList = (url) => {
-    fetch(url, {
-      credentials: 'same-origin',
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage)
-          throw(error)
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        setEvents(body.events)
-        setCurrentUser(body.user)
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
-  }
-
-  useEffect(() => {
-    fetchEventList(`/api/v1/events`)
+  useEffect(() => {fetch(`/api/v1/events`, {
+    credentials: 'same-origin',
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage)
+        throw(error)
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      setEvents(body.events)
+      setCurrentUser(body.user)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  let addEvent
+  let addNewEvent
   if (currentUser){
-    if (currentUser["role"] === 2){
-      addEvent = <Link to='/events/new'>Add Event</Link>
+    if (currentUser.role >= 2){
+      addNewEvent = <Link to='/events/new'>Add Event</Link>
     }
   }
 
   const eventTiles = events.map(event  => {
     return(
       <EventTile
-        key={event["id"]}
+        key={event.id}
         event={event}
       />
     )
   })
 
   return (
-    <div className="submission-list">
-      <div className="row columns">
-        <table>
-          <thead>
-            <tr>
-              <th>Events</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventTiles}
-          </tbody>
-        </table>
-        <div className="columns small-12">
-        <hr />
-          {addEvent}
+    <div className="event-index-list">
+      <div className="title">
+          Events
+      </div>
+      <div className="row">
+        <div className="table-header">
+          <div className="columns small-6 large-3">
+            Event
+          </div>
+          <div className="columns small-2 large-4">
+            Venue
+          </div>
+          <div className="columns small-12 large-3">
+            Location
+          </div>
+          <div className="columns small-12 large-2">
+            When
+          </div>
         </div>
+      </div>
+      <div className="row">
+        <hr />
+      </div>
+      <div className="scroll-body">
+        {eventTiles}
+      </div>
+      <div className="text-center">
+        {addNewEvent}
       </div>
     </div>
   )

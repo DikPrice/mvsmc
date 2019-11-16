@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authorize_user
 
   def index
-    render json: User.all
+    @users = User.all
   end
 
   protected

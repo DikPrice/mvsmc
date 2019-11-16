@@ -1,17 +1,32 @@
 body {
   font-family: 'Helvetica neue', Arial, 'sans serif';
+  background-color: #B9C2C1;
+}
+
+.menu.align-right {
+  background-color: #265479;
 }
 
 .top-bar {
-  background-color: #0071BD;
+  background-color: #265479;
   color: white;
-
-  h3 {
-    margin: 0;
-  }
+  padding-left: 10px;
 
   a {
-    background-color: #0071BD;
+    background-color: #265479;
     color: white;
   }
+}
+
+.top-bar-section {
+  a:hover {
+    background-color: white;
+    color: #265479;
+    font-weight: bold;
+  }
+}
+
+.login-detail {
+  text-align: right;
+  padding-right: 10px;
 }

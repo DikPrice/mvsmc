@@ -11,14 +11,29 @@ const EventTile = props => {
   }
 
   return (
-    <>
-      <tr>
-        <td>{eventName}</td>
-        <td>{props.event["venue"]}</td>
-        <td>{props.event["city"]}</td>
-        <td>{props.event["start_date"]}</td>
-      </tr>
-    </>
+    <div>
+      <div className="rows">
+        <div className="tile">
+          <div className="columns small-12 large-3">
+            <div className="name">
+              <strong>{eventName}</strong>
+            </div>
+          </div>
+          <div className="columns small-12 large-4 venue">
+            {props.event["venue"]}
+          </div>
+          <div className="columns small-12 large-3 location">
+            {props.event["city"]}
+          </div>
+          <div className="columns small-12 large-2 when">
+            {props.event["start_date"]}
+          </div>
+        </div>
+      </div>
+      <div>
+        <hr />
+      </div>
+    </div>
   )
 }
 

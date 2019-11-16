@@ -1,44 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from "react-router-dom"
 import SubmissionTile from './SubmissionTile'
+import { fetchData } from './../../../modules/fetchData'
 
 const SubmissionIndexContainer = props => {
   const [submissions, setSubmissions] = useState([])
-  const [sort, setSort] = useState({sort: "none"})
+  const [sort, setSort] = useState("none")
   const [currentUser, setCurrentUser] = useState({})
   const [show, setShow] = useState("list")
 
-  const fetchModelList = (url) => {
-    fetch(url, {
-      credentials: 'same-origin',
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage)
-          throw(error)
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        setSubmissions(body.models)
-        setCurrentUser(body.user)
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`))
+  const storeData = (body) =>{
+    setSubmissions(body.models)
+    setCurrentUser(body.user)
   }
-
   useEffect(() => {
-    fetchModelList(`/api/v1/submissions?sort=${sort.sort}`)
+    fetchData(`/api/v1/submissions?sort=${sort}`, storeData)
   }, [sort])
 
-  const handleInputChange = event => {
+  const passSortType = event => {
     let sortValue = event.currentTarget.value.toLowerCase().replace(' ', '')
-    setSort({
-      ...sort,
-      [event.currentTarget.name]: sortValue
-    })
+    setSort(sortValue)
   }
 
   let findMyModels, showReadyForReview
@@ -52,18 +32,14 @@ const SubmissionIndexContainer = props => {
   const submissionsTiles = submissions.map(submission  => {
 
     let edit_submission = (event) => {
+      event.preventDefault()
       setShow("edit")
     }
 
     return(
       <SubmissionTile
         key={submission.id}
-        id={submission.id}
-        name={submission .name}
-        scale={submission.scale}
-        firstName={submission.first_name}
-        lastName={submission.last_name}
-        review={submission.review}
+        submission={submission}
         edit={edit_submission}
       />
     )
@@ -71,41 +47,48 @@ const SubmissionIndexContainer = props => {
 
   if ( show === "list"){
     return (
-      <div className="submission-list">
+      <div className="index-list submission">
         <div className="title row">
-          <div className="columns small-5 medium-4 large-3">
+          <div className="columns small-8 medium-8">
             Submissions
           </div>
           <form>
-          <div className="columns small-5 medium-2 large-2">
-            <label>
-              <select name="sort"
-                value={sort.sort}
-                onChange={handleInputChange}>
-                <option name="">Sort by</option>
-                <option name="models">Models</option>
-                <option name="modelers">Modelers</option>
-                {findMyModels}
-                {showReadyForReview}
-              </select>
-            </label>
-          </div>
+            <div className="columns small-4 medium-2">
+              <label>
+                <select name="sort"
+                  value={sort.sort}
+                  onChange={passSortType}>
+                  <option name="">Sort by</option>
+                  <option name="models">Models</option>
+                  <option name="modelers">Modelers</option>
+                  <option name="newestupdate">Newest Update</option>
+                  {findMyModels}
+                  {showReadyForReview}
+                </select>
+              </label>
+            </div>
           </form>
-          <hr />
         </div>
-        <div className="scroll-body row columns">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Scale</th>
-                <th>Modeler</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="row columns">
+          <div className="rows table-header">
+            <div className="table-header">
+              <div className="columns small-6 large-6">
+                Model
+              </div>
+              <div className="columns small-2 large-2">
+                Scale
+              </div>
+              <div className="columns small-12 large-4">
+                Modeler
+              </div>
+            <hr />
+            </div>
+          </div>
+          <div className="row columns">
+            <div className="scroll-body">
               {submissionsTiles}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
     )

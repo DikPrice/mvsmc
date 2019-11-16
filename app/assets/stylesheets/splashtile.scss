@@ -3,17 +3,26 @@
   background-size: cover;
   height: 100vh;
   opacity: 75%;
+  font-family: 'Open Sans', sans-serif;
 
   .splash-text-box {
     float: left;
-    width: 500px;
-    margin-left: 100px;
+    max-width: 500px;
+    margin-left: 2em;
     margin-top: 50px;
     opacity: 100%;
     border-radius: 10px;
     background-color: white;
     padding:10px;
     box-shadow: 10px 10px 5px #444444;
+
+    .stats {
+      font-size: 0.65em;
+    }
+
+    .review {
+      color: red;
+    }
 
     .welcome {
       text-align: center;
@@ -35,7 +44,7 @@
   .model-info-box {
     float:right;
     width: 300px;
-    margin-top: 200px;
+    margin-top: 5em;
     margin-right: 50px;
     opacity: 100%;
     border-radius: 10px;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from 'react-router-dom'
+import { fetchData } from './../../../modules/fetchData'
 import ShowSubmissionTile from "./ShowSubmissionTile"
 import EditSubmissionContainer from "./EditSubmissionContainer"
 
@@ -8,29 +9,19 @@ const SubmissionShowContainer = props => {
   const [submission, setSubmission] = useState({})
   const [showComponent, setShowComponent] = useState ("show")
   const [currentUser, setCurrentUser] = useState({})
+  const [timestamps, setTimestamps] = useState({})
   const [redirect, setRedirect] = useState(false)
 
   let submissionId = props.match.params.id
 
-  useEffect(() => {fetch(`/api/v1/submissions/${submissionId}`, {
-    credentials: 'same-origin',
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage)
-        throw(error)
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      setSubmission(body.model)
-      setCurrentUser(body.user)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-  },[])
+  const storeData = (body) =>{
+    setSubmission(body.model)
+    setTimestamps(body.timestamps)
+    setCurrentUser(body.user)
+  }
+  useEffect(() => {
+    fetchData(`/api/v1/submissions/${submissionId}`, storeData)
+  }, [])
 
   const markForReview = () => {
     event.preventDefault()
@@ -91,6 +82,7 @@ const SubmissionShowContainer = props => {
       edit={edit_submission}
       user={currentUser}
       forReview={markForReview}
+      timestamps={timestamps}
     />
   }
   else {
@@ -102,7 +94,7 @@ const SubmissionShowContainer = props => {
   }
 
   return (
-    <div>
+    <div className="submission-panel">
       {component}
     </div>
   )

@@ -1,0 +1,43 @@
+.select-index-list {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #E9EDF0;
+  overflow: hidden;
+  height: 100%;
+
+  .model-select {
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  .model-select:hover {
+    background-color:  #A0C0CF;
+    color: white;
+    font-weight: bold;
+  }
+
+  .select-title {
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #265479;
+    background-color: #E9EDF0;
+    padding-left: 10px;
+  }
+
+  .select-scroll-body {
+    height: 70vh;
+    overflow-y: scroll;
+
+    .tile {
+      padding-top: 5px;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-size: 1.2em;
+
+      hr {
+          padding: 0px;
+          margin: 0px;
+      }
+    }
+  }
+}
