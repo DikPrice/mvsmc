@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from 'react-router-dom'
 import { fetchData } from './../../../modules/fetchData'
+import { sendData } from './../../../modules/sendData'
 import ShowSubmissionTile from "./ShowSubmissionTile"
 import EditSubmissionContainer from "./EditSubmissionContainer"
 
@@ -23,48 +24,23 @@ const SubmissionShowContainer = props => {
     fetchData(`/api/v1/submissions/${submissionId}`, storeData)
   }, [])
 
-  const markForReview = () => {
+  const setSuccessState = (body) =>{
+    setRedirect(true)
+  }
+  const setErrorState = (body) =>{
+    setErrors(body)
+  }
+  const markForReview= (event) =>{
     event.preventDefault()
     submission["review"] = true
-    event.preventDefault()
-    fetch(`/api/v1/submissions/${submissionId}`, {
-      credentials: "same-origin",
-      method: "PATCH",
-      body: JSON.stringify({
-        submission: submission,
-        id: submissionId
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      if (body.id) {
-        showSubmission(body)
-        setRedirect(true)
-      } else {
-        setErrors(body)
-      }
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
+    sendData(`/api/v1/submissions/${submissionId}`, "PATCH", submission, setSuccessState, setErrorState)
   }
 
   if (redirect === true){
     return <Redirect to='/submissions' />
   }
 
-  let edit_submission = (event) => {
+  let editSubmission = (event) => {
     event.preventDefault()
     setShowComponent("edit")
   }
@@ -74,18 +50,17 @@ const SubmissionShowContainer = props => {
     setSubmission(updatedSubmission)
   }
 
-  let component = "show"
+  let component
   if (showComponent === "show") {
     component = <ShowSubmissionTile
       key={submission.id}
       submission={submission}
-      edit={edit_submission}
+      edit={editSubmission}
       user={currentUser}
       forReview={markForReview}
       timestamps={timestamps}
     />
-  }
-  else {
+  } else {
     component = <EditSubmissionContainer
       key={submission.id}
       submission={submission}

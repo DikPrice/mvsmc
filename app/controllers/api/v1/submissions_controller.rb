@@ -51,8 +51,9 @@ class Api::V1::SubmissionsController < ApplicationController
 
     if model_exists.nil?
       new_submission = Submission.new(submission_params)
-      new_submission.first_name =cap_first_name
-      new_submission.last_name =  cap_last_name
+      new_submission.first_name = cap_first_name
+      new_submission.last_name = cap_last_name
+      removeNull(new_submission)
       if new_submission.save
         render json: { result: new_submission, duplicate: 0 }
       else
@@ -97,6 +98,15 @@ class Api::V1::SubmissionsController < ApplicationController
       :email,
       :review
     )
+  end
+
+  def removeNull (submission)
+    submission.source.nil? ? "" : submission.source
+    submission.description.ni? ? "" : submission.description
+    submission.length.nil? ? 0 : submission.length
+    submission.width.nil? ? 0 : submission.width
+    submission.height.nil? ? 0 : submission.height
+    submission.phone.nil? ? "" : submission.phone
   end
 
 end
