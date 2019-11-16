@@ -39,6 +39,13 @@ const ModelShowTile = props => {
     event.preventDefault()
     setRedirect(true)
   }
+
+  let printView = (event) => {
+    let printPath = `/models/${modelId}/print`
+    event.preventDefault()
+    return < Redirect to={printPath} />
+  }
+
   let deleteEntry
   if (currentUser){
     if (currentUser["role"] >= 3){
@@ -76,6 +83,7 @@ const ModelShowTile = props => {
             </div>
             <div className="columns small-12 medium-4">
               <div className="meta">
+                <button className="button" onClick={printView}>Print</button>
                 <button className="button" onClick={goBack}>Go Back</button>
                 {deleteEntry}
               </div>
