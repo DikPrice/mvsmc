@@ -22,11 +22,11 @@ Rails.application.routes.draw do
   resources :imports, only: [ :index, :create ]
   namespace :api do
     namespace :v1 do
-      resources :models, only: [ :index, :show, :create, :update ]
+      resources :models, only: [ :index, :show, :create, :update, :destroy ]
       resources :modelers, only: [ :show, :create, :update ] do
         resources :models, only: :index
       end
-      resources :submissions, only: [ :index, :show, :create, :update ]
+      resources :submissions, only: [ :index, :show, :create, :update, :destroy ]
       resources :events, only: [ :index, :show, :create, :update ] do
         resources :models, only: [ :index ]
       end

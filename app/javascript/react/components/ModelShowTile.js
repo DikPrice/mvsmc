@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import { fetchData } from './../../modules/fetchData'
+import { deleteData } from './../../modules/deleteData'
 
 const ModelShowTile = props => {
   const [model , setModel] = useState({})
   const [modeler, setModeler] = useState({})
   const [currentUser, setCurrentUser] = useState({})
   const [redirect, setRedirect] = useState(false)
+  const [errors, setErrors] = useState([])
 
   let modelId = props.match.params.id
 
+  const setSuccessState = (body) =>{
+    setRedirect(true)
+  }
+  const setErrorState = (body) =>{
+    setErrors(body)
+  }
   const storeData = (body) =>{
     setModel(body.model)
     setModeler(body.modeler)
@@ -18,6 +26,10 @@ const ModelShowTile = props => {
   useEffect(() => {
     fetchData(`/api/v1/models/${modelId}`, storeData)
   }, [])
+  const deleteModel= (event) => {
+    event.preventDefault()
+    deleteData(`/api/v1/models/${modelId}`, setSuccessState, setErrorState)
+  }
 
   if (redirect){
     return < Redirect to='/models' />
@@ -26,6 +38,12 @@ const ModelShowTile = props => {
   let goBack = (event) => {
     event.preventDefault()
     setRedirect(true)
+  }
+  let deleteEntry
+  if (currentUser){
+    if (currentUser["role"] >= 3){
+      deleteEntry = <button className="button" onClick={deleteModel}>Delete</button>
+    }
   }
 
   return (
@@ -59,6 +77,7 @@ const ModelShowTile = props => {
             <div className="columns small-12 medium-4">
               <div className="meta">
                 <button className="button" onClick={goBack}>Go Back</button>
+                {deleteEntry}
               </div>
             </div>
           </div>

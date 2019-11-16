@@ -1,8 +1,9 @@
-export const sendData = (url, type, data, setSuccessState, setErrorState) => {
+export const deleteData = (url, setSuccessState, setErrorState) => {
+  debugger
   fetch(url, {
     credentials: 'same-origin',
-    method: type,
-    body: JSON.stringify(data),
+    method: "DELETE",
+    body: JSON.stringify(""),
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -19,7 +20,7 @@ export const sendData = (url, type, data, setSuccessState, setErrorState) => {
   })
   .then(response => response.json())
   .then(body => {
-    if (body.result["id"]) {
+    if (body.result == "Deleted") {
       setSuccessState(body.result)
     } else {
       setErrorState(body.result)

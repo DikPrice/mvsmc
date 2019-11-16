@@ -64,6 +64,17 @@ class Api::V1::SubmissionsController < ApplicationController
     end
   end
 
+  def destroy
+    submissionToDelete = Submission.find(params["id"])
+    if (current_user.role >= 3)
+      if submissionToDelete.delete
+        render json: { result: "Deleted" }
+      else
+        render json: { result: submissionToDelete.errors }
+      end
+    end
+  end
+
   private
 
   def submission_params
