@@ -36,40 +36,6 @@ const EditSubmissionContainer = props => {
     sendData(`/api/v1/submissions/${id}`, "PATCH", submission, setSuccessState, setErrorState)
   }
 
-  // const postSubmissionEdit = (event) => {
-  //   event.preventDefault()
-  //   fetch(`/api/v1/submissions/${id}`, {
-  //     credentials: "same-origin",
-  //     method: "PATCH",
-  //     body: JSON.stringify({
-  //       submission: submission,
-  //       id: id
-  //     }),
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //   .then(response => {
-  //     if (response.ok) {
-  //       return response
-  //     } else {
-  //       const errorMessage = `${response.status} (${response.statusText})`
-  //       const error = new Error(errorMessage)
-  //       throw error
-  //     }
-  //   })
-  //   .then(response => response.json())
-  //   .then(body => {
-  //     if (body.id) {
-  //       props.showUpdates(body)
-  //     } else {
-  //       setErrors(body)
-  //     }
-  //   })
-  //   .catch(error => console.error(`Error in fetch: ${error.message}`))
-  // }
-
   const handleInputChange = event => {
     setSubmission({
       ...submission,
@@ -248,6 +214,7 @@ const EditSubmissionContainer = props => {
             value={submission.description}
             onChange={handleInputChange}>
           </textarea>
+          Character Count: {submission.description.length}
         </div>
       </div>
     </form>

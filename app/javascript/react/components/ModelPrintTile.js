@@ -35,6 +35,14 @@ const ModelPrintTile = props => {
     setRedirect(true)
   }
 
+  let displayParas
+  if (model.description){
+    let paras = model.description.split("\n")
+    displayParas = paras.map(para => {
+      return(<p>{para}</p>)
+    })
+  }
+
   return (
     <>
       <div className="print-panel">
@@ -49,7 +57,7 @@ const ModelPrintTile = props => {
             {model.scale}
           </div>
           <div className="description">
-            {model.description}
+            {displayParas}
           </div>
         </div>
       </div>
