@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 import { sendData } from './../../../modules/sendData'
+import { deleteData } from './../../../modules/deleteData'
 
 const ShowSubmissionTile = props => {
   const [redirect, setRedirect] = useState(false)
@@ -24,6 +25,10 @@ const ShowSubmissionTile = props => {
     event.preventDefault()
     sendData("/api/v1/models", "POST", props.submission, setSuccessState, setErrorState)
   }
+  const deleteSubmission = (event) => {
+    event.preventDefault()
+    deleteData(`/api/v1/submissions/${id}`, setSuccessState, setErrorState)
+  }
 
   if (redirect){
     return < Redirect to='/submissions' />
@@ -34,8 +39,12 @@ const ShowSubmissionTile = props => {
     setRedirect(true)
   }
 
-  let edit, submitForReview, showContacts, showTimestamps, transferToMaster
+
+  let edit, submitForReview, showContacts, showTimestamps, transferToMaster, deleteEntry
   if (props.user){
+    if (props.user["role"] >= 3){
+      deleteEntry = <button className="button" onClick={deleteSubmission}>Delete</button>
+    }
     if ((first_name == props.user["first_name"] && last_name == props.user["last_name"]) || (props.user["role"] >= 2)){
       showTimestamps =
       <>
@@ -96,6 +105,7 @@ const ShowSubmissionTile = props => {
               {submitForReview}
               {edit}
               {transferToMaster}
+              {deleteEntry}
             </div>
           </div>
         </div>

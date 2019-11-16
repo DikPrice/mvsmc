@@ -10,7 +10,7 @@ class Api::V1::ModelsController < ApplicationController
 
     if (params["modeler_id"])
       modeler = Modeler.find_by(email: user.email)
-      model_list=Model.where(modeler_id: modeler)
+      model_list = Model.where(modeler_id: modeler)
     elsif (params["event_id"])
       selected_models = Event.find(params["event_id"]).models
       model_list = get_unselected_models(selected_models)
@@ -80,6 +80,17 @@ class Api::V1::ModelsController < ApplicationController
       render json: { result: new_model, duplicate: 0 }
     else
       render json: { result: new_model.errors, duplicate: 0 }
+    end
+  end
+
+  def destroy
+    modelToDelete = Model.find(params["id"])
+    if (current_user.role >= 3)
+      if modelToDelete.delete
+        render json: { result: "Deleted" }
+      else
+        render json: { result: modelToDelete.errors }
+      end
     end
   end
 
