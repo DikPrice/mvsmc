@@ -15,18 +15,20 @@ const SplashTile = props => {
   }, [])
 
   let seeSubmissions, submissionStats, awaitingReview
-  if (currentUser.role >= 1) {
-    seeSubmissions = <><Link to="/submissions/new">Submit a new Model</Link><br /></>
-    if (statusCount.submissioncount > 0){
-      submissionStats =
-        <>
-          <li className="stats">In progress: {statusCount.submissioncount}</li>
-          <li className="stats">Being reviewed: {statusCount.myreviews}</li>
-        </>
-    }
-    if (currentUser.role >= 2) {
-      awaitingReview =
-      <li className="stats review">Awaiting review: {statusCount.allreviewcount}</li>
+  if (currentUser){
+    if (currentUser.role >= 1) {
+      seeSubmissions = <><Link to="/submissions/new">Submit a new Model</Link><br /></>
+      if (statusCount.submissioncount > 0){
+        submissionStats =
+          <>
+            <li className="stats">In progress: {statusCount.submissioncount}</li>
+            <li className="stats">Being reviewed: {statusCount.myreviews}</li>
+          </>
+      }
+      if (currentUser.role >= 2) {
+        awaitingReview =
+        <li className="stats review">Awaiting review: {statusCount.allreviewcount}</li>
+      }
     }
   }
 
