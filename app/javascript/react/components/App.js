@@ -22,7 +22,7 @@ export const App = (props) => {
         <Route exact path="/submissions/new" component={NewSubmissionContainer} />
         <Route exact path="/submissions/:id" component={SubmissionShowContainer} />
         <Route exact path="/models" component={ModelIndexContainer} />
-        <Route exact path="/models/:id/print" component={ModelPrintTile} />
+        <Route exact path="/models/print/:id" component={ModelPrintTile} />
         <Route exact path="/models/:id" component={ModelShowTile} />
         <Route exact path="/events" component={EventIndexContainer} />
         <Route exact path="/events/new" component={NewEventContainer} />
