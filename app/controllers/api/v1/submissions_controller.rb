@@ -50,7 +50,6 @@ class Api::V1::SubmissionsController < ApplicationController
       new_submission = Submission.new(submission_params)
       new_submission.first_name =cap_first_name
       new_submission.last_name =  cap_last_name
-binding.pry
       if new_submission.save
         render json: { result: new_submission, duplicate: 0 }
       else
