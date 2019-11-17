@@ -2,14 +2,11 @@ class Api::V1::ModelsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    if current_user
-      user = current_user
-    end
     selected_models = []
     model_list = []
 
     if (params["modeler_id"])
-      modeler = Modeler.find_by(email: user.email)
+      modeler = Modeler.find_by(email: current_user.email)
       model_list = Model.where(modeler_id: modeler)
     elsif (params["event_id"])
       selected_models = Event.find(params["event_id"]).models
@@ -28,28 +25,26 @@ class Api::V1::ModelsController < ApplicationController
       model_list << {id: 1, name: "No models found"}
     end
 
-    render json: { models: model_list, event_models: selected_models, user: user }
+    render json: { models: model_list, event_models: selected_models, user: current_user }
   end
 
   def show
-    if current_user
-      user = current_user
-    end
-
     model = Model.find(params["id"])
     modeler = model.modeler
-    render json: { model: model, modeler: modeler , user: user}
+    render json: { model: model, modeler: modeler , user: current_user}
   end
 
   def create
+    cap_first_name = params["first_name"].capitalize()
+    cap_last_name = params["last_name"].capitalize()
     modeler = Modeler.find_by(
-      first_name: params["first_name"],
-      last_name: params["last_name"]
+      first_name: cap_first_name,
+      last_name: cap_last_name
     )
     if modeler.nil?
       modeler = Modeler.create(
-        first_name: params["first_name"],
-        last_name: params["last_name"],
+        first_name: cap_first_name,
+        last_name: cap_last_name,
         email: params["email"],
         phone: params["phone"],
       )

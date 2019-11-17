@@ -1,5 +1,4 @@
 export const deleteData = (url, setSuccessState, setErrorState) => {
-  debugger
   fetch(url, {
     credentials: 'same-origin',
     method: "DELETE",

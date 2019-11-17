@@ -2,18 +2,19 @@ class Api::V1::SubmissionsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    if current_user
-      user = current_user
-    end
-    if (params["sort"])
-      model_list = Submission.get_model_list(params["sort"], user)
-      render json: { models: model_list, user: user }
-    elsif (params["count"])
-      model_count = Submission.get_model_count(params["statusCount"], user)
-      render json: { models: model_count, user: user }
+    if (current_user)
+      if (params["sort"])
+        model_list = Submission.get_model_list(params["sort"], current_user)
+        render json: { models: model_list, user: current_user }
+      elsif (params["count"])
+        model_count = Submission.get_model_count(params["statusCount"], current_user)
+        render json: { models: model_count, user: current_user }
+      else
+        model_list = Submission.all
+        render json: { models: model_list, user: current_user }
+      end
     else
-      model_list = Submission.all
-      render json: { models: model_list, user: user }
+      render json: { models: "Not available" }
     end
   end
 
@@ -35,16 +36,20 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def create
+    cap_first_name = submission_params["first_name"].capitalize()
+    cap_last_name = submission_params["last_name"].capitalize()
+
     model_exists = Submission.find_by(
       name: submission_params["name"],
       scale: submission_params["scale"],
-      first_name: submission_params["first_name"],
-      last_name: submission_params["last_name"]
+      first_name: cap_first_name,
+      last_name: cap_last_name
     )
 
     if model_exists.nil?
       new_submission = Submission.new(submission_params)
-
+      new_submission.first_name =cap_first_name
+      new_submission.last_name =  cap_last_name
       if new_submission.save
         render json: { result: new_submission, duplicate: 0 }
       else

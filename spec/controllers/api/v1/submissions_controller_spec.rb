@@ -8,6 +8,7 @@ RSpec.describe Api::V1::SubmissionsController, type: :controller do
 
     context "The user asks to see a list of models" do
       it "should return a list of all model submission" do
+        sign_in test_user
 
         get :index
         returned_json = JSON.parse(response.body)
