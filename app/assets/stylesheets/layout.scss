@@ -30,3 +30,9 @@ body {
   text-align: right;
   padding-right: 10px;
 }
+
+@media print {
+  .top-bar {
+    display: none;
+  }
+}

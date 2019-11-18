@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   get '/events/:id/update', to: 'homes#index'
 
   get '/models', to: 'homes#index'
+  get '/models/:id/print', to: 'homes#index'
   get '/models/:id', to: 'homes#index'
-
-  get '/events/print', to: 'homes#index'
 
   devise_for :users
   resources :users, only: [ :index, :show, :create ]
