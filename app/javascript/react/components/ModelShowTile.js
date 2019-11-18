@@ -7,7 +7,7 @@ const ModelShowTile = props => {
   const [model , setModel] = useState({})
   const [modeler, setModeler] = useState({})
   const [currentUser, setCurrentUser] = useState({})
-  const [redirect, setRedirect] = useState(false)
+  const [redirect, setRedirect] = useState("")
   const [errors, setErrors] = useState([])
 
   let modelId = props.match.params.id
@@ -32,18 +32,17 @@ const ModelShowTile = props => {
   }
 
   if (redirect){
-    return < Redirect to='/models' />
+    return < Redirect to={redirect} />
   }
 
   let goBack = (event) => {
     event.preventDefault()
-    setRedirect(true)
+    setRedirect("/models")
   }
 
   let printView = (event) => {
-    let printPath = `/models/${modelId}/print`
     event.preventDefault()
-    return < Redirect to={printPath} />
+    setRedirect(`/models/print/${modelId}`)
   }
 
   let deleteEntry
