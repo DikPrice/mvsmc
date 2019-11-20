@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { isEmpty } from 'lodash'
 import { sendData } from './../../../modules/sendData'
+import { fetchData } from './../../../modules/fetchData'
 
 const NewSubmissionContainer = props => {
   const [errors, setErrors] = useState({})
@@ -9,7 +10,7 @@ const NewSubmissionContainer = props => {
   const [newSubmission, setNewSubmission] = useState({
     name: "", scale: "", source: "", description: "",
     length: "", width: "", height: "",
-    first_name: "",last_name: "", phone: "", email: ""
+    first_name: "", last_name: "", phone: "", email: ""
   })
 
   const sourceArray = [
@@ -18,6 +19,26 @@ const NewSubmissionContainer = props => {
     'Scratch-built',
     'Other'
   ]
+
+  const storeData = (body) =>{
+    debugger
+    setNewSubmission({
+      name: "",
+      scale: "",
+      source: "",
+      description: "",
+      length: "",
+      width: "",
+      height: "",
+      first_name: body.user.first_name,
+      last_name: body.user.last_name,
+      phone: "",
+      email: body.user.email
+    })
+  }
+  useEffect(() => {
+    fetchData("/api/v1/submissions?user=getuser", storeData)
+  }, [])
 
   const validForSubmission = () => {
     let submitErrors = {}
@@ -62,6 +83,7 @@ const NewSubmissionContainer = props => {
   }
 
   const handleInputChange = event => {
+    event.preventDefault()
     setNewSubmission({
       ...newSubmission,
       [event.currentTarget.name]: event.currentTarget.value
@@ -252,6 +274,7 @@ const NewSubmissionContainer = props => {
               value={newSubmission.description}
               onChange={handleInputChange}>
             </textarea>
+            Character Count: {newSubmission.description.length}
           </div>
         </div>
       </form>

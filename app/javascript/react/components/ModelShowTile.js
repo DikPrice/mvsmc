@@ -52,6 +52,14 @@ const ModelShowTile = props => {
     }
   }
 
+  let displayParas
+  if (model.description){
+    let paras = model.description.split("\n")
+    displayParas = paras.map(para => {
+      return(<p>{para}</p>)
+    })
+  }
+
   return (
     <div className="submission-panel">
       <div className="submission-display">
@@ -66,7 +74,7 @@ const ModelShowTile = props => {
               {model.scale}
             </div>
             <div className="rows columns description">
-              {model.description}
+              {displayParas}
             </div>
           </div>
         </div>

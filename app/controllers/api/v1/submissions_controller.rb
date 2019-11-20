@@ -2,8 +2,11 @@ class Api::V1::SubmissionsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
+
     if (current_user)
-      if (params["sort"])
+      if (params["user"] == "getuser")
+        render json: { user: current_user }
+      elsif (params["sort"])
         model_list = Submission.get_model_list(params["sort"], current_user)
         render json: { models: model_list, user: current_user }
       elsif (params["count"])

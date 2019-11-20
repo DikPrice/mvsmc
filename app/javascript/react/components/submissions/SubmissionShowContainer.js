@@ -77,7 +77,7 @@ const SubmissionShowContainer = props => {
   let component = "show"
   if (showComponent === "show") {
     component = <ShowSubmissionTile
-      id={submission.id}
+      key={submission.id}
       submission={submission}
       edit={edit_submission}
       user={currentUser}
@@ -87,7 +87,7 @@ const SubmissionShowContainer = props => {
   }
   else {
     component = <EditSubmissionContainer
-      id={submission.id}
+      key={submission.id}
       submission={submission}
       showUpdates={showSubmission}
     />

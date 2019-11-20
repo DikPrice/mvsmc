@@ -67,6 +67,14 @@ const ShowSubmissionTile = props => {
     }
   }
 
+  let displayParas
+  if (description){
+    let paras = description.split("\n")
+    displayParas = paras.map(para => {
+      return(<p>{para}</p>)
+    })
+  }
+
   return (
     <div className="submission-display">
       <div className="row">
@@ -80,7 +88,7 @@ const ShowSubmissionTile = props => {
             {scale}
           </div>
           <div className="rows columns description">
-            {description}
+            {displayParas}
           </div>
         </div>
       </div>
