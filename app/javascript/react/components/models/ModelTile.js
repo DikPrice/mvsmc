@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import { fetchData } from './../../modules/fetchData'
+import { fetchData } from './../../../modules/fetchData'
 
 const SelectTile = props => {
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ModelTile from './ModelTile'
-import { fetchData } from './../../modules/fetchData'
+import { fetchData } from './../../../modules/fetchData'
 
 const ModelIndexContainer = props => {
   const [models, setModels] = useState([])

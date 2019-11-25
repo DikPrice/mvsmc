@@ -78,6 +78,19 @@ class Api::V1::ModelsController < ApplicationController
     end
   end
 
+  def update
+    edit_model = Model.find(params["id"])
+    if (current_user.role >= 3)
+      if edit_model.update(model_params)
+        render json: { result: edit_model }
+      else
+        render json: { result: edit_model.errors }
+      end
+    else
+      render json: { result: "You are not authorised" }
+    end
+  end
+
   def destroy
     modelToDelete = Model.find(params["id"])
     if (current_user.role >= 3)
@@ -86,6 +99,8 @@ class Api::V1::ModelsController < ApplicationController
       else
         render json: { result: modelToDelete.errors }
       end
+    else
+      render json: { result: "You are not authorised" }
     end
   end
 

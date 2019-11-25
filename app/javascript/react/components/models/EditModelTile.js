@@ -1,51 +1,49 @@
 import React, { useState } from 'react'
 import { sendData } from './../../../modules/sendData'
 
-const EditSubmissionContainer = props => {
-
-  for (var index in props.submission){
-    if (props.submission[index] == null){
-      props.submission[index] = ""
-    }
-  }
+const EditModelTile = props => {
 
   const {
     id,
     name, source, scale, description,
-    length, width, height,
+    length, width, height
+  } = props.model
+  const {
     first_name, last_name, phone, email,
-  } = props.submission
+  } = props.modeler
 
   const [errors, setErrors] = useState({})
-  const [submission, setSubmission] = useState({
+  const [model, setModel] = useState({
     name: name, scale: scale, source: source, description: description,
     length: length, width: width, height: height,
+  })
+  const [modeler, setModeler] = useState({
     first_name: first_name, last_name: last_name, phone: phone, email: email
   })
 
   const setSuccessState = (body) =>{
-    props.showUpdates(body)
+    props.showUpdatedModel(body)
   }
   const setErrorState = (body) =>{
     setErrors(body)
   }
-  const postSubmissionEdit= (event) =>{
+  const postModelEdit= (event) =>{
     event.preventDefault()
-    sendData(`/api/v1/submissions/${id}`, "PATCH", submission, setSuccessState, setErrorState)
+    sendData(`/api/v1/models/${id}`, "PATCH", model, setSuccessState, setErrorState)
   }
 
   const handleInputChange = event => {
-    setSubmission({
-      ...submission,
+    setModel({
+      ...model,
       [event.currentTarget.name]: event.currentTarget.value
     })
   }
 
   const validForSubmission = () => {
     let submitErrors = {}
-    const requiredFields = ["name", "scale", "first_name", "last_name"]
+    const requiredFields = ["name", "scale"]
     requiredFields.forEach(field => {
-      if (submission[field].trim() === "") {
+      if (model[field].trim() === "") {
         submitErrors = {
           ...submitErrors,
           [field]: "can't be blank"
@@ -74,10 +72,10 @@ const EditSubmissionContainer = props => {
     <div className="submission-form">
       <div className="row columns">
         <div className="form-title">
-          Edit your submission
+          Edit model details
         </div>
       </div>
-      <form onSubmit={postSubmissionEdit}>
+      <form onSubmit={postModelEdit}>
       <div className="row">
         <div className="columns small-12 large-6">
 
@@ -88,7 +86,7 @@ const EditSubmissionContainer = props => {
               <input
                 type="text"
                 name="name"
-                value={submission.name}
+                value={model.name}
                 onChange={handleInputChange}
               />
             </label>
@@ -101,7 +99,7 @@ const EditSubmissionContainer = props => {
                 <input
                   type="text"
                   name="scale"
-                  value={submission.scale}
+                  value={model.scale}
                   onChange={handleInputChange}
                 />
               </label>
@@ -110,7 +108,7 @@ const EditSubmissionContainer = props => {
               <label>
                 Source: {errors.source}
                 <select name="source"
-                  value={submission.source}
+                  value={model.source}
                   onChange={handleInputChange}>
                   <option name=""></option>
                   {sourceOptions}
@@ -126,7 +124,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="first_name"
-                    value={submission.first_name}
+                    value={modeler.first_name}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -137,7 +135,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="last_name"
-                    value={submission.last_name}
+                    value={modeler.last_name}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -151,7 +149,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="phone"
-                    value={submission.phone}
+                    value={modeler.phone}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -162,7 +160,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="email"
-                    value={submission.email}
+                    value={modeler.email}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -176,7 +174,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="length"
-                    value={submission.length}
+                    value={model.length}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -187,7 +185,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="width"
-                    value={submission.width}
+                    value={model.width}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -198,7 +196,7 @@ const EditSubmissionContainer = props => {
                   <input
                     type="text"
                     name="height"
-                    value={submission.height}
+                    value={model.height}
                     onChange={handleInputChange}
                   />
                 </label>
@@ -225,10 +223,10 @@ const EditSubmissionContainer = props => {
             cols="50"
             rows="15"
             name="description"
-            value={submission.description}
+            value={model.description}
             onChange={handleInputChange}>
           </textarea>
-          Character Count: {submission.description.length}
+          Character Count: {description.length}
         </div>
       </div>
     </form>
@@ -236,4 +234,4 @@ const EditSubmissionContainer = props => {
   )
 }
 
-export default EditSubmissionContainer
+export default EditModelTile

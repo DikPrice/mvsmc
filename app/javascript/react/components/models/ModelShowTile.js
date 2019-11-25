@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
-import { fetchData } from './../../modules/fetchData'
-import { deleteData } from './../../modules/deleteData'
+import { deleteData } from './../../../modules/deleteData'
 
 const ModelShowTile = props => {
-  const [model , setModel] = useState({})
-  const [modeler, setModeler] = useState({})
-  const [currentUser, setCurrentUser] = useState({})
   const [redirect, setRedirect] = useState("")
   const [errors, setErrors] = useState([])
 
-  let modelId = props.match.params.id
+  const {
+    id,
+    name, source, scale, description,
+    length, width, height
+  } = props.model
+  const {
+    first_name, last_name, phone, email,
+  } = props.modeler
 
   const setSuccessState = (body) =>{
-    setRedirect(true)
+    setRedirect("/models")
   }
   const setErrorState = (body) =>{
     setErrors(body)
   }
-  const storeData = (body) =>{
-    setModel(body.model)
-    setModeler(body.modeler)
-    setCurrentUser(body.user)
-  }
-  useEffect(() => {
-    fetchData(`/api/v1/models/${modelId}`, storeData)
-  }, [])
+
   const deleteModel= (event) => {
     event.preventDefault()
-    deleteData(`/api/v1/models/${modelId}`, setSuccessState, setErrorState)
+    deleteData(`/api/v1/models/${id}`, setSuccessState, setErrorState)
   }
 
   if (redirect){
@@ -42,19 +38,20 @@ const ModelShowTile = props => {
 
   let printView = (event) => {
     event.preventDefault()
-    setRedirect(`/models/print/${modelId}`)
+    setRedirect(`/models/print/${id}`)
   }
 
-  let deleteEntry
-  if (currentUser){
-    if (currentUser["role"] >= 3){
+  let deleteEntry, editEntry
+  if (props.currentUser){
+    if (props.currentUser["role"] >= 3){
       deleteEntry = <button className="button" onClick={deleteModel}>Delete</button>
+      editEntry = <button className="button" onClick={props.editModel}>Edit</button>
     }
   }
 
   let displayParas
-  if (model.description){
-    let paras = model.description.split("\n")
+  if (description){
+    let paras = description.split("\n")
     displayParas = paras.map(para => {
       return(<p>{para}</p>)
     })
@@ -66,12 +63,12 @@ const ModelShowTile = props => {
         <div className="row">
           <div className="event-card">
             <div className="rows columns title">
-              {model.name}
+              {name}
             </div>
             <div className="rows columns details">
-              {modeler.first_name} {modeler.last_name}<br />
-              {model.source}<br />
-              {model.scale}
+              {first_name} {last_name}<br />
+              {source}<br />
+              {scale}
             </div>
             <div className="rows columns description">
               {displayParas}
@@ -92,6 +89,7 @@ const ModelShowTile = props => {
               <div className="meta">
                 <button className="button" onClick={printView}>Print</button>
                 <button className="button" onClick={goBack}>Go Back</button>
+                {editEntry}
                 {deleteEntry}
               </div>
             </div>

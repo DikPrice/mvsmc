@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/models', to: 'homes#index'
   get '/models/print/:id', to: 'homes#index'
   get '/models/:id', to: 'homes#index'
+  get '/models/:id/update', to: 'homes#index'
 
   devise_for :users
   resources :users, only: [ :index, :show, :create ]
